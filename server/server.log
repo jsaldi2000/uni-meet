@@ -1,0 +1,2458 @@
+2026-02-18T19:30:25.445Z [LOG] PRAGMA journal_mode = WAL
+2026-02-18T19:30:25.533Z [LOG] Server running on http://localhost:3000
+2026-02-18T19:30:43.575Z - PUT /api/meetings/1 - {"titulo":"Cálculo I","subtitulo":"","estado":"borrador","fecha_reunion":"2026-02-18","valores":[{"campo_id":9,"valor_texto":null,"valor_numero":9971003101,"valor_booleano":null,"valor_fecha":null},{"campo_id":11,"valor_texto":"S2","valor_numero":null,"valor_booleano":null,"valor_fecha":null},{"campo_id":12,"valor_texto":"RUBEN TINO RAMOS","valor_numero":null,"valor_booleano":null,"valor_fecha":null},{"campo_id":13,"valor_texto":"RUBEN TINO RAMOS","valor_numero":null,"valor_booleano":null,"valor_fecha":null},{"campo_id":14,"valor_texto":"PIEA","valor_numero":null,"valor_booleano":null,"valor_fecha":null},{"campo_id":15,"valor_texto":null,"valor_numero":null,"valor_booleano":1,"valor_fecha":null},{"campo_id":16,"valor_texto":null,"valor_numero":null,"valor_booleano":1,"valor_fecha":null},{"campo_id":26,"valor_texto":"[{\"Acciones de mejora\":\"1 bla bla\",\"Responsable de la tarea\":\"Rubén y Jorge\",\"Fecha Inicio\":\"2026-02-18\",\"Fecha Fin\":\"2026-02-20\",\"Acciones realizadas\":\"Se hace esto y esto\",\"Estado de la Acción\":\"PTE\"}]","valor_numero":null,"valor_booleano":null,"valor_fecha":null},{"campo_id":31,"valor_texto":null,"valor_numero":null,"valor_booleano":null,"valor_fecha":null}]}
+2026-02-18T19:30:43.576Z [LOG] BEGIN
+2026-02-18T19:30:43.577Z [LOG] UPDATE ReunionInstancia SET titulo = 'Cálculo I', subtitulo = '', estado = 'borrador', fecha_reunion = '2026-02-18', fecha_actualizacion = CURRENT_TIMESTAMP WHERE id = '1'
+2026-02-18T19:30:43.577Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 9.0, NULL, 9971003101.0, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:30:43.577Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 11.0, 'S2', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:30:43.577Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 12.0, 'RUBEN TINO RAMOS', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:30:43.577Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 13.0, 'RUBEN TINO RAMOS', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:30:43.577Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 14.0, 'PIEA', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:30:43.577Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 15.0, NULL, NULL, 1.0, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:30:43.577Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 16.0, NULL, NULL, 1.0, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:30:43.577Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 26.0, '[{"Acciones de mejora":"1 bla bl'/*+173 bytes*/, NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:30:43.577Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 31.0, NULL, NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:30:43.577Z [LOG] COMMIT
+2026-02-18T19:30:43.685Z - GET /api/templates - undefined
+2026-02-18T19:30:43.685Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:30:43.686Z - GET /api/templates - undefined
+2026-02-18T19:30:43.686Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:30:45.180Z - GET /api/templates/2 - undefined
+2026-02-18T19:30:45.180Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:30:45.180Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:30:45.182Z - GET /api/templates/2 - undefined
+2026-02-18T19:30:45.182Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:30:45.182Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:31:06.486Z - PUT /api/templates/2 - {"titulo":"CEA Meeting - GIST","descripcion":"Grado en Ing. de Sistemas de Telecomunicación.","campos":[{"id":32,"plantilla_id":2,"nombre":"ADJUNTOS","tipo":"seccion","orden":0,"requerido":0,"opciones":null},{"id":31,"plantilla_id":2,"nombre":"Documentación inicial","tipo":"adjunto","orden":1,"requerido":0,"opciones":null},{"id":27,"plantilla_id":2,"nombre":"Datos identificativos de la materia ","tipo":"seccion","orden":2,"requerido":0,"opciones":null},{"id":9,"plantilla_id":2,"nombre":"Código","tipo":"numero","orden":3,"requerido":0,"opciones":null},{"id":11,"plantilla_id":2,"nombre":"Semestre","tipo":"texto_corto","orden":4,"requerido":0,"opciones":null},{"id":12,"plantilla_id":2,"nombre":"Profesor","tipo":"texto_corto","orden":5,"requerido":0,"opciones":null},{"id":13,"plantilla_id":2,"nombre":"Coordinador","tipo":"texto_corto","orden":6,"requerido":0,"opciones":null},{"id":14,"plantilla_id":2,"nombre":"Formato Entrega","tipo":"texto_corto","orden":7,"requerido":0,"opciones":null},{"id":28,"plantilla_id":2,"nombre":"Procesos de evaluación de aprendizajes a nivel de materia","tipo":"seccion","orden":8,"requerido":0,"opciones":null},{"id":15,"plantilla_id":2,"nombre":"La guía de aprendizaje está colgada en la página web con el formato adecuado","tipo":"booleano","orden":9,"requerido":0,"opciones":null},{"id":16,"plantilla_id":2,"nombre":"La guía de aprendizaje con plan de trabajo de la asignatura (anexos) está disponible en el Campus Virtual","tipo":"booleano","orden":10,"requerido":0,"opciones":null},{"id":17,"plantilla_id":2,"nombre":"La guía de aprendizaje web y del campus virtual está disponible en el SharePoint de la titulación","tipo":"booleano","orden":11,"requerido":0,"opciones":null},{"id":18,"plantilla_id":2,"nombre":"Se han celebrado reuniones de coordinación de asignatura (inicial y final-CEA)*","tipo":"booleano","orden":12,"requerido":0,"opciones":null},{"id":19,"plantilla_id":2,"nombre":"Las actas de las reuniones de coordinación de asignatura (inicial y final-CEA) están firmadas y subidas en el SharePoint*","tipo":"booleano","orden":13,"requerido":0,"opciones":null},{"id":20,"plantilla_id":2,"nombre":"Las actividades evaluables están calificadas en Campus Virtual","tipo":"booleano","orden":14,"requerido":0,"opciones":null},{"id":21,"plantilla_id":2,"nombre":"Se aplica feedback formativo del proceso de aprendizaje al alumno","tipo":"booleano","orden":15,"requerido":0,"opciones":null},{"id":22,"plantilla_id":2,"nombre":"Evidencias de feedback formativo en el Campus Virtual.","tipo":"booleano","orden":16,"requerido":0,"opciones":null},{"id":23,"plantilla_id":2,"nombre":"Se han alcanzado los resultados de aprendizaje previstos en la materia","tipo":"booleano","orden":17,"requerido":0,"opciones":null},{"id":24,"plantilla_id":2,"nombre":"Las actividades evaluables están alineadas con los resultados de aprendizaje","tipo":"booleano","orden":18,"requerido":0,"opciones":null},{"id":25,"plantilla_id":2,"nombre":"La metodología docente y las actividades formativas contribuyen a la consecución de los resultados de aprendizaje","tipo":"booleano","orden":19,"requerido":0,"opciones":null},{"id":26,"plantilla_id":2,"nombre":"Plan de Mejora de la materia","tipo":"tabla","orden":20,"requerido":0,"opciones":[{"nombre":"Acción de mejora","tipo":"texto_corto"},{"nombre":"Responsable","tipo":"texto_corto"},{"nombre":"Fecha Inicio","tipo":"fecha"},{"nombre":"Fecha Fin","tipo":"fecha"},{"nombre":"Acciónes realizadas","tipo":"texto_corto"},{"nombre":"Estado acciones","tipo":"texto_corto"}]},{"id":29,"plantilla_id":2,"nombre":"Acta de Comité de Evaluación de Resultados de Aprendizaje (CEA)","tipo":"seccion","orden":21,"requerido":0,"opciones":null},{"id":30,"plantilla_id":2,"nombre":"Temas tratados en la reunión","tipo":"texto_largo","orden":22,"requerido":0,"opciones":null}]}
+2026-02-18T19:31:06.486Z [LOG] Updating template 2 [object Object]
+2026-02-18T19:31:06.486Z [LOG] BEGIN
+2026-02-18T19:31:06.486Z [LOG] UPDATE Plantilla SET titulo = 'CEA Meeting - GIST', descripcion = 'Grado en Ing. de Sistemas de Tel'/*+15 bytes*/ WHERE id = '2'
+2026-02-18T19:31:06.486Z [LOG] SELECT id FROM CampoPlantilla WHERE plantilla_id = '2'
+2026-02-18T19:31:06.487Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'ADJUNTOS', tipo = 'seccion', orden = 0.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 32.0
+            
+2026-02-18T19:31:06.487Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Documentación inicial', tipo = 'adjunto', orden = 1.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 31.0
+            
+2026-02-18T19:31:06.487Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Datos identificativos de la mate'/*+4 bytes*/, tipo = 'seccion', orden = 2.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 27.0
+            
+2026-02-18T19:31:06.487Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Código', tipo = 'numero', orden = 3.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 9.0
+            
+2026-02-18T19:31:06.487Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Semestre', tipo = 'texto_corto', orden = 4.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 11.0
+            
+2026-02-18T19:31:06.487Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Profesor', tipo = 'texto_corto', orden = 5.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 12.0
+            
+2026-02-18T19:31:06.487Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Coordinador', tipo = 'texto_corto', orden = 6.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 13.0
+            
+2026-02-18T19:31:06.487Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Formato Entrega', tipo = 'texto_corto', orden = 7.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 14.0
+            
+2026-02-18T19:31:06.487Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Procesos de evaluación de apren'/*+26 bytes*/, tipo = 'seccion', orden = 8.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 28.0
+            
+2026-02-18T19:31:06.487Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'La guía de aprendizaje está co'/*+47 bytes*/, tipo = 'booleano', orden = 9.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 15.0
+            
+2026-02-18T19:31:06.487Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'La guía de aprendizaje con plan'/*+75 bytes*/, tipo = 'booleano', orden = 10.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 16.0
+            
+2026-02-18T19:31:06.487Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'La guía de aprendizaje web y de'/*+68 bytes*/, tipo = 'booleano', orden = 11.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 17.0
+            
+2026-02-18T19:31:06.487Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Se han celebrado reuniones de co'/*+48 bytes*/, tipo = 'booleano', orden = 12.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 18.0
+            
+2026-02-18T19:31:06.487Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Las actas de las reuniones de co'/*+91 bytes*/, tipo = 'booleano', orden = 13.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 19.0
+            
+2026-02-18T19:31:06.487Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Las actividades evaluables está'/*+31 bytes*/, tipo = 'booleano', orden = 14.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 20.0
+            
+2026-02-18T19:31:06.487Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Se aplica feedback formativo del'/*+33 bytes*/, tipo = 'booleano', orden = 15.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 21.0
+            
+2026-02-18T19:31:06.487Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Evidencias de feedback formativo'/*+22 bytes*/, tipo = 'booleano', orden = 16.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 22.0
+            
+2026-02-18T19:31:06.487Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Se han alcanzado los resultados '/*+38 bytes*/, tipo = 'booleano', orden = 17.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 23.0
+            
+2026-02-18T19:31:06.487Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Las actividades evaluables está'/*+45 bytes*/, tipo = 'booleano', orden = 18.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 24.0
+            
+2026-02-18T19:31:06.487Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'La metodología docente y las ac'/*+83 bytes*/, tipo = 'booleano', orden = 19.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 25.0
+            
+2026-02-18T19:31:06.487Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Plan de Mejora de la materia', tipo = 'tabla', orden = 20.0, requerido = 0.0, opciones = '[{"nombre":"Acción de mejora","'/*+251 bytes*/
+                WHERE id = 26.0
+            
+2026-02-18T19:31:06.487Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Acta de Comité de Evaluación d'/*+33 bytes*/, tipo = 'seccion', orden = 21.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 29.0
+            
+2026-02-18T19:31:06.487Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Temas tratados en la reunión', tipo = 'texto_largo', orden = 22.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 30.0
+            
+2026-02-18T19:31:06.487Z [LOG] COMMIT
+2026-02-18T19:31:06.501Z - GET /api/templates - undefined
+2026-02-18T19:31:06.501Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:31:06.503Z - GET /api/templates - undefined
+2026-02-18T19:31:06.503Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:31:07.721Z - GET /api/meetings - undefined
+2026-02-18T19:31:07.722Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:31:07.723Z - GET /api/templates - undefined
+2026-02-18T19:31:07.723Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:31:07.724Z - GET /api/meetings - undefined
+2026-02-18T19:31:07.724Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:31:07.725Z - GET /api/templates - undefined
+2026-02-18T19:31:07.725Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:31:09.256Z - GET /api/meetings/1 - undefined
+2026-02-18T19:31:09.257Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:31:09.257Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:31:09.257Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:31:09.258Z - GET /api/meetings/1 - undefined
+2026-02-18T19:31:09.258Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:31:09.258Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:31:09.258Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:31:09.258Z - GET /api/templates/2 - undefined
+2026-02-18T19:31:09.259Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:31:09.259Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:31:09.259Z - GET /api/templates/2 - undefined
+2026-02-18T19:31:09.259Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:31:09.260Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:31:13.293Z - POST /api/attachments - undefined
+2026-02-18T19:31:13.296Z [LOG] 
+                SELECT ri.titulo as instance_title, p.titulo as template_title
+                FROM ReunionInstancia ri
+                JOIN Plantilla p ON ri.plantilla_id = p.id
+                WHERE ri.id = '1'
+            
+2026-02-18T19:31:13.298Z [LOG] 
+            INSERT INTO Adjunto (instancia_id, nombre_archivo, ruta_archivo, tipo_mime, tamano_bytes)
+            VALUES ('1', 'Guia Docente EA 2526 S2 Gonzalo.'/*+3 bytes*/, 'cea_meeting___gist/c_lculo_i/177'/*+46 bytes*/, 'application/pdf', 278082.0)
+        
+2026-02-18T19:31:14.050Z - GET /attachments/cea_meeting___gist/c_lculo_i/1771443073296-Guia%20Docente%20EA%202526%20S2%20Gonzalo.pdf - undefined
+2026-02-18T19:31:28.288Z - POST /api/attachments - undefined
+2026-02-18T19:31:28.289Z [LOG] 
+                SELECT ri.titulo as instance_title, p.titulo as template_title
+                FROM ReunionInstancia ri
+                JOIN Plantilla p ON ri.plantilla_id = p.id
+                WHERE ri.id = '1'
+            
+2026-02-18T19:31:28.299Z [LOG] 
+            INSERT INTO Adjunto (instancia_id, nombre_archivo, ruta_archivo, tipo_mime, tamano_bytes)
+            VALUES ('1', 'Captura de pantalla (1).png', 'cea_meeting___gist/c_lculo_i/177'/*+38 bytes*/, 'image/png', 858560.0)
+        
+2026-02-18T19:31:29.299Z - GET /attachments/cea_meeting___gist/c_lculo_i/1771443088289-Captura%20de%20pantalla%20(1).png - undefined
+2026-02-18T19:31:30.478Z - GET /attachments/cea_meeting___gist/c_lculo_i/1771443088289-Captura%20de%20pantalla%20(1).png - undefined
+2026-02-18T19:31:57.844Z - GET /attachments/cea_meeting___gist/c_lculo_i/1771443088289-Captura%20de%20pantalla%20(1).png - undefined
+2026-02-18T19:32:01.309Z - GET /attachments/cea_meeting___gist/c_lculo_i/1771443088289-Captura%20de%20pantalla%20(1).png - undefined
+2026-02-18T19:32:05.655Z - GET /api/templates - undefined
+2026-02-18T19:32:05.655Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:32:05.657Z - GET /api/templates - undefined
+2026-02-18T19:32:05.657Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:32:06.737Z - GET /api/meetings - undefined
+2026-02-18T19:32:06.737Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:32:06.738Z - GET /api/templates - undefined
+2026-02-18T19:32:06.738Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:32:06.738Z - GET /api/meetings - undefined
+2026-02-18T19:32:06.739Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:32:06.739Z - GET /api/templates - undefined
+2026-02-18T19:32:06.739Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:32:08.950Z - GET /api/meetings/1 - undefined
+2026-02-18T19:32:08.950Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:32:08.950Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:32:08.951Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:32:08.952Z - GET /api/meetings/1 - undefined
+2026-02-18T19:32:08.952Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:32:08.953Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:32:08.953Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:32:08.953Z - GET /api/templates/2 - undefined
+2026-02-18T19:32:08.954Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:32:08.954Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:32:08.954Z - GET /api/templates/2 - undefined
+2026-02-18T19:32:08.955Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:32:08.955Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:32:09.928Z - GET /api/templates - undefined
+2026-02-18T19:32:09.928Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:32:09.929Z - GET /api/templates - undefined
+2026-02-18T19:32:09.929Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:32:12.919Z - GET /api/meetings - undefined
+2026-02-18T19:32:12.919Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:32:12.920Z - GET /api/templates - undefined
+2026-02-18T19:32:12.920Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:32:12.920Z - GET /api/meetings - undefined
+2026-02-18T19:32:12.920Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:32:12.921Z - GET /api/templates - undefined
+2026-02-18T19:32:12.921Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:32:19.339Z - GET /api/meetings/1 - undefined
+2026-02-18T19:32:19.339Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:32:19.339Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:32:19.339Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:32:19.340Z - GET /api/meetings/1 - undefined
+2026-02-18T19:32:19.341Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:32:19.341Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:32:19.341Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:32:19.342Z - GET /api/templates/2 - undefined
+2026-02-18T19:32:19.342Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:32:19.342Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:32:19.343Z - GET /api/templates/2 - undefined
+2026-02-18T19:32:19.343Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:32:19.344Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:33:19.358Z - PUT /api/meetings/1 - {"titulo":"Cálculo I","subtitulo":"","estado":"borrador","fecha_reunion":"2026-02-18","valores":[{"campo_id":9,"valor_texto":null,"valor_numero":9971003101,"valor_booleano":null,"valor_fecha":null},{"campo_id":11,"valor_texto":"S2","valor_numero":null,"valor_booleano":null,"valor_fecha":null},{"campo_id":12,"valor_texto":"RUBEN TINO RAMOS","valor_numero":null,"valor_booleano":null,"valor_fecha":null},{"campo_id":13,"valor_texto":"RUBEN TINO RAMOS","valor_numero":null,"valor_booleano":null,"valor_fecha":null},{"campo_id":14,"valor_texto":"PIEA","valor_numero":null,"valor_booleano":null,"valor_fecha":null},{"campo_id":15,"valor_texto":null,"valor_numero":null,"valor_booleano":1,"valor_fecha":null},{"campo_id":16,"valor_texto":null,"valor_numero":null,"valor_booleano":1,"valor_fecha":null},{"campo_id":26,"valor_texto":"[{\"Acciones de mejora\":\"1 bla bla\",\"Responsable de la tarea\":\"Rubén y Jorge\",\"Fecha Inicio\":\"2026-02-18\",\"Fecha Fin\":\"2026-02-20\",\"Acciones realizadas\":\"Se hace esto y esto\",\"Estado de la Acción\":\"PTE\"}]","valor_numero":null,"valor_booleano":null,"valor_fecha":null},{"campo_id":31,"valor_texto":null,"valor_numero":null,"valor_booleano":null,"valor_fecha":null}]}
+2026-02-18T19:33:19.358Z [LOG] BEGIN
+2026-02-18T19:33:19.358Z [LOG] UPDATE ReunionInstancia SET titulo = 'Cálculo I', subtitulo = '', estado = 'borrador', fecha_reunion = '2026-02-18', fecha_actualizacion = CURRENT_TIMESTAMP WHERE id = '1'
+2026-02-18T19:33:19.358Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 9.0, NULL, 9971003101.0, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:33:19.358Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 11.0, 'S2', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:33:19.358Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 12.0, 'RUBEN TINO RAMOS', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:33:19.358Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 13.0, 'RUBEN TINO RAMOS', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:33:19.358Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 14.0, 'PIEA', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:33:19.358Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 15.0, NULL, NULL, 1.0, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:33:19.358Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 16.0, NULL, NULL, 1.0, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:33:19.358Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 26.0, '[{"Acciones de mejora":"1 bla bl'/*+173 bytes*/, NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:33:19.358Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 31.0, NULL, NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:33:19.358Z [LOG] COMMIT
+2026-02-18T19:33:19.885Z - POST /api/attachments - undefined
+2026-02-18T19:33:19.886Z [LOG] 
+                SELECT ri.titulo as instance_title, p.titulo as template_title
+                FROM ReunionInstancia ri
+                JOIN Plantilla p ON ri.plantilla_id = p.id
+                WHERE ri.id = '1'
+            
+2026-02-18T19:33:19.888Z [LOG] 
+            INSERT INTO Adjunto (instancia_id, nombre_archivo, ruta_archivo, tipo_mime, tamano_bytes)
+            VALUES ('1', 'Captura de pantalla (1).png', 'cea_meeting___gist/c_lculo_i/177'/*+38 bytes*/, 'image/png', 858560.0)
+        
+2026-02-18T19:33:20.514Z - GET /attachments/cea_meeting___gist/c_lculo_i/1771443199886-Captura%20de%20pantalla%20(1).png - undefined
+2026-02-18T19:34:02.493Z - POST /api/attachments - undefined
+2026-02-18T19:34:02.494Z [LOG] 
+                SELECT ri.titulo as instance_title, p.titulo as template_title
+                FROM ReunionInstancia ri
+                JOIN Plantilla p ON ri.plantilla_id = p.id
+                WHERE ri.id = '1'
+            
+2026-02-18T19:34:02.497Z [LOG] 
+            INSERT INTO Adjunto (instancia_id, nombre_archivo, ruta_archivo, tipo_mime, tamano_bytes)
+            VALUES ('1', 'Captura de pantalla (1).png', 'cea_meeting___gist/c_lculo_i/177'/*+38 bytes*/, 'image/png', 858560.0)
+        
+2026-02-18T19:34:03.076Z - GET /attachments/cea_meeting___gist/c_lculo_i/1771443242494-Captura%20de%20pantalla%20(1).png - undefined
+2026-02-18T19:35:06.311Z - PUT /api/meetings/1 - {"titulo":"Cálculo I","subtitulo":"","estado":"borrador","fecha_reunion":"2026-02-18","valores":[{"campo_id":9,"valor_texto":null,"valor_numero":9971003101,"valor_booleano":null,"valor_fecha":null},{"campo_id":11,"valor_texto":"S2","valor_numero":null,"valor_booleano":null,"valor_fecha":null},{"campo_id":12,"valor_texto":"RUBEN TINO RAMOS","valor_numero":null,"valor_booleano":null,"valor_fecha":null},{"campo_id":13,"valor_texto":"RUBEN TINO RAMOS","valor_numero":null,"valor_booleano":null,"valor_fecha":null},{"campo_id":14,"valor_texto":"PIEA","valor_numero":null,"valor_booleano":null,"valor_fecha":null},{"campo_id":15,"valor_texto":null,"valor_numero":null,"valor_booleano":1,"valor_fecha":null},{"campo_id":16,"valor_texto":null,"valor_numero":null,"valor_booleano":1,"valor_fecha":null},{"campo_id":26,"valor_texto":"[{\"Acciones de mejora\":\"1 bla bla\",\"Responsable de la tarea\":\"Rubén y Jorge\",\"Fecha Inicio\":\"2026-02-18\",\"Fecha Fin\":\"2026-02-20\",\"Acciones realizadas\":\"Se hace esto y esto\",\"Estado de la Acción\":\"PTE\"}]","valor_numero":null,"valor_booleano":null,"valor_fecha":null},{"campo_id":31,"valor_texto":null,"valor_numero":null,"valor_booleano":null,"valor_fecha":null}]}
+2026-02-18T19:35:06.312Z [LOG] BEGIN
+2026-02-18T19:35:06.312Z [LOG] UPDATE ReunionInstancia SET titulo = 'Cálculo I', subtitulo = '', estado = 'borrador', fecha_reunion = '2026-02-18', fecha_actualizacion = CURRENT_TIMESTAMP WHERE id = '1'
+2026-02-18T19:35:06.312Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 9.0, NULL, 9971003101.0, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:35:06.312Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 11.0, 'S2', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:35:06.312Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 12.0, 'RUBEN TINO RAMOS', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:35:06.312Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 13.0, 'RUBEN TINO RAMOS', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:35:06.312Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 14.0, 'PIEA', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:35:06.312Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 15.0, NULL, NULL, 1.0, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:35:06.312Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 16.0, NULL, NULL, 1.0, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:35:06.312Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 26.0, '[{"Acciones de mejora":"1 bla bl'/*+173 bytes*/, NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:35:06.312Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 31.0, NULL, NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:35:06.312Z [LOG] COMMIT
+2026-02-18T19:35:24.822Z [LOG] PRAGMA journal_mode = WAL
+2026-02-18T19:35:24.908Z [LOG] Server running on http://localhost:3000
+2026-02-18T19:35:29.287Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:35:29.290Z - GET /1 - 200 (3ms)
+2026-02-18T19:35:29.291Z - GET /1 - 304 (1ms)
+2026-02-18T19:35:29.288Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:35:29.288Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:35:29.290Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:35:29.290Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:35:29.290Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:35:29.292Z - GET /2 - 304 (1ms)
+2026-02-18T19:35:29.291Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:35:29.292Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:35:29.292Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:35:29.293Z - GET /2 - 304 (1ms)
+2026-02-18T19:35:29.292Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:35:31.385Z [LOG] 
+                SELECT ri.titulo as instance_title, p.titulo as template_title
+                FROM ReunionInstancia ri
+                JOIN Plantilla p ON ri.plantilla_id = p.id
+                WHERE ri.id = '1'
+            
+2026-02-18T19:35:31.389Z [LOG] 
+            INSERT INTO Adjunto (instancia_id, nombre_archivo, ruta_archivo, tipo_mime, tamano_bytes)
+            VALUES ('1', 'Captura de pantalla (1).png', 'cea_meeting___gist/c_lculo_i/177'/*+38 bytes*/, 'image/png', 858560.0)
+        
+2026-02-18T19:35:31.389Z - POST / - 201 (6ms)
+2026-02-18T19:35:32.133Z - GET /cea_meeting___gist/c_lculo_i/1771443331385-Captura%20de%20pantalla%20(1).png - 200 (4ms)
+2026-02-18T19:36:46.580Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:36:46.581Z - GET /1 - 200 (1ms)
+2026-02-18T19:36:46.580Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:36:46.580Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:36:46.581Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:36:46.582Z - GET /1 - 304 (1ms)
+2026-02-18T19:36:46.581Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:36:46.582Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:36:46.583Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:36:46.584Z - GET /2 - 304 (1ms)
+2026-02-18T19:36:46.583Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:36:46.585Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:36:46.585Z - GET /2 - 304 (0ms)
+2026-02-18T19:36:46.585Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:37:09.127Z [LOG] SELECT * FROM Adjunto WHERE id = '6'
+2026-02-18T19:37:09.127Z - DELETE /6 - 200 (0ms)
+2026-02-18T19:37:09.127Z [LOG] DELETE FROM Adjunto WHERE id = '6'
+2026-02-18T19:37:10.941Z [LOG] SELECT * FROM Adjunto WHERE id = '7'
+2026-02-18T19:37:10.942Z - DELETE /7 - 200 (1ms)
+2026-02-18T19:37:10.941Z [LOG] DELETE FROM Adjunto WHERE id = '7'
+2026-02-18T19:37:12.263Z [LOG] SELECT * FROM Adjunto WHERE id = '8'
+2026-02-18T19:37:12.263Z - DELETE /8 - 200 (0ms)
+2026-02-18T19:37:12.263Z [LOG] DELETE FROM Adjunto WHERE id = '8'
+2026-02-18T19:37:13.653Z [LOG] SELECT * FROM Adjunto WHERE id = '9'
+2026-02-18T19:37:13.653Z - DELETE /9 - 200 (0ms)
+2026-02-18T19:37:13.653Z [LOG] DELETE FROM Adjunto WHERE id = '9'
+2026-02-18T19:37:15.155Z [LOG] SELECT * FROM Adjunto WHERE id = '10'
+2026-02-18T19:37:15.155Z - DELETE /10 - 200 (0ms)
+2026-02-18T19:37:15.155Z [LOG] DELETE FROM Adjunto WHERE id = '10'
+2026-02-18T19:37:16.737Z [LOG] SELECT * FROM Adjunto WHERE id = '11'
+2026-02-18T19:37:16.737Z - DELETE /11 - 200 (0ms)
+2026-02-18T19:37:16.737Z [LOG] DELETE FROM Adjunto WHERE id = '11'
+2026-02-18T19:37:18.075Z [LOG] SELECT * FROM Adjunto WHERE id = '12'
+2026-02-18T19:37:18.076Z - DELETE /12 - 200 (1ms)
+2026-02-18T19:37:18.075Z [LOG] DELETE FROM Adjunto WHERE id = '12'
+2026-02-18T19:37:19.722Z [LOG] SELECT * FROM Adjunto WHERE id = '13'
+2026-02-18T19:37:19.723Z - DELETE /13 - 200 (1ms)
+2026-02-18T19:37:19.723Z [LOG] DELETE FROM Adjunto WHERE id = '13'
+2026-02-18T19:37:21.030Z [LOG] SELECT * FROM Adjunto WHERE id = '14'
+2026-02-18T19:37:21.031Z - DELETE /14 - 200 (1ms)
+2026-02-18T19:37:21.030Z [LOG] DELETE FROM Adjunto WHERE id = '14'
+2026-02-18T19:37:22.645Z [LOG] SELECT * FROM Adjunto WHERE id = '15'
+2026-02-18T19:37:22.645Z - DELETE /15 - 200 (0ms)
+2026-02-18T19:37:22.645Z [LOG] DELETE FROM Adjunto WHERE id = '15'
+2026-02-18T19:37:26.401Z [LOG] BEGIN
+2026-02-18T19:37:26.402Z - PUT /1 - 200 (1ms)
+2026-02-18T19:37:26.401Z [LOG] UPDATE ReunionInstancia SET titulo = 'Cálculo I', subtitulo = '', estado = 'borrador', fecha_reunion = '2026-02-18', fecha_actualizacion = CURRENT_TIMESTAMP WHERE id = '1'
+2026-02-18T19:37:26.401Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 9.0, NULL, 9971003101.0, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:37:26.401Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 11.0, 'S2', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:37:26.401Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 12.0, 'RUBEN TINO RAMOS', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:37:26.401Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 13.0, 'RUBEN TINO RAMOS', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:37:26.401Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 14.0, 'PIEA', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:37:26.401Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 15.0, NULL, NULL, 1.0, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:37:26.401Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 16.0, NULL, NULL, 1.0, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:37:26.401Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 26.0, '[{"Acciones de mejora":"1 bla bl'/*+173 bytes*/, NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:37:26.401Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 31.0, NULL, NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:37:26.401Z [LOG] COMMIT
+2026-02-18T19:37:27.427Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:37:27.428Z - GET /1 - 200 (1ms)
+2026-02-18T19:37:27.429Z - GET /1 - 304 (0ms)
+2026-02-18T19:37:27.427Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:37:27.427Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:37:27.429Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:37:27.429Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:37:27.429Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:37:27.431Z - GET /2 - 304 (1ms)
+2026-02-18T19:37:27.432Z - GET /2 - 304 (0ms)
+2026-02-18T19:37:27.430Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:37:27.431Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:37:27.432Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:37:27.432Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:38:08.809Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:38:08.809Z - GET /1 - 304 (0ms)
+2026-02-18T19:38:08.809Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:38:08.809Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:38:08.810Z - GET /1 - 304 (0ms)
+2026-02-18T19:38:08.810Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:38:08.810Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:38:08.810Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:38:08.811Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:38:08.812Z - GET /2 - 304 (1ms)
+2026-02-18T19:38:08.811Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:38:08.812Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:38:08.812Z - GET /2 - 304 (0ms)
+2026-02-18T19:38:08.812Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:38:19.341Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:38:19.341Z - GET /1 - 304 (0ms)
+2026-02-18T19:38:19.341Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:38:19.341Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:38:19.342Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:38:19.342Z - GET /1 - 304 (0ms)
+2026-02-18T19:38:19.342Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:38:19.342Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:38:19.343Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:38:19.343Z - GET /2 - 304 (0ms)
+2026-02-18T19:38:19.343Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:38:19.344Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:38:19.345Z - GET /2 - 304 (1ms)
+2026-02-18T19:38:19.344Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:38:20.149Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:38:20.149Z - GET /1 - 304 (0ms)
+2026-02-18T19:38:20.149Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:38:20.149Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:38:20.150Z - GET /1 - 304 (0ms)
+2026-02-18T19:38:20.150Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:38:20.150Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:38:20.150Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:38:20.152Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:38:20.152Z - GET /2 - 304 (0ms)
+2026-02-18T19:38:20.152Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:38:20.153Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:38:20.153Z - GET /2 - 304 (0ms)
+2026-02-18T19:38:20.153Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:38:56.544Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:38:56.544Z - GET /1 - 304 (0ms)
+2026-02-18T19:38:56.546Z - GET /1 - 304 (1ms)
+2026-02-18T19:38:56.544Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:38:56.544Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:38:56.545Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:38:56.545Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:38:56.545Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:38:56.548Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:38:56.548Z - GET /2 - 304 (0ms)
+2026-02-18T19:38:56.548Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:38:56.549Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:38:56.549Z - GET /2 - 304 (0ms)
+2026-02-18T19:38:56.549Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:39:02.971Z [LOG] 
+                SELECT ri.titulo as instance_title, p.titulo as template_title
+                FROM ReunionInstancia ri
+                JOIN Plantilla p ON ri.plantilla_id = p.id
+                WHERE ri.id = '1'
+            
+2026-02-18T19:39:02.974Z [LOG] 
+            INSERT INTO Adjunto (instancia_id, nombre_archivo, ruta_archivo, tipo_mime, tamano_bytes)
+            VALUES ('1', 'Captura de pantalla (1).png', 'cea_meeting___gist/c_lculo_i/177'/*+38 bytes*/, 'image/png', 858560.0)
+        
+2026-02-18T19:39:02.975Z - POST / - 201 (4ms)
+2026-02-18T19:39:03.932Z - GET /cea_meeting___gist/c_lculo_i/1771443542972-Captura%20de%20pantalla%20(1).png - 200 (4ms)
+2026-02-18T19:40:38.334Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:40:38.335Z - GET /1 - 200 (1ms)
+2026-02-18T19:40:38.336Z - GET /1 - 304 (0ms)
+2026-02-18T19:40:38.335Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:40:38.335Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:40:38.336Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:40:38.336Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:40:38.336Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:40:38.337Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:40:38.337Z - GET /2 - 304 (0ms)
+2026-02-18T19:40:38.337Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:40:38.339Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:40:38.339Z - GET /2 - 304 (0ms)
+2026-02-18T19:40:38.339Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:40:41.268Z [LOG] 
+                SELECT ri.titulo as instance_title, p.titulo as template_title
+                FROM ReunionInstancia ri
+                JOIN Plantilla p ON ri.plantilla_id = p.id
+                WHERE ri.id = '1'
+            
+2026-02-18T19:40:41.271Z [LOG] 
+            INSERT INTO Adjunto (instancia_id, nombre_archivo, ruta_archivo, tipo_mime, tamano_bytes)
+            VALUES ('1', 'Captura de pantalla (1).png', 'cea_meeting___gist/c_lculo_i/177'/*+38 bytes*/, 'image/png', 858560.0)
+        
+2026-02-18T19:40:41.271Z - POST / - 201 (4ms)
+2026-02-18T19:40:44.159Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:40:44.159Z - GET / - 200 (1ms)
+2026-02-18T19:40:44.159Z - GET / - 304 (0ms)
+2026-02-18T19:40:44.159Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:40:44.160Z - GET / - 304 (0ms)
+2026-02-18T19:40:44.160Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:40:44.160Z - GET / - 304 (0ms)
+2026-02-18T19:40:44.160Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:40:47.336Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:40:47.337Z - GET /1 - 200 (1ms)
+2026-02-18T19:40:47.336Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:40:47.336Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:40:47.337Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:40:47.338Z - GET /1 - 304 (1ms)
+2026-02-18T19:40:47.338Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:40:47.338Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:40:47.339Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:40:47.339Z - GET /2 - 304 (0ms)
+2026-02-18T19:40:47.339Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:40:47.340Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:40:47.340Z - GET /2 - 304 (0ms)
+2026-02-18T19:40:47.340Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:41:04.941Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:41:04.942Z - GET / - 304 (1ms)
+2026-02-18T19:41:04.942Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:41:04.943Z - GET / - 304 (1ms)
+2026-02-18T19:41:06.299Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:41:06.299Z - GET / - 304 (0ms)
+2026-02-18T19:41:06.300Z - GET / - 304 (0ms)
+2026-02-18T19:41:06.300Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:41:06.301Z - GET / - 304 (1ms)
+2026-02-18T19:41:06.300Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:41:06.301Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:41:06.302Z - GET / - 304 (1ms)
+2026-02-18T19:41:08.062Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:41:08.062Z - GET /1 - 304 (1ms)
+2026-02-18T19:41:08.062Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:41:08.062Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:41:08.063Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:41:08.063Z - GET /1 - 304 (0ms)
+2026-02-18T19:41:08.063Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:41:08.063Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:41:08.064Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:41:08.064Z - GET /2 - 304 (0ms)
+2026-02-18T19:41:08.064Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:41:08.064Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:41:08.065Z - GET /2 - 304 (1ms)
+2026-02-18T19:41:08.064Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:41:18.236Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:41:18.236Z - GET /1 - 304 (0ms)
+2026-02-18T19:41:18.236Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:41:18.236Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:41:18.237Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:41:18.237Z - GET /1 - 304 (0ms)
+2026-02-18T19:41:18.237Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:41:18.237Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:41:18.238Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:41:18.238Z - GET /2 - 304 (0ms)
+2026-02-18T19:41:18.238Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:41:18.239Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:41:18.239Z - GET /2 - 304 (0ms)
+2026-02-18T19:41:18.239Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:41:22.649Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:41:22.649Z - GET / - 304 (0ms)
+2026-02-18T19:41:22.649Z - GET / - 304 (0ms)
+2026-02-18T19:41:22.649Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:41:22.650Z - GET / - 304 (0ms)
+2026-02-18T19:41:22.650Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:41:22.650Z - GET / - 304 (0ms)
+2026-02-18T19:41:22.650Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:41:24.210Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '2'
+2026-02-18T19:41:24.210Z - GET /2 - 304 (0ms)
+2026-02-18T19:41:24.210Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '2'
+2026-02-18T19:41:24.210Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '2'
+2026-02-18T19:41:24.211Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '2'
+2026-02-18T19:41:24.211Z - GET /2 - 304 (0ms)
+2026-02-18T19:41:24.211Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '2'
+2026-02-18T19:41:24.211Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '2'
+2026-02-18T19:41:24.212Z - GET /2 - 304 (0ms)
+2026-02-18T19:41:24.212Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:41:24.212Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:41:24.213Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:41:24.213Z - GET /2 - 304 (0ms)
+2026-02-18T19:41:24.213Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:42:07.146Z [LOG] 
+                SELECT ri.titulo as instance_title, p.titulo as template_title
+                FROM ReunionInstancia ri
+                JOIN Plantilla p ON ri.plantilla_id = p.id
+                WHERE ri.id = '2'
+            
+2026-02-18T19:42:07.149Z [LOG] 
+            INSERT INTO Adjunto (instancia_id, nombre_archivo, ruta_archivo, tipo_mime, tamano_bytes)
+            VALUES ('2', 'Captura de pantalla (1).png', 'cea_meeting___gist/copy_of_c_lcu'/*+46 bytes*/, 'image/png', 858560.0)
+        
+2026-02-18T19:42:07.149Z - POST / - 201 (3ms)
+2026-02-18T19:42:07.946Z - GET /cea_meeting___gist/copy_of_c_lculo_i/1771443727147-Captura%20de%20pantalla%20(1).png - 200 (3ms)
+2026-02-18T19:42:27.760Z [LOG] BEGIN
+2026-02-18T19:42:27.760Z - PUT /2 - 200 (0ms)
+2026-02-18T19:42:27.760Z [LOG] UPDATE ReunionInstancia SET titulo = 'Álgebra', subtitulo = '', estado = 'borrador', fecha_reunion = '2026-02-19', fecha_actualizacion = CURRENT_TIMESTAMP WHERE id = '2'
+2026-02-18T19:42:27.760Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('2', 9.0, NULL, 9971003102.0, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:42:27.760Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('2', 11.0, 'S2', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:42:27.760Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('2', 12.0, 'RUBEN TINO RAMOS', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:42:27.760Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('2', 13.0, 'RUBEN TINO RAMOS', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:42:27.760Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('2', 14.0, 'PIEA', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:42:27.760Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('2', 15.0, NULL, NULL, 1.0, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:42:27.760Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('2', 16.0, NULL, NULL, 1.0, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:42:27.760Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('2', 26.0, '[{"Acciones de mejora":"1 bla bl'/*+173 bytes*/, NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:42:27.760Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('2', 31.0, '{"path":"cea_meeting___gist/copy'/*+147 bytes*/, NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:42:27.760Z [LOG] COMMIT
+2026-02-18T19:42:28.441Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:42:28.441Z - GET / - 304 (0ms)
+2026-02-18T19:42:28.442Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:42:28.442Z - GET / - 304 (0ms)
+2026-02-18T19:42:29.656Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:42:29.656Z - GET / - 304 (0ms)
+2026-02-18T19:42:29.657Z - GET / - 304 (0ms)
+2026-02-18T19:42:29.657Z - GET / - 200 (0ms)
+2026-02-18T19:42:29.657Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:42:29.657Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:42:29.658Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:42:29.658Z - GET / - 304 (0ms)
+2026-02-18T19:42:31.948Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:42:31.948Z - GET /1 - 304 (1ms)
+2026-02-18T19:42:31.948Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:42:31.948Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:42:31.949Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:42:31.949Z - GET /1 - 304 (0ms)
+2026-02-18T19:42:31.949Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:42:31.949Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:42:31.950Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:42:31.951Z - GET /2 - 304 (1ms)
+2026-02-18T19:42:31.952Z - GET /2 - 304 (1ms)
+2026-02-18T19:42:31.950Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:42:31.951Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:42:31.951Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:42:34.384Z [LOG] 
+                SELECT ri.titulo as instance_title, p.titulo as template_title
+                FROM ReunionInstancia ri
+                JOIN Plantilla p ON ri.plantilla_id = p.id
+                WHERE ri.id = '1'
+            
+2026-02-18T19:42:34.387Z [LOG] 
+            INSERT INTO Adjunto (instancia_id, nombre_archivo, ruta_archivo, tipo_mime, tamano_bytes)
+            VALUES ('1', 'Captura de pantalla (1).png', 'cea_meeting___gist/c_lculo_i/177'/*+38 bytes*/, 'image/png', 858560.0)
+        
+2026-02-18T19:42:34.387Z - POST / - 201 (3ms)
+2026-02-18T19:42:35.515Z - GET /cea_meeting___gist/c_lculo_i/1771443754385-Captura%20de%20pantalla%20(1).png - 200 (3ms)
+2026-02-18T19:42:37.080Z [LOG] BEGIN
+2026-02-18T19:42:37.080Z - PUT /1 - 200 (0ms)
+2026-02-18T19:42:37.080Z [LOG] UPDATE ReunionInstancia SET titulo = 'Cálculo I', subtitulo = '', estado = 'borrador', fecha_reunion = '2026-02-18', fecha_actualizacion = CURRENT_TIMESTAMP WHERE id = '1'
+2026-02-18T19:42:37.080Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 9.0, NULL, 9971003101.0, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:42:37.080Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 11.0, 'S2', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:42:37.080Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 12.0, 'RUBEN TINO RAMOS', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:42:37.080Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 13.0, 'RUBEN TINO RAMOS', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:42:37.080Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 14.0, 'PIEA', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:42:37.080Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 15.0, NULL, NULL, 1.0, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:42:37.080Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 16.0, NULL, NULL, 1.0, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:42:37.080Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 26.0, '[{"Acciones de mejora":"1 bla bl'/*+173 bytes*/, NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:42:37.080Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 31.0, '{"path":"cea_meeting___gist/c_lc'/*+139 bytes*/, NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:42:37.080Z [LOG] COMMIT
+2026-02-18T19:42:37.741Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:42:37.741Z - GET / - 304 (0ms)
+2026-02-18T19:42:37.742Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:42:37.742Z - GET / - 304 (0ms)
+2026-02-18T19:42:38.589Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:42:38.589Z - GET / - 200 (0ms)
+2026-02-18T19:42:38.589Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:42:38.590Z - GET / - 304 (1ms)
+2026-02-18T19:42:38.590Z - GET / - 304 (0ms)
+2026-02-18T19:42:38.590Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:42:38.591Z - GET / - 304 (1ms)
+2026-02-18T19:42:38.590Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:42:39.704Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '2'
+2026-02-18T19:42:39.705Z - GET /2 - 200 (1ms)
+2026-02-18T19:42:39.704Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '2'
+2026-02-18T19:42:39.704Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '2'
+2026-02-18T19:42:39.705Z - GET /2 - 304 (0ms)
+2026-02-18T19:42:39.705Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '2'
+2026-02-18T19:42:39.705Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '2'
+2026-02-18T19:42:39.705Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '2'
+2026-02-18T19:42:39.706Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:42:39.707Z - GET /2 - 304 (1ms)
+2026-02-18T19:42:39.706Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:42:39.707Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:42:39.707Z - GET /2 - 304 (0ms)
+2026-02-18T19:42:39.707Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:42:40.858Z - GET /cea_meeting___gist/copy_of_c_lculo_i/1771443727147-Captura%20de%20pantalla%20(1).png - 304 (1ms)
+2026-02-18T19:42:51.415Z [LOG] SELECT * FROM Adjunto WHERE id = '18'
+2026-02-18T19:42:51.415Z - DELETE /18 - 200 (0ms)
+2026-02-18T19:42:51.415Z [LOG] DELETE FROM Adjunto WHERE id = '18'
+2026-02-18T19:43:18.060Z [LOG] 
+                SELECT ri.titulo as instance_title, p.titulo as template_title
+                FROM ReunionInstancia ri
+                JOIN Plantilla p ON ri.plantilla_id = p.id
+                WHERE ri.id = '2'
+            
+2026-02-18T19:43:18.064Z [LOG] 
+            INSERT INTO Adjunto (instancia_id, nombre_archivo, ruta_archivo, tipo_mime, tamano_bytes)
+            VALUES ('2', 'Captura de pantalla (1).png', 'cea_meeting___gist/_lgebra/17714'/*+36 bytes*/, 'image/png', 858560.0)
+        
+2026-02-18T19:43:18.064Z - POST / - 201 (4ms)
+2026-02-18T19:43:20.025Z [LOG] BEGIN
+2026-02-18T19:43:20.025Z - PUT /2 - 200 (0ms)
+2026-02-18T19:43:20.025Z [LOG] UPDATE ReunionInstancia SET titulo = 'Álgebra', subtitulo = '', estado = 'borrador', fecha_reunion = '2026-02-19', fecha_actualizacion = CURRENT_TIMESTAMP WHERE id = '2'
+2026-02-18T19:43:20.025Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('2', 9.0, NULL, 9971003102.0, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:43:20.025Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('2', 11.0, 'S2', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:43:20.025Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('2', 12.0, 'RUBEN TINO RAMOS', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:43:20.025Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('2', 13.0, 'RUBEN TINO RAMOS', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:43:20.025Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('2', 14.0, 'PIEA', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:43:20.025Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('2', 15.0, NULL, NULL, 1.0, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:43:20.025Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('2', 16.0, NULL, NULL, 1.0, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:43:20.025Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('2', 26.0, '[{"Acciones de mejora":"1 bla bl'/*+173 bytes*/, NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:43:20.025Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('2', 31.0, '{"path":"cea_meeting___gist/_lge'/*+137 bytes*/, NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:43:20.025Z [LOG] COMMIT
+2026-02-18T19:43:40.286Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:43:40.287Z - GET / - 304 (1ms)
+2026-02-18T19:43:40.287Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:43:40.288Z - GET / - 304 (1ms)
+2026-02-18T19:43:42.434Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:43:42.435Z - GET / - 304 (1ms)
+2026-02-18T19:43:42.435Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:43:42.436Z - GET / - 304 (1ms)
+2026-02-18T19:43:42.852Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:43:42.852Z - GET / - 200 (0ms)
+2026-02-18T19:43:42.852Z - GET / - 304 (0ms)
+2026-02-18T19:43:42.852Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:43:42.853Z - GET / - 304 (0ms)
+2026-02-18T19:43:42.853Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:43:42.853Z - GET / - 304 (0ms)
+2026-02-18T19:43:42.853Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:44:13.720Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:44:13.721Z - GET / - 304 (1ms)
+2026-02-18T19:44:13.721Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:44:13.721Z - GET / - 304 (0ms)
+2026-02-18T19:44:14.613Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:44:14.613Z - GET / - 304 (0ms)
+2026-02-18T19:44:14.614Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:44:14.614Z - GET / - 304 (0ms)
+2026-02-18T19:44:14.615Z - GET / - 304 (0ms)
+2026-02-18T19:44:14.615Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:44:14.615Z - GET / - 304 (0ms)
+2026-02-18T19:44:14.615Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:44:35.732Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:44:35.732Z - GET / - 304 (0ms)
+2026-02-18T19:44:35.733Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:44:35.733Z - GET / - 304 (0ms)
+2026-02-18T19:44:37.928Z [LOG] DELETE FROM Plantilla WHERE id = '1'
+2026-02-18T19:44:37.929Z - DELETE /1 - 200 (1ms)
+2026-02-18T19:44:37.931Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:44:37.931Z - GET / - 200 (0ms)
+2026-02-18T19:44:38.588Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:44:38.588Z - GET / - 304 (0ms)
+2026-02-18T19:44:38.589Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:44:38.589Z - GET / - 304 (0ms)
+2026-02-18T19:44:38.590Z - GET / - 304 (1ms)
+2026-02-18T19:44:38.589Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:44:38.590Z - GET / - 304 (0ms)
+2026-02-18T19:44:38.590Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:44:55.572Z [LOG] PRAGMA journal_mode = WAL
+2026-02-18T19:44:55.657Z [LOG] Server running on http://localhost:3000
+2026-02-18T19:46:05.484Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:46:05.487Z - GET /1 - 200 (3ms)
+2026-02-18T19:46:05.488Z - GET /1 - 304 (1ms)
+2026-02-18T19:46:05.484Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:46:05.485Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:46:05.487Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:46:05.487Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:46:05.487Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:46:05.489Z - GET /2 - 304 (0ms)
+2026-02-18T19:46:05.489Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:46:05.489Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:46:05.489Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:46:05.490Z - GET /2 - 304 (1ms)
+2026-02-18T19:46:05.489Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:46:11.232Z [LOG] SELECT * FROM Adjunto WHERE id = '16'
+2026-02-18T19:46:11.233Z - DELETE /16 - 200 (1ms)
+2026-02-18T19:46:11.232Z [LOG] DELETE FROM Adjunto WHERE id = '16'
+2026-02-18T19:46:12.904Z [LOG] SELECT * FROM Adjunto WHERE id = '17'
+2026-02-18T19:46:12.904Z - DELETE /17 - 200 (0ms)
+2026-02-18T19:46:12.904Z [LOG] DELETE FROM Adjunto WHERE id = '17'
+2026-02-18T19:46:14.505Z [LOG] SELECT * FROM Adjunto WHERE id = '19'
+2026-02-18T19:46:14.505Z - DELETE /19 - 200 (0ms)
+2026-02-18T19:46:14.505Z [LOG] DELETE FROM Adjunto WHERE id = '19'
+2026-02-18T19:46:21.353Z [LOG] BEGIN
+2026-02-18T19:46:21.353Z - PUT /1 - 200 (1ms)
+2026-02-18T19:46:21.353Z [LOG] UPDATE ReunionInstancia SET titulo = 'Cálculo I', subtitulo = '', estado = 'borrador', fecha_reunion = '2026-02-18', fecha_actualizacion = CURRENT_TIMESTAMP WHERE id = '1'
+2026-02-18T19:46:21.353Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 9.0, NULL, 9971003101.0, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:46:21.353Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 11.0, 'S2', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:46:21.353Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 12.0, 'RUBEN TINO RAMOS', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:46:21.353Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 13.0, 'RUBEN TINO RAMOS', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:46:21.353Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 14.0, 'PIEA', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:46:21.353Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 15.0, NULL, NULL, 1.0, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:46:21.353Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 16.0, NULL, NULL, 1.0, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:46:21.353Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 26.0, '[{"Acciones de mejora":"1 bla bl'/*+173 bytes*/, NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:46:21.353Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 31.0, NULL, NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:46:21.353Z [LOG] COMMIT
+2026-02-18T19:46:22.095Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:46:22.095Z - GET / - 200 (1ms)
+2026-02-18T19:46:22.096Z - GET / - 304 (0ms)
+2026-02-18T19:46:22.096Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:46:22.097Z - GET / - 304 (1ms)
+2026-02-18T19:46:22.096Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:46:22.097Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:46:22.098Z - GET / - 304 (1ms)
+2026-02-18T19:46:23.892Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '2'
+2026-02-18T19:46:23.893Z - GET /2 - 200 (1ms)
+2026-02-18T19:46:23.893Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '2'
+2026-02-18T19:46:23.893Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '2'
+2026-02-18T19:46:23.894Z - GET /2 - 304 (1ms)
+2026-02-18T19:46:23.894Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '2'
+2026-02-18T19:46:23.894Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '2'
+2026-02-18T19:46:23.894Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '2'
+2026-02-18T19:46:23.895Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:46:23.895Z - GET /2 - 304 (0ms)
+2026-02-18T19:46:23.895Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:46:23.896Z - GET /2 - 304 (1ms)
+2026-02-18T19:46:23.896Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:46:23.896Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:46:26.608Z [LOG] SELECT * FROM Adjunto WHERE id = '20'
+2026-02-18T19:46:26.609Z - DELETE /20 - 200 (1ms)
+2026-02-18T19:46:26.608Z [LOG] DELETE FROM Adjunto WHERE id = '20'
+2026-02-18T19:46:37.518Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:46:37.519Z - GET / - 304 (1ms)
+2026-02-18T19:46:37.520Z - GET / - 304 (1ms)
+2026-02-18T19:46:37.519Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:46:40.285Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:46:40.286Z - GET / - 304 (1ms)
+2026-02-18T19:46:40.286Z - GET / - 304 (0ms)
+2026-02-18T19:46:40.286Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:46:40.287Z - GET / - 304 (0ms)
+2026-02-18T19:46:40.287Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:46:40.287Z - GET / - 304 (0ms)
+2026-02-18T19:46:40.287Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:46:44.944Z [LOG] PRAGMA journal_mode = WAL
+2026-02-18T19:46:45.031Z [LOG] Server running on http://localhost:3000
+2026-02-18T19:46:49.596Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:46:49.600Z - GET /1 - 200 (5ms)
+2026-02-18T19:46:49.602Z - GET /1 - 304 (1ms)
+2026-02-18T19:46:49.596Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:46:49.596Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:46:49.601Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:46:49.601Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:46:49.601Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:46:49.603Z - GET /2 - 304 (0ms)
+2026-02-18T19:46:49.603Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:46:49.603Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:46:49.604Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:46:49.605Z - GET /2 - 304 (1ms)
+2026-02-18T19:46:49.604Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:46:59.238Z [LOG] 
+                SELECT ri.titulo as instance_title, p.titulo as template_title
+                FROM ReunionInstancia ri
+                JOIN Plantilla p ON ri.plantilla_id = p.id
+                WHERE ri.id = '1'
+            
+2026-02-18T19:46:59.242Z [LOG] 
+            INSERT INTO Adjunto (instancia_id, nombre_archivo, ruta_archivo, tipo_mime, tamano_bytes)
+            VALUES ('1', 'Captura de pantalla (1).png', 'cea_meeting_-_gist/cálculo_i/17'/*+39 bytes*/, 'image/png', 858560.0)
+        
+2026-02-18T19:46:59.242Z - POST / - 201 (7ms)
+2026-02-18T19:47:22.165Z [LOG] BEGIN
+2026-02-18T19:47:22.166Z - PUT /1 - 200 (1ms)
+2026-02-18T19:47:22.165Z [LOG] UPDATE ReunionInstancia SET titulo = 'Cálculo I', subtitulo = '', estado = 'borrador', fecha_reunion = '2026-02-18', fecha_actualizacion = CURRENT_TIMESTAMP WHERE id = '1'
+2026-02-18T19:47:22.165Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 9.0, NULL, 9971003101.0, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:47:22.165Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 11.0, 'S2', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:47:22.166Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 12.0, 'RUBEN TINO RAMOS', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:47:22.166Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 13.0, 'RUBEN TINO RAMOS', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:47:22.166Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 14.0, 'PIEA', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:47:22.166Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 15.0, NULL, NULL, 1.0, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:47:22.166Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 16.0, NULL, NULL, 1.0, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:47:22.166Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 26.0, '[{"Acciones de mejora":"1 bla bl'/*+173 bytes*/, NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:47:22.166Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 31.0, NULL, NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:47:22.166Z [LOG] COMMIT
+2026-02-18T19:47:28.734Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:47:28.735Z - GET /1 - 200 (1ms)
+2026-02-18T19:47:28.734Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:47:28.734Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:47:28.735Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:47:28.736Z - GET /1 - 304 (1ms)
+2026-02-18T19:47:28.737Z - GET /2 - 304 (0ms)
+2026-02-18T19:47:28.736Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:47:28.736Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:47:28.737Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:47:28.737Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:47:28.740Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:47:28.740Z - GET /2 - 304 (0ms)
+2026-02-18T19:47:28.740Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:47:31.138Z [LOG] SELECT * FROM Adjunto WHERE id = '21'
+2026-02-18T19:47:31.139Z - DELETE /21 - 200 (1ms)
+2026-02-18T19:47:31.138Z [LOG] DELETE FROM Adjunto WHERE id = '21'
+2026-02-18T19:47:48.855Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:47:48.856Z - GET / - 304 (1ms)
+2026-02-18T19:47:48.857Z - GET / - 304 (0ms)
+2026-02-18T19:47:48.857Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:47:49.489Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:47:49.489Z - GET /2 - 304 (1ms)
+2026-02-18T19:47:49.490Z - GET /2 - 304 (0ms)
+2026-02-18T19:47:49.489Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:47:49.490Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:47:49.490Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:47:55.701Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:47:55.702Z - GET / - 200 (1ms)
+2026-02-18T19:47:55.703Z - GET / - 304 (1ms)
+2026-02-18T19:47:55.702Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:47:55.703Z - GET / - 304 (0ms)
+2026-02-18T19:47:55.703Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:47:55.704Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:47:55.704Z - GET / - 304 (0ms)
+2026-02-18T19:47:57.109Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:47:57.109Z - GET /1 - 200 (0ms)
+2026-02-18T19:47:57.109Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:47:57.109Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:47:57.110Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:47:57.110Z - GET /1 - 304 (0ms)
+2026-02-18T19:47:57.110Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:47:57.110Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:47:57.112Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:47:57.112Z - GET /2 - 304 (0ms)
+2026-02-18T19:47:57.112Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:47:57.113Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:47:57.114Z - GET /2 - 304 (1ms)
+2026-02-18T19:47:57.113Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:48:36.416Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:48:36.416Z - GET / - 304 (0ms)
+2026-02-18T19:48:36.417Z - GET / - 304 (0ms)
+2026-02-18T19:48:36.417Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:48:36.990Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:48:36.991Z - GET / - 304 (1ms)
+2026-02-18T19:48:36.992Z - GET / - 304 (0ms)
+2026-02-18T19:48:36.992Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:48:36.993Z - GET / - 304 (0ms)
+2026-02-18T19:48:36.993Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:48:36.993Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:48:36.994Z - GET / - 304 (1ms)
+2026-02-18T19:48:37.983Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:48:37.984Z - GET / - 304 (1ms)
+2026-02-18T19:48:37.984Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:48:37.985Z - GET / - 304 (1ms)
+2026-02-18T19:48:38.350Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:48:38.350Z - GET / - 304 (0ms)
+2026-02-18T19:48:38.350Z - GET / - 304 (0ms)
+2026-02-18T19:48:38.350Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:48:38.351Z - GET / - 304 (0ms)
+2026-02-18T19:48:38.351Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:48:38.351Z - GET / - 304 (0ms)
+2026-02-18T19:48:38.351Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:48:39.921Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:48:39.922Z - GET / - 304 (1ms)
+2026-02-18T19:48:39.922Z - GET / - 304 (0ms)
+2026-02-18T19:48:39.922Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:48:40.350Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:48:40.350Z - GET / - 304 (0ms)
+2026-02-18T19:48:40.351Z - GET / - 304 (1ms)
+2026-02-18T19:48:40.350Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:48:40.351Z - GET / - 304 (0ms)
+2026-02-18T19:48:40.352Z - GET / - 304 (1ms)
+2026-02-18T19:48:40.351Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:48:40.352Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:48:44.950Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:48:44.950Z - GET / - 304 (0ms)
+2026-02-18T19:48:44.951Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:48:44.951Z - GET / - 304 (0ms)
+2026-02-18T19:48:45.616Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:48:45.616Z - GET / - 304 (0ms)
+2026-02-18T19:48:45.616Z - GET / - 304 (0ms)
+2026-02-18T19:48:45.616Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:48:45.617Z - GET / - 304 (0ms)
+2026-02-18T19:48:45.617Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:48:45.617Z - GET / - 304 (0ms)
+2026-02-18T19:48:45.617Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:48:50.116Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:48:50.116Z - GET / - 304 (0ms)
+2026-02-18T19:48:50.117Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:48:50.117Z - GET / - 304 (0ms)
+2026-02-18T19:48:51.000Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:48:51.000Z - GET / - 304 (0ms)
+2026-02-18T19:48:51.001Z - GET / - 304 (1ms)
+2026-02-18T19:48:51.001Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:48:51.001Z - GET / - 304 (0ms)
+2026-02-18T19:48:51.001Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:48:51.002Z - GET / - 304 (0ms)
+2026-02-18T19:48:51.002Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:49:04.718Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:49:04.718Z - GET / - 304 (0ms)
+2026-02-18T19:49:04.719Z - GET / - 304 (0ms)
+2026-02-18T19:49:04.719Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:49:06.109Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:49:06.109Z - GET /2 - 304 (0ms)
+2026-02-18T19:49:06.109Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:49:06.110Z - GET /2 - 304 (0ms)
+2026-02-18T19:49:06.110Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:49:06.110Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:49:36.468Z [LOG] Updating template 2 [object Object]
+2026-02-18T19:49:36.469Z - PUT /2 - 200 (1ms)
+2026-02-18T19:49:36.468Z [LOG] BEGIN
+2026-02-18T19:49:36.468Z [LOG] UPDATE Plantilla SET titulo = 'CEA Meeting - GIST', descripcion = 'Grado en Ing. de Sistemas de Tel'/*+15 bytes*/ WHERE id = '2'
+2026-02-18T19:49:36.468Z [LOG] SELECT id FROM CampoPlantilla WHERE plantilla_id = '2'
+2026-02-18T19:49:36.468Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'ADJUNTOS', tipo = 'seccion', orden = 0.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 32.0
+            
+2026-02-18T19:49:36.468Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Documentación inicial', tipo = 'adjunto', orden = 1.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 31.0
+            
+2026-02-18T19:49:36.468Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Datos identificativos de la mate'/*+4 bytes*/, tipo = 'seccion', orden = 2.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 27.0
+            
+2026-02-18T19:49:36.468Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Código', tipo = 'numero', orden = 3.0, requerido = 1.0, opciones = 'null'
+                WHERE id = 9.0
+            
+2026-02-18T19:49:36.468Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Semestre', tipo = 'texto_corto', orden = 4.0, requerido = 1.0, opciones = 'null'
+                WHERE id = 11.0
+            
+2026-02-18T19:49:36.469Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Profesor', tipo = 'texto_corto', orden = 5.0, requerido = 1.0, opciones = 'null'
+                WHERE id = 12.0
+            
+2026-02-18T19:49:36.469Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Coordinador', tipo = 'texto_corto', orden = 6.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 13.0
+            
+2026-02-18T19:49:36.469Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Formato Entrega', tipo = 'texto_corto', orden = 7.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 14.0
+            
+2026-02-18T19:49:36.469Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Procesos de evaluación de apren'/*+26 bytes*/, tipo = 'seccion', orden = 8.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 28.0
+            
+2026-02-18T19:49:36.469Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'La guía de aprendizaje está co'/*+47 bytes*/, tipo = 'booleano', orden = 9.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 15.0
+            
+2026-02-18T19:49:36.469Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'La guía de aprendizaje con plan'/*+75 bytes*/, tipo = 'booleano', orden = 10.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 16.0
+            
+2026-02-18T19:49:36.469Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'La guía de aprendizaje web y de'/*+68 bytes*/, tipo = 'booleano', orden = 11.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 17.0
+            
+2026-02-18T19:49:36.469Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Se han celebrado reuniones de co'/*+48 bytes*/, tipo = 'booleano', orden = 12.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 18.0
+            
+2026-02-18T19:49:36.469Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Las actas de las reuniones de co'/*+91 bytes*/, tipo = 'booleano', orden = 13.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 19.0
+            
+2026-02-18T19:49:36.469Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Las actividades evaluables está'/*+31 bytes*/, tipo = 'booleano', orden = 14.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 20.0
+            
+2026-02-18T19:49:36.469Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Se aplica feedback formativo del'/*+33 bytes*/, tipo = 'booleano', orden = 15.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 21.0
+            
+2026-02-18T19:49:36.469Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Evidencias de feedback formativo'/*+22 bytes*/, tipo = 'booleano', orden = 16.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 22.0
+            
+2026-02-18T19:49:36.469Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Se han alcanzado los resultados '/*+38 bytes*/, tipo = 'booleano', orden = 17.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 23.0
+            
+2026-02-18T19:49:36.469Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Las actividades evaluables está'/*+45 bytes*/, tipo = 'booleano', orden = 18.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 24.0
+            
+2026-02-18T19:49:36.469Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'La metodología docente y las ac'/*+83 bytes*/, tipo = 'booleano', orden = 19.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 25.0
+            
+2026-02-18T19:49:36.469Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Plan de Mejora de la materia', tipo = 'tabla', orden = 20.0, requerido = 0.0, opciones = '[{"nombre":"Acción de mejora","'/*+251 bytes*/
+                WHERE id = 26.0
+            
+2026-02-18T19:49:36.469Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Acta de Comité de Evaluación d'/*+33 bytes*/, tipo = 'seccion', orden = 21.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 29.0
+            
+2026-02-18T19:49:36.469Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Temas tratados en la reunión', tipo = 'texto_largo', orden = 22.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 30.0
+            
+2026-02-18T19:49:36.469Z [LOG] COMMIT
+2026-02-18T19:49:36.485Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:49:36.486Z - GET / - 304 (1ms)
+2026-02-18T19:49:36.486Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:49:36.487Z - GET / - 304 (1ms)
+2026-02-18T19:49:37.432Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:49:37.433Z - GET / - 304 (1ms)
+2026-02-18T19:49:37.433Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:49:37.433Z - GET / - 304 (0ms)
+2026-02-18T19:49:37.434Z - GET / - 304 (0ms)
+2026-02-18T19:49:37.434Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:49:37.434Z - GET / - 304 (0ms)
+2026-02-18T19:49:37.434Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:49:37.913Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:49:37.914Z - GET / - 304 (1ms)
+2026-02-18T19:49:37.915Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:49:37.915Z - GET / - 304 (1ms)
+2026-02-18T19:49:38.428Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:49:38.428Z - GET / - 304 (0ms)
+2026-02-18T19:49:38.429Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:49:38.429Z - GET / - 304 (0ms)
+2026-02-18T19:49:38.429Z - GET / - 304 (0ms)
+2026-02-18T19:49:38.429Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:49:38.430Z - GET / - 304 (0ms)
+2026-02-18T19:49:38.430Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:49:39.549Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:49:39.549Z - GET /1 - 304 (1ms)
+2026-02-18T19:49:39.549Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:49:39.549Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:49:39.550Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:49:39.550Z - GET /1 - 304 (0ms)
+2026-02-18T19:49:39.550Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:49:39.550Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:49:39.551Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:49:39.551Z - GET /2 - 200 (0ms)
+2026-02-18T19:49:39.551Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:49:39.551Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:49:39.552Z - GET /2 - 304 (1ms)
+2026-02-18T19:49:39.552Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:49:41.073Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:49:41.073Z - GET /1 - 304 (0ms)
+2026-02-18T19:49:41.073Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:49:41.073Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:49:41.074Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:49:41.075Z - GET /2 - 304 (1ms)
+2026-02-18T19:49:41.074Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:50:25.957Z [LOG] 
+                SELECT ri.titulo as instance_title, p.titulo as template_title
+                FROM ReunionInstancia ri
+                JOIN Plantilla p ON ri.plantilla_id = p.id
+                WHERE ri.id = '1'
+            
+2026-02-18T19:50:25.959Z [LOG] 
+            INSERT INTO Adjunto (instancia_id, nombre_archivo, ruta_archivo, tipo_mime, tamano_bytes)
+            VALUES ('1', '25-26-Informe_9971003402.pdf', 'cea_meeting_-_gist/cálculo_i/17'/*+40 bytes*/, 'application/pdf', 24200.0)
+        
+2026-02-18T19:50:25.959Z - POST / - 201 (2ms)
+2026-02-18T19:50:28.520Z - GET /cea_meeting_-_gist/c%C3%A1lculo_i/1771444225958-25-26-Informe_9971003402.pdf - 200 (5ms)
+2026-02-18T19:50:41.286Z [LOG] SELECT * FROM Adjunto WHERE id = '22'
+2026-02-18T19:50:41.286Z - DELETE /22 - 200 (0ms)
+2026-02-18T19:50:41.286Z [LOG] DELETE FROM Adjunto WHERE id = '22'
+2026-02-18T19:51:27.192Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:51:27.193Z - GET / - 304 (1ms)
+2026-02-18T19:51:27.193Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:51:27.193Z - GET / - 304 (0ms)
+2026-02-18T19:51:27.624Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:51:27.625Z - GET / - 304 (1ms)
+2026-02-18T19:51:27.625Z - GET / - 304 (0ms)
+2026-02-18T19:51:27.625Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:51:27.626Z - GET / - 304 (0ms)
+2026-02-18T19:51:27.627Z - GET / - 304 (1ms)
+2026-02-18T19:51:27.626Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:51:27.627Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:51:28.574Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:51:28.574Z - GET / - 304 (0ms)
+2026-02-18T19:51:28.575Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:51:28.575Z - GET / - 304 (0ms)
+2026-02-18T19:51:28.990Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:51:28.991Z - GET / - 304 (1ms)
+2026-02-18T19:51:28.991Z - GET / - 304 (0ms)
+2026-02-18T19:51:28.991Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:51:28.992Z - GET / - 304 (0ms)
+2026-02-18T19:51:28.992Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:51:28.992Z - GET / - 304 (0ms)
+2026-02-18T19:51:28.992Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:52:21.623Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:52:21.623Z - GET / - 304 (0ms)
+2026-02-18T19:52:21.624Z - GET / - 304 (0ms)
+2026-02-18T19:52:21.624Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:52:23.679Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:52:23.679Z - GET / - 304 (0ms)
+2026-02-18T19:52:23.680Z - GET / - 304 (0ms)
+2026-02-18T19:52:23.680Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:52:23.681Z - GET / - 304 (0ms)
+2026-02-18T19:52:23.681Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:52:23.681Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:52:23.681Z - GET / - 304 (0ms)
+2026-02-18T19:52:24.889Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:52:24.889Z - GET /1 - 304 (1ms)
+2026-02-18T19:52:24.889Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:52:24.889Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:52:24.890Z - GET /1 - 304 (0ms)
+2026-02-18T19:52:24.890Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:52:24.890Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:52:24.890Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:52:24.891Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:52:24.892Z - GET /2 - 304 (1ms)
+2026-02-18T19:52:24.893Z - GET /2 - 304 (1ms)
+2026-02-18T19:52:24.891Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:52:24.892Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:52:24.892Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:52:35.462Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:52:35.463Z - GET / - 304 (1ms)
+2026-02-18T19:52:35.463Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:52:35.463Z - GET / - 304 (0ms)
+2026-02-18T19:52:36.201Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:52:36.201Z - GET /2 - 304 (1ms)
+2026-02-18T19:52:36.201Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:52:36.202Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:52:36.202Z - GET /2 - 304 (0ms)
+2026-02-18T19:52:36.202Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:52:42.174Z [LOG] Updating template 2 [object Object]
+2026-02-18T19:52:42.175Z - PUT /2 - 200 (1ms)
+2026-02-18T19:52:42.174Z [LOG] BEGIN
+2026-02-18T19:52:42.174Z [LOG] UPDATE Plantilla SET titulo = 'CEA Meeting - Grado en Ing. de S'/*+29 bytes*/, descripcion = 'Grado en Ing. de Sistemas de Tel'/*+15 bytes*/ WHERE id = '2'
+2026-02-18T19:52:42.174Z [LOG] SELECT id FROM CampoPlantilla WHERE plantilla_id = '2'
+2026-02-18T19:52:42.175Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'ADJUNTOS', tipo = 'seccion', orden = 0.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 32.0
+            
+2026-02-18T19:52:42.175Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Documentación inicial', tipo = 'adjunto', orden = 1.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 31.0
+            
+2026-02-18T19:52:42.175Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Datos identificativos de la mate'/*+4 bytes*/, tipo = 'seccion', orden = 2.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 27.0
+            
+2026-02-18T19:52:42.175Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Código', tipo = 'numero', orden = 3.0, requerido = 1.0, opciones = 'null'
+                WHERE id = 9.0
+            
+2026-02-18T19:52:42.175Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Semestre', tipo = 'texto_corto', orden = 4.0, requerido = 1.0, opciones = 'null'
+                WHERE id = 11.0
+            
+2026-02-18T19:52:42.175Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Profesor', tipo = 'texto_corto', orden = 5.0, requerido = 1.0, opciones = 'null'
+                WHERE id = 12.0
+            
+2026-02-18T19:52:42.175Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Coordinador', tipo = 'texto_corto', orden = 6.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 13.0
+            
+2026-02-18T19:52:42.175Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Formato Entrega', tipo = 'texto_corto', orden = 7.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 14.0
+            
+2026-02-18T19:52:42.175Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Procesos de evaluación de apren'/*+26 bytes*/, tipo = 'seccion', orden = 8.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 28.0
+            
+2026-02-18T19:52:42.175Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'La guía de aprendizaje está co'/*+47 bytes*/, tipo = 'booleano', orden = 9.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 15.0
+            
+2026-02-18T19:52:42.175Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'La guía de aprendizaje con plan'/*+75 bytes*/, tipo = 'booleano', orden = 10.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 16.0
+            
+2026-02-18T19:52:42.175Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'La guía de aprendizaje web y de'/*+68 bytes*/, tipo = 'booleano', orden = 11.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 17.0
+            
+2026-02-18T19:52:42.175Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Se han celebrado reuniones de co'/*+48 bytes*/, tipo = 'booleano', orden = 12.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 18.0
+            
+2026-02-18T19:52:42.175Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Las actas de las reuniones de co'/*+91 bytes*/, tipo = 'booleano', orden = 13.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 19.0
+            
+2026-02-18T19:52:42.175Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Las actividades evaluables está'/*+31 bytes*/, tipo = 'booleano', orden = 14.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 20.0
+            
+2026-02-18T19:52:42.175Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Se aplica feedback formativo del'/*+33 bytes*/, tipo = 'booleano', orden = 15.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 21.0
+            
+2026-02-18T19:52:42.175Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Evidencias de feedback formativo'/*+22 bytes*/, tipo = 'booleano', orden = 16.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 22.0
+            
+2026-02-18T19:52:42.175Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Se han alcanzado los resultados '/*+38 bytes*/, tipo = 'booleano', orden = 17.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 23.0
+            
+2026-02-18T19:52:42.175Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Las actividades evaluables está'/*+45 bytes*/, tipo = 'booleano', orden = 18.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 24.0
+            
+2026-02-18T19:52:42.175Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'La metodología docente y las ac'/*+83 bytes*/, tipo = 'booleano', orden = 19.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 25.0
+            
+2026-02-18T19:52:42.175Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Plan de Mejora de la materia', tipo = 'tabla', orden = 20.0, requerido = 0.0, opciones = '[{"nombre":"Acción de mejora","'/*+251 bytes*/
+                WHERE id = 26.0
+            
+2026-02-18T19:52:42.175Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Acta de Comité de Evaluación d'/*+33 bytes*/, tipo = 'seccion', orden = 21.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 29.0
+            
+2026-02-18T19:52:42.175Z [LOG] 
+                UPDATE CampoPlantilla SET nombre = 'Temas tratados en la reunión', tipo = 'texto_largo', orden = 22.0, requerido = 0.0, opciones = 'null'
+                WHERE id = 30.0
+            
+2026-02-18T19:52:42.175Z [LOG] COMMIT
+2026-02-18T19:52:42.190Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:52:42.191Z - GET / - 200 (1ms)
+2026-02-18T19:52:42.192Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:52:42.192Z - GET / - 304 (1ms)
+2026-02-18T19:52:45.670Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:52:45.670Z - GET /2 - 200 (0ms)
+2026-02-18T19:52:45.670Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:52:45.671Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:52:45.672Z - GET /2 - 304 (1ms)
+2026-02-18T19:52:45.671Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:52:49.819Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:52:49.820Z - GET / - 200 (1ms)
+2026-02-18T19:52:49.820Z - GET / - 304 (0ms)
+2026-02-18T19:52:49.820Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:52:49.821Z - GET / - 304 (0ms)
+2026-02-18T19:52:49.821Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:52:49.821Z - GET / - 304 (0ms)
+2026-02-18T19:52:49.821Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:52:52.029Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:52:52.030Z - GET /1 - 304 (1ms)
+2026-02-18T19:52:52.029Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:52:52.029Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:52:52.031Z - GET /1 - 304 (1ms)
+2026-02-18T19:52:52.030Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:52:52.030Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:52:52.030Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:52:52.032Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:52:52.032Z - GET /2 - 304 (1ms)
+2026-02-18T19:52:52.032Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:52:52.033Z - GET /2 - 304 (1ms)
+2026-02-18T19:52:52.032Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:52:52.032Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:53:09.379Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:53:09.379Z - GET /1 - 304 (0ms)
+2026-02-18T19:53:09.379Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:53:09.379Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:53:09.380Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:53:09.380Z - GET /1 - 304 (0ms)
+2026-02-18T19:53:09.380Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:53:09.380Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:53:09.381Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:53:09.381Z - GET /2 - 304 (0ms)
+2026-02-18T19:53:09.381Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:53:09.382Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:53:09.382Z - GET /2 - 304 (0ms)
+2026-02-18T19:53:09.382Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:53:28.126Z [LOG] 
+                SELECT ri.titulo as instance_title, p.titulo as template_title
+                FROM ReunionInstancia ri
+                JOIN Plantilla p ON ri.plantilla_id = p.id
+                WHERE ri.id = '1'
+            
+2026-02-18T19:53:28.128Z [LOG] 
+            INSERT INTO Adjunto (instancia_id, nombre_archivo, ruta_archivo, tipo_mime, tamano_bytes)
+            VALUES ('1', 'image.png', 'cea_meeting_-_grado_en_ing._de_s'/*+64 bytes*/, 'image/png', 72549.0)
+        
+2026-02-18T19:53:28.128Z - POST / - 201 (2ms)
+2026-02-18T19:53:29.606Z - GET /cea_meeting_-_grado_en_ing._de_sistemas_de_telecomunicaci%C3%B3n./c%C3%A1lculo_i/1771444408127-image.png - 200 (1ms)
+2026-02-18T19:54:11.365Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:54:11.365Z - GET /1 - 200 (0ms)
+2026-02-18T19:54:11.366Z - GET /1 - 304 (0ms)
+2026-02-18T19:54:11.365Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:54:11.365Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:54:11.366Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:54:11.366Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:54:11.366Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:54:11.369Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:54:11.369Z - GET /2 - 304 (0ms)
+2026-02-18T19:54:11.369Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:54:11.370Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:54:11.370Z - GET /2 - 304 (1ms)
+2026-02-18T19:54:11.370Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:54:23.688Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:54:23.688Z - GET /1 - 304 (0ms)
+2026-02-18T19:54:23.688Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:54:23.688Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:54:23.689Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:54:23.689Z - GET /1 - 304 (0ms)
+2026-02-18T19:54:23.689Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:54:23.689Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:54:23.690Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:54:23.691Z - GET /2 - 304 (1ms)
+2026-02-18T19:54:23.690Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:54:23.692Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:54:23.692Z - GET /2 - 304 (0ms)
+2026-02-18T19:54:23.692Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:54:39.954Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:54:39.954Z - GET / - 304 (0ms)
+2026-02-18T19:54:39.955Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:54:39.955Z - GET / - 304 (0ms)
+2026-02-18T19:54:39.955Z - GET / - 304 (0ms)
+2026-02-18T19:54:39.955Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:54:39.957Z - GET / - 304 (1ms)
+2026-02-18T19:54:39.956Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:54:40.626Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:54:40.626Z - GET / - 304 (1ms)
+2026-02-18T19:54:40.627Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:54:40.627Z - GET / - 304 (0ms)
+2026-02-18T19:54:41.931Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:54:41.931Z - GET / - 304 (1ms)
+2026-02-18T19:54:41.932Z - GET / - 304 (0ms)
+2026-02-18T19:54:41.932Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:54:42.330Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:54:42.330Z - GET / - 304 (0ms)
+2026-02-18T19:54:42.330Z - GET / - 304 (0ms)
+2026-02-18T19:54:42.330Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:54:42.331Z - GET / - 304 (0ms)
+2026-02-18T19:54:42.331Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:54:42.332Z - GET / - 304 (0ms)
+2026-02-18T19:54:42.332Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:54:43.629Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:54:43.629Z - GET / - 304 (0ms)
+2026-02-18T19:54:43.630Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:54:43.630Z - GET / - 304 (0ms)
+2026-02-18T19:54:44.133Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:54:44.133Z - GET / - 304 (0ms)
+2026-02-18T19:54:44.134Z - GET / - 304 (0ms)
+2026-02-18T19:54:44.135Z - GET / - 304 (0ms)
+2026-02-18T19:54:44.134Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:54:44.135Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:54:44.136Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:54:44.136Z - GET / - 304 (0ms)
+2026-02-18T19:54:45.996Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:54:45.997Z - GET / - 304 (1ms)
+2026-02-18T19:54:45.997Z - GET / - 304 (0ms)
+2026-02-18T19:54:45.997Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:54:47.360Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:54:47.360Z - GET / - 304 (0ms)
+2026-02-18T19:54:47.361Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:54:47.361Z - GET / - 304 (0ms)
+2026-02-18T19:54:47.362Z - GET / - 304 (0ms)
+2026-02-18T19:54:47.363Z - GET / - 304 (1ms)
+2026-02-18T19:54:47.362Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:54:47.362Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:54:47.995Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:54:47.996Z - GET / - 304 (1ms)
+2026-02-18T19:54:47.996Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:54:47.996Z - GET / - 304 (0ms)
+2026-02-18T19:55:03.261Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:55:03.261Z - GET / - 304 (0ms)
+2026-02-18T19:55:03.262Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:55:03.262Z - GET / - 304 (0ms)
+2026-02-18T19:55:03.263Z - GET / - 304 (0ms)
+2026-02-18T19:55:03.263Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T19:55:03.263Z - GET / - 304 (0ms)
+2026-02-18T19:55:03.263Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T19:55:04.462Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:55:04.462Z - GET /1 - 304 (1ms)
+2026-02-18T19:55:04.463Z - GET /1 - 304 (0ms)
+2026-02-18T19:55:04.462Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:55:04.462Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:55:04.463Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:55:04.463Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:55:04.463Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:55:04.464Z - GET /2 - 304 (0ms)
+2026-02-18T19:55:04.464Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:55:04.464Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:55:04.464Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:55:04.465Z - GET /2 - 304 (1ms)
+2026-02-18T19:55:04.464Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:55:58.329Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:55:58.329Z - GET /1 - 304 (0ms)
+2026-02-18T19:55:58.329Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:55:58.329Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:55:58.331Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:55:58.331Z - GET /2 - 304 (0ms)
+2026-02-18T19:55:58.331Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:56:23.630Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:56:23.630Z - GET /1 - 304 (0ms)
+2026-02-18T19:56:23.630Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:56:23.630Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:56:23.631Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:56:23.631Z - GET /1 - 304 (0ms)
+2026-02-18T19:56:23.632Z - GET /2 - 304 (0ms)
+2026-02-18T19:56:23.631Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:56:23.631Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:56:23.632Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:56:23.632Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:56:23.633Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:56:23.633Z - GET /2 - 304 (0ms)
+2026-02-18T19:56:23.633Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:56:25.048Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:56:25.048Z - GET /1 - 304 (0ms)
+2026-02-18T19:56:25.048Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:56:25.048Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:56:25.049Z - GET /1 - 304 (0ms)
+2026-02-18T19:56:25.049Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:56:25.049Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:56:25.049Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:56:25.050Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:56:25.051Z - GET /2 - 304 (1ms)
+2026-02-18T19:56:25.050Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:56:25.051Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:56:25.052Z - GET /2 - 304 (1ms)
+2026-02-18T19:56:25.051Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:56:51.977Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:56:51.977Z - GET /1 - 304 (0ms)
+2026-02-18T19:56:51.977Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:56:51.977Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:56:51.978Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:56:51.979Z - GET /2 - 304 (1ms)
+2026-02-18T19:56:51.978Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:57:45.806Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:57:45.806Z - GET /1 - 304 (0ms)
+2026-02-18T19:57:45.806Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:57:45.806Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:57:45.809Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:57:45.809Z - GET /2 - 304 (0ms)
+2026-02-18T19:57:45.809Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:58:11.473Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:58:11.474Z - GET /1 - 304 (1ms)
+2026-02-18T19:58:11.475Z - GET /1 - 304 (1ms)
+2026-02-18T19:58:11.474Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:58:11.474Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:58:11.474Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:58:11.474Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:58:11.475Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:58:11.476Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:58:11.476Z - GET /2 - 304 (0ms)
+2026-02-18T19:58:11.477Z - GET /2 - 304 (0ms)
+2026-02-18T19:58:11.476Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:58:11.477Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:58:11.477Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T19:59:12.299Z [LOG] BEGIN
+2026-02-18T19:59:12.299Z - PUT /1 - 200 (0ms)
+2026-02-18T19:59:12.299Z [LOG] UPDATE ReunionInstancia SET titulo = 'Cálculo I', subtitulo = '', estado = 'borrador', fecha_reunion = '2026-02-18', fecha_actualizacion = CURRENT_TIMESTAMP WHERE id = '1'
+2026-02-18T19:59:12.299Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 9.0, NULL, 9971003101.0, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:59:12.299Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 11.0, 'S2', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:59:12.299Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 12.0, 'RUBEN TINO RAMOS', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:59:12.299Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 13.0, 'RUBEN TINO RAMOS', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:59:12.299Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 14.0, 'PIEA', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:59:12.299Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 15.0, NULL, NULL, 1.0, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:59:12.299Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 16.0, NULL, NULL, 1.0, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:59:12.299Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 26.0, '[{"Acciones de mejora":"1 bla bl'/*+173 bytes*/, NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:59:12.299Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 31.0, NULL, NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T19:59:12.299Z [LOG] COMMIT
+2026-02-18T19:59:15.314Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T19:59:15.315Z - GET /1 - 200 (1ms)
+2026-02-18T19:59:15.315Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T19:59:15.315Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T19:59:15.316Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T19:59:15.317Z - GET /2 - 304 (1ms)
+2026-02-18T19:59:15.316Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T20:00:16.298Z [LOG] BEGIN
+2026-02-18T20:00:16.298Z - PUT /1 - 200 (0ms)
+2026-02-18T20:00:16.298Z [LOG] UPDATE ReunionInstancia SET titulo = 'Cálculo I', subtitulo = '', estado = 'borrador', fecha_reunion = '2026-02-18', fecha_actualizacion = CURRENT_TIMESTAMP WHERE id = '1'
+2026-02-18T20:00:16.298Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 9.0, NULL, 9971003101.0, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T20:00:16.298Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 11.0, 'S2', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T20:00:16.298Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 12.0, 'RUBEN TINO RAMOS', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T20:00:16.298Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 13.0, 'RUBEN TINO RAMOS', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T20:00:16.298Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 14.0, 'PIEA', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T20:00:16.298Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 15.0, NULL, NULL, 1.0, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T20:00:16.298Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 16.0, NULL, NULL, 1.0, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T20:00:16.298Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 26.0, '[{"Acciones de mejora":"1 bla bl'/*+173 bytes*/, NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T20:00:16.298Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 31.0, NULL, NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T20:00:16.298Z [LOG] COMMIT
+2026-02-18T20:00:20.302Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T20:00:20.302Z - GET /1 - 200 (0ms)
+2026-02-18T20:00:20.302Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T20:00:20.302Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T20:00:20.303Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T20:00:20.304Z - GET /2 - 304 (1ms)
+2026-02-18T20:00:20.304Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T20:00:54.439Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T20:00:54.439Z - GET /1 - 304 (0ms)
+2026-02-18T20:00:54.439Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T20:00:54.439Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T20:00:54.441Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T20:00:54.441Z - GET /2 - 304 (0ms)
+2026-02-18T20:00:54.441Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T20:01:02.157Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T20:01:02.157Z - GET /1 - 304 (0ms)
+2026-02-18T20:01:02.157Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T20:01:02.157Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T20:01:02.160Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T20:01:02.160Z - GET /2 - 304 (0ms)
+2026-02-18T20:01:02.160Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T20:01:49.938Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T20:01:49.938Z - GET / - 304 (1ms)
+2026-02-18T20:01:49.938Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T20:01:49.939Z - GET / - 304 (1ms)
+2026-02-18T20:01:50.687Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T20:01:50.687Z - GET / - 200 (0ms)
+2026-02-18T20:01:50.688Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T20:01:50.688Z - GET / - 304 (0ms)
+2026-02-18T20:01:50.689Z [LOG] SELECT ri.*, p.titulo as plantilla_titulo FROM ReunionInstancia ri JOIN Plantilla p ON ri.plantilla_id = p.id ORDER BY ri.fecha_actualizacion DESC
+2026-02-18T20:01:50.689Z - GET / - 304 (0ms)
+2026-02-18T20:01:50.689Z [LOG] SELECT * FROM Plantilla ORDER BY fecha_creacion DESC
+2026-02-18T20:01:50.689Z - GET / - 304 (0ms)
+2026-02-18T20:01:52.455Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T20:01:52.456Z - GET /1 - 304 (1ms)
+2026-02-18T20:01:52.455Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T20:01:52.456Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T20:01:52.457Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T20:01:52.457Z - GET /1 - 304 (1ms)
+2026-02-18T20:01:52.457Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T20:01:52.457Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T20:01:52.458Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T20:01:52.458Z - GET /2 - 304 (0ms)
+2026-02-18T20:01:52.458Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T20:01:52.459Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T20:01:52.459Z - GET /2 - 304 (0ms)
+2026-02-18T20:01:52.459Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T20:02:52.991Z [LOG] BEGIN
+2026-02-18T20:02:52.992Z - PUT /1 - 200 (1ms)
+2026-02-18T20:02:52.991Z [LOG] UPDATE ReunionInstancia SET titulo = 'Cálculo I', subtitulo = '', estado = 'borrador', fecha_reunion = '2026-02-18', fecha_actualizacion = CURRENT_TIMESTAMP WHERE id = '1'
+2026-02-18T20:02:52.992Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 9.0, NULL, 9971003101.0, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T20:02:52.992Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 11.0, 'S2', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T20:02:52.992Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 12.0, 'RUBEN TINO RAMOS', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T20:02:52.992Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 13.0, 'RUBEN TINO RAMOS', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T20:02:52.992Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 14.0, 'PIEA', NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T20:02:52.992Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 15.0, NULL, NULL, 1.0, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T20:02:52.992Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 16.0, NULL, NULL, 1.0, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T20:02:52.992Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 26.0, '[{"Acciones de mejora":"1 bla bl'/*+173 bytes*/, NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T20:02:52.992Z [LOG] 
+                    INSERT INTO ValorCampo (instancia_id, campo_id, valor_texto, valor_numero, valor_booleano, valor_fecha)
+                    VALUES ('1', 31.0, NULL, NULL, NULL, NULL)
+                    ON CONFLICT(instancia_id, campo_id) DO UPDATE SET
+                    valor_texto = excluded.valor_texto,
+                    valor_numero = excluded.valor_numero,
+                    valor_booleano = excluded.valor_booleano,
+                    valor_fecha = excluded.valor_fecha
+                
+2026-02-18T20:02:52.992Z [LOG] COMMIT

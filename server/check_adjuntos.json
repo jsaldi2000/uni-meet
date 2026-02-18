@@ -1,0 +1,38 @@
+[
+  {
+    "id": 20,
+    "instancia_id": 2,
+    "nombre_archivo": "Captura de pantalla (1).png",
+    "ruta_archivo": "cea_meeting___gist/_lgebra/1771443798060-Captura de pantalla (1).png",
+    "tipo_mime": "image/png",
+    "tamano_bytes": 858560,
+    "fecha_subida": "2026-02-18 19:43:18"
+  },
+  {
+    "id": 19,
+    "instancia_id": 1,
+    "nombre_archivo": "Captura de pantalla (1).png",
+    "ruta_archivo": "cea_meeting___gist/c_lculo_i/1771443754385-Captura de pantalla (1).png",
+    "tipo_mime": "image/png",
+    "tamano_bytes": 858560,
+    "fecha_subida": "2026-02-18 19:42:34"
+  },
+  {
+    "id": 17,
+    "instancia_id": 1,
+    "nombre_archivo": "Captura de pantalla (1).png",
+    "ruta_archivo": "cea_meeting___gist/c_lculo_i/1771443641268-Captura de pantalla (1).png",
+    "tipo_mime": "image/png",
+    "tamano_bytes": 858560,
+    "fecha_subida": "2026-02-18 19:40:41"
+  },
+  {
+    "id": 16,
+    "instancia_id": 1,
+    "nombre_archivo": "Captura de pantalla (1).png",
+    "ruta_archivo": "cea_meeting___gist/c_lculo_i/1771443542972-Captura de pantalla (1).png",
+    "tipo_mime": "image/png",
+    "tamano_bytes": 858560,
+    "fecha_subida": "2026-02-18 19:39:02"
+  }
+]
