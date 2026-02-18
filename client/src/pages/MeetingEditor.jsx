@@ -276,13 +276,22 @@ const MeetingEditor = () => {
                             )}
 
                             {field.tipo === 'booleano' && (
-                                <div className={styles.checkboxWrapper}>
+                                <div className={styles.booleanFieldWrapper}>
+                                    <div className={styles.checkboxWrapper}>
+                                        <input
+                                            type="checkbox"
+                                            checked={!!val.valor_booleano}
+                                            onChange={(e) => handleValueChange(field.id, e.target.checked, 'booleano')}
+                                        />
+                                        <span>Sí</span>
+                                    </div>
                                     <input
-                                        type="checkbox"
-                                        checked={!!val.valor_booleano}
-                                        onChange={(e) => handleValueChange(field.id, e.target.checked, 'booleano')}
+                                        type="text"
+                                        className={styles.booleanComment}
+                                        placeholder="Comentarios adicionales"
+                                        value={val.valor_texto || ''}
+                                        onChange={(e) => handleValueChange(field.id, e.target.value, 'texto')}
                                     />
-                                    <span>Sí</span>
                                 </div>
                             )}
 

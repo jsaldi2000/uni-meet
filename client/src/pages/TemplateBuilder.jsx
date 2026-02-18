@@ -199,6 +199,42 @@ const TemplateBuilder = () => {
             setFields((items) => {
                 const oldIndex = items.findIndex((item) => item.id === active.id);
                 const newIndex = items.findIndex((item) => item.id === over.id);
+
+                // If moving a section, move it along with all its "children" fields
+                if (items[oldIndex].tipo === 'seccion') {
+                    const newItems = [...items];
+
+                    // 1. Identify which fields belong to this section (until next section)
+                    let count = 1;
+                    for (let i = oldIndex + 1; i < items.length; i++) {
+                        if (items[i].tipo === 'seccion') break;
+                        count++;
+                    }
+
+                    // 2. Check if the 'over' target is within the block being moved
+                    const overIndex = items.findIndex(item => item.id === over.id);
+                    if (overIndex >= oldIndex && overIndex < oldIndex + count) {
+                        // If dragging over its own fields, just move the section itself (normal behavior for fields)
+                        // This allows reordering fields within their own section if desired, 
+                        // though dragging the SECTION over its fields is a bit ambiguous.
+                        // We'll just do the normal move in this specific case.
+                        return arrayMove(items, oldIndex, newIndex);
+                    }
+
+                    // 3. Extract the block
+                    const block = newItems.splice(oldIndex, count);
+
+                    // 4. Find the new index of the 'over' item after removal
+                    const overIndexAfterSplice = newItems.findIndex(item => item.id === over.id);
+
+                    // 5. Insert block
+                    // If moving down, we want to place it AFTER the target item
+                    const insertAt = oldIndex < newIndex ? overIndexAfterSplice + 1 : overIndexAfterSplice;
+                    newItems.splice(insertAt, 0, ...block);
+
+                    return newItems;
+                }
+
                 return arrayMove(items, oldIndex, newIndex);
             });
         }

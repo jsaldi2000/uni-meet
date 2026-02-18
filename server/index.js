@@ -62,11 +62,13 @@ const templatesRouter = require('./routes/templates');
 const meetingsRouter = require('./routes/meetings');
 const attachmentsRouter = require('./routes/attachments');
 const exportRouter = require('./routes/export');
+const backupRouter = require('./routes/backup');
 
 app.use('/api/templates', templatesRouter);
 app.use('/api/meetings', meetingsRouter);
 app.use('/api/attachments', attachmentsRouter);
 app.use('/api/export', exportRouter);
+app.use('/api/backup', backupRouter);
 
 // Health Check
 app.get('/api/health', (req, res) => {

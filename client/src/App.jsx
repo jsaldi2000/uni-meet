@@ -6,6 +6,8 @@ import TemplateList from './pages/TemplateList';
 import TemplateBuilder from './pages/TemplateBuilder';
 import MeetingList from './pages/MeetingList';
 import MeetingEditor from './pages/MeetingEditor';
+import Backup from './pages/Backup';
+import Seguimiento from './pages/Seguimiento';
 
 function App() {
     return (
@@ -19,6 +21,8 @@ function App() {
                     <Route path="meetings" element={<MeetingList />} />
                     <Route path="meetings/new/:templateId" element={<div>Nueva Reunión (Próximamente)</div>} />
                     <Route path="meetings/:id" element={<MeetingEditor />} />
+                    <Route path="backup" element={<Backup />} />
+                    <Route path="seguimiento" element={<Seguimiento />} />
                 </Route>
             </Routes>
         </Router>

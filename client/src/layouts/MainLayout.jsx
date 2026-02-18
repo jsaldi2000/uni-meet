@@ -13,7 +13,7 @@ const MainLayout = () => {
                 <div className={styles.brand}>
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                         <h1>UniMeet</h1>
-                        <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '-5px' }}>v1.0.0</span>
+                        <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '-5px' }}>v1.1.0</span>
                     </div>
                 </div>
                 <nav className={styles.nav}>
@@ -25,6 +25,12 @@ const MainLayout = () => {
                     </Link>
                     <Link to="/meetings" className={`${styles.navItem} ${isActive('/meetings') ? styles.active : ''}`}>
                         Reuniones
+                    </Link>
+                    <Link to="/seguimiento" className={`${styles.navItem} ${isActive('/seguimiento') ? styles.active : ''}`}>
+                        Seguimiento
+                    </Link>
+                    <Link to="/backup" className={`${styles.navItem} ${isActive('/backup') ? styles.active : ''}`}>
+                        Copia de Seguridad
                     </Link>
                 </nav>
             </aside>

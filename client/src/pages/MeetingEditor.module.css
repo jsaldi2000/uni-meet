@@ -380,6 +380,116 @@
     border-radius: 50%;
 }
 
+.uploadActions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.uploadHint {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.booleanFieldWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+.booleanComment {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    border-style: dashed;
+    background: #fafafa;
+    transition: all 0.2s;
+}
+
+.booleanComment:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    border-style: solid;
+    background: #fff;
+}
+
+/* Date Input Icon Integration */
+.dateInput,
+.dateInputHeader {
+    position: relative;
+    padding-right: 2.2rem !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23666' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px;
+    border: 1px solid var(--border-color) !important;
+    background-color: #fff !important;
+}
+
+/* Ensure table cells wrap content and inputs don't overflow */
+.inputTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    table-layout: fixed;
+    /* Better control over columns */
+}
+
+.inputTable td {
+    border: 1px solid var(--border-color);
+    padding: 0.25rem;
+    vertical-align: top;
+    word-break: break-word;
+    /* Force wrap */
+    overflow: hidden;
+}
+
+.cellArea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    resize: none;
+    /* Resize handled by JS */
+    min-height: 2.5rem;
+    font-family: inherit;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    background: transparent;
+    display: block;
+    white-space: pre-wrap;
+    overflow-y: hidden;
+    /* Hide scrollbar during auto-resize */
+}
+
+.cellInput {
+    width: 100%;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    position: relative;
+    /* Essential for picker indicator positioning */
+}
+
+/* Hide native indicator icon but keep it clickable to trigger picker */
+.dateInput::-webkit-calendar-picker-indicator,
+.dateInputHeader::-webkit-calendar-picker-indicator,
+.cellInput::-webkit-calendar-picker-indicator {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
 @media print {
 
     .actions,

@@ -17,13 +17,28 @@ const TableField = ({ field, value, onChange, readOnly }) => {
         }
     }, [value]);
 
-    const updateRow = (rowIndex, colName, cellValue) => {
+    const updateRow = (rowIndex, colName, cellValue, event) => {
+        // Auto-resize logic
+        if (event && event.target && event.target.tagName === 'TEXTAREA') {
+            event.target.style.height = 'auto';
+            event.target.style.height = event.target.scrollHeight + 'px';
+        }
+
         const newRows = [...rows];
         if (!newRows[rowIndex]) newRows[rowIndex] = {};
         newRows[rowIndex][colName] = cellValue;
         setRows(newRows);
         onChange(JSON.stringify(newRows));
     };
+
+    // Auto-resize all textareas on value change
+    useEffect(() => {
+        const textareas = document.querySelectorAll(`.${styles.cellArea}`);
+        textareas.forEach(ta => {
+            ta.style.height = 'auto';
+            ta.style.height = ta.scrollHeight + 'px';
+        });
+    }, [rows]);
 
     const addRow = () => {
         const newRows = [...rows, {}];
@@ -60,14 +75,14 @@ const TableField = ({ field, value, onChange, readOnly }) => {
                                         <input
                                             type="checkbox"
                                             checked={!!row[col.nombre]}
-                                            onChange={(e) => updateRow(rowIndex, col.nombre, e.target.checked)}
+                                            onChange={(e) => updateRow(rowIndex, col.nombre, e.target.checked, e)}
                                             disabled={readOnly}
                                         />
                                     ) : col.tipo === 'numero' ? (
                                         <input
                                             type="number"
                                             value={row[col.nombre] || ''}
-                                            onChange={(e) => updateRow(rowIndex, col.nombre, e.target.value)}
+                                            onChange={(e) => updateRow(rowIndex, col.nombre, e.target.value, e)}
                                             className={styles.cellInput}
                                             disabled={readOnly}
                                         />
@@ -75,14 +90,14 @@ const TableField = ({ field, value, onChange, readOnly }) => {
                                         <input
                                             type="date"
                                             value={row[col.nombre] || ''}
-                                            onChange={(e) => updateRow(rowIndex, col.nombre, e.target.value)}
+                                            onChange={(e) => updateRow(rowIndex, col.nombre, e.target.value, e)}
                                             className={styles.cellInput}
                                             disabled={readOnly}
                                         />
                                     ) : (
                                         <textarea
                                             value={row[col.nombre] || ''}
-                                            onChange={(e) => updateRow(rowIndex, col.nombre, e.target.value)}
+                                            onChange={(e) => updateRow(rowIndex, col.nombre, e.target.value, e)}
                                             className={styles.cellArea}
                                             disabled={readOnly}
                                             rows={1}
