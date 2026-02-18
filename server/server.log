@@ -2456,3 +2456,19 @@
                     valor_fecha = excluded.valor_fecha
                 
 2026-02-18T20:02:52.992Z [LOG] COMMIT
+2026-02-18T20:06:57.035Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T20:06:57.035Z - GET /1 - 200 (0ms)
+2026-02-18T20:06:57.035Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T20:06:57.035Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T20:06:57.036Z [LOG] SELECT * FROM ReunionInstancia WHERE id = '1'
+2026-02-18T20:06:57.036Z - GET /1 - 304 (0ms)
+2026-02-18T20:06:57.036Z [LOG] SELECT * FROM ValorCampo WHERE instancia_id = '1'
+2026-02-18T20:06:57.036Z [LOG] SELECT * FROM Adjunto WHERE instancia_id = '1'
+2026-02-18T20:06:57.038Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T20:06:57.038Z - GET /2 - 304 (0ms)
+2026-02-18T20:06:57.038Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T20:06:57.040Z [LOG] SELECT * FROM Plantilla WHERE id = '2'
+2026-02-18T20:06:57.040Z - GET /2 - 304 (1ms)
+2026-02-18T20:06:57.040Z [LOG] SELECT * FROM CampoPlantilla WHERE plantilla_id = '2' ORDER BY orden ASC
+2026-02-18T20:07:57.298Z [LOG] BEGIN
+2026-02-18T20:07:57.298Z - PUT /1 - 200 (0ms)
