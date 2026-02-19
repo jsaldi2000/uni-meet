@@ -196,7 +196,6 @@ const SeguimientoView = () => {
     const togglePrincipal = (campoId) => {
         setCamposPrincipales(prev => {
             if (prev.includes(campoId)) return prev.filter(x => x !== campoId);
-            if (prev.length >= 2) return prev;
             setCamposSeleccionados(s => {
                 if (!s.includes(campoId)) {
                     setModos(m => ({ ...m, [campoId]: 'contenido' }));
@@ -278,7 +277,7 @@ const SeguimientoView = () => {
             // Helper to render value (handling tables and empty states)
             const renderCellContent = (val, field) => {
                 if (field.tipo === 'booleano') {
-                    return val?.valor_booleano ? '✅ Sí' : '❌ No';
+                    return val?.valor_booleano ? '✅' : '❌';
                 }
 
                 const rawVal = val?.valor_texto || (val?.valor_numero != null ? String(val.valor_numero) : null);
@@ -313,113 +312,190 @@ const SeguimientoView = () => {
 
             // 1. Build HTML string for EMAIL (Wide layout)
             let html = `
-                <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #1e293b; max-width: 1100px; margin: 0 auto; line-height: 1.5; background-color: #f1f5f9; padding: 25px; border-radius: 12px;">
-                    <div style="background-color: #ffffff; padding: 20px; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
-                        <h1 style="color: #2563eb; margin: 0 0 10px 0; font-size: 24px;">Seguimiento: ${data.nombre}</h1>
-                        <p style="color: #64748b; font-size: 14px; margin: 0;">Plantilla: ${data.plantilla_nombre} · Reporte interactivo generado el ${new Date().toLocaleString()}</p>
-                    </div>
+                <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #1e293b; width: 100%; max-width: 100%; margin: 0; line-height: 1.5; background-color: #ffffff; padding: 20px;">
+                    <h1 style="color: #0f172a; margin: 0 0 10px 0; font-size: 18px; font-weight: 700;">Seguimiento: ${data.nombre}</h1>
+                    <hr style="border: 0; border-top: 3px solid #2563eb; margin: 0 0 12px 0;" />
+                    <p style="color: #64748b; font-size: 13px; margin: 0 0 25px 0;">Plantilla: ${data.plantilla_nombre} · Exportado el ${new Date().toLocaleString()}</p>
             `;
 
             // 2. Global Notes (Always Visible)
             if (globalEntradas && globalEntradas.length > 0) {
                 html += `
-                    <div style="background-color: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 20px; margin-bottom: 25px;">
-                        <h2 style="margin-top: 0; color: #1e40af; font-size: 18px; display: flex; align-items: center; gap: 10px;">
-                            📋 Notas Globales de la Lista
+                    <div style="background-color: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 10px; margin-bottom: 15px;">
+                        <h2 style="margin-top: 0; margin-bottom: 4px; color: #1e40af; font-size: 14px; line-height: 1.2;">
+                            📋 <span style="vertical-align: middle;">Notas globales Reunión</span>
                         </h2>
-                        <ul style="padding-left: 25px; margin: 10px 0 0 0; color: #1e3a8a;">
+                        <ul style="padding-left: 15px; margin: 0; color: #1e3a8a;">
                 `;
                 globalEntradas.forEach(e => {
                     const style = e.realizado ? 'text-decoration: line-through; color: #64748b; font-style: italic;' : '';
-                    html += `<li style="margin-bottom: 10px; ${style}">${e.contenido}</li>`;
+                    html += `<li style="margin-bottom: 1px; font-size: 13px; line-height: 1.4; ${style}">${e.contenido}</li>`;
                 });
                 html += `</ul></div>`;
             }
 
-            // 3. Meeting Cards (Interactive)
-            html += `<h2 style="color: #334155; font-size: 18px; margin-bottom: 15px; padding-left: 5px;">Reuniones e Instancias</h2>`;
+            // 3. Meeting List using Table Structure for Stability
+            html += `<h2 style="color: #475569; font-size: 13px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.05em; padding-left: 5px;">Reuniones</h2>`;
+
+            // Main Table for list items
+            html += `<table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: separate; border-spacing: 0;">`;
 
             filteredRows.forEach(fila => {
-                // Determine icons for the summary bar
-                const booleanIconsHtml = booleanFields.map(f => {
-                    const val = fila.valores[f.id];
-                    const label = aliases[f.id] || f.nombre;
-                    return `<span style="padding: 2px 6px; background: #f1f5f9; border-radius: 4px; font-size: 11px; color: #475569; border: 1px solid #e2e8f0; display: inline-flex; align-items: center; gap: 4px;" title="${label}">
-                        ${val?.valor_booleano ? '✅' : '❌'} ${label}
-                    </span>`;
-                }).join(' ');
+                // Identify principal fields
+                const summaryFieldsHtml = (camposPrincipales || []).map(cpId => {
+                    const field = allCampos.find(f => String(f.id) === String(cpId));
+                    if (!field) return '';
+                    const val = fila.valores[cpId];
+                    const label = aliases[cpId] || field.nombre;
 
-                // Identify if there's a "Profesor" field to show in the summary
-                const profField = visibleFields.find(f => (aliases[f.id] || f.nombre).toLowerCase().includes('profesor'));
-                const profVal = profField ? (fila.valores[profField.id]?.valor_texto || '—') : null;
+                    let icon = ''; // Removed icon for cleaner look, just text
+                    let content = '';
 
+                    if (field.tipo === 'booleano') {
+                        const isTrue = !!val?.valor_booleano;
+                        return `<span style="color: ${isTrue ? '#047857' : '#991b1b'}; font-size: 11px; background: ${isTrue ? '#ecfdf5' : '#fef2f2'}; padding: 2px 6px; border-radius: 4px; border: 1px solid ${isTrue ? '#a7f3d0' : '#fecaca'}; white-space: nowrap; margin-left: 5px; display: inline-block; font-weight: 600; line-height: 1.2;">
+                            ${label}: <span style="font-size: 12px; vertical-align: middle;">${isTrue ? '✅' : '❌'}</span>
+                        </span>`;
+                    } else {
+                        content = val?.valor_texto || (val?.valor_numero != null ? String(val.valor_numero) : null);
+                        if (field.tipo === 'fecha') icon = ''; // Optional icon
+                    }
+
+                    if (!content || (typeof content === 'string' && content.trim() === '') || content === '—') return '';
+
+                    return `<span style="color: #475569; font-size: 11px; background: #f8fafc; padding: 2px 6px; border-radius: 4px; border: 1px solid #e2e8f0; white-space: nowrap; margin-left: 5px; display: inline-block; font-weight: 600; line-height: 1.2;">${label}: ${content}</span>`;
+                }).join('');
+
+                // Start of Item Row (Header)
                 html += `
-                    <details style="margin-bottom: 15px; border-radius: 10px; background: #ffffff; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.05); overflow: hidden;">
-                        <summary style="padding: 15px 20px; cursor: pointer; display: flex; align-items: center; list-style: none; outline: none; transition: background 0.2s;">
-                            <div style="display: flex; align-items: center; width: 100%; justify-content: space-between; gap: 20px;">
-                                <div style="display: flex; align-items: center; gap: 15px;">
-                                    <span style="font-weight: 700; color: #0f172a; font-size: 16px;">${fila.titulo || 'Instancia'}</span>
-                                    ${profVal ? `<span style="color: #64748b; font-size: 13px; background: #f8fafc; padding: 2px 8px; border-radius: 12px; border: 1px solid #f1f5f9;">👤 ${profVal}</span>` : ''}
-                                </div>
-                                <div style="display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end;">
-                                    ${booleanIconsHtml}
-                                    <span style="color: #3b82f6; font-size: 12px; margin-left: 10px;">Ver detalles ▼</span>
-                                </div>
+                    <tr>
+                        <td style="padding: 10px 12px; background-color: #ffffff; border: 1px solid #e2e8f0; border-bottom: none; border-radius: 8px 8px 0 0;">
+                            <div style="font-weight: 700; color: #1e40af; font-size: 15px; display: inline-block; margin-right: 5px;">
+                                ${fila.titulo || 'Reunión'}
                             </div>
-                        </summary>
-                        <div style="padding: 20px; border-top: 1px solid #f1f5f9; background-color: #fff;">
-                            
-                            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; margin-bottom: 25px;">
+                            <div style="display: inline-block;">
+                                ${summaryFieldsHtml}
+                            </div>
+                        </td>
+                    </tr>
                 `;
 
-                // All fields in detailed view
-                visibleFields.forEach(f => {
-                    const val = fila.valores[f.id];
-                    const label = aliases[f.id] || f.nombre;
-                    const content = renderCellContent(val, f);
-                    const isFullWidth = content.includes('<table');
+                // Content Row (Details)
+                html += `
+                    <tr>
+                        <td style="padding: 0; background-color: #ffffff; border: 1px solid #e2e8f0; border-top: none; border-radius: 0 0 8px 8px; margin-bottom: 10px;">
+                            <details style="width: 100%;">
+                                <summary style="padding: 8px 12px; cursor: pointer; color: #3b82f6; font-size: 11px; font-weight: 600; background-color: #f8fafc; border-top: 1px solid #f1f5f9; outline: none;">
+                                    <span style="vertical-align: middle;">Ver detalles y seguimiento ▼</span>
+                                </summary>
+                                <div style="padding: 12px;">
+                                    <!-- Inner Table for Grid Layout -->
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="width: 100%; border-collapse: collapse;">
+                                        <tr>
+                                            <td style="padding: 0;">
+                                                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 8px;">
+                `;
 
-                    html += `
-                        <div style="background: #f8fafc; padding: 12px; border-radius: 8px; border: 1px solid #f1f5f9; ${isFullWidth ? 'grid-column: 1 / -1;' : ''}">
-                            <div style="font-weight: bold; color: #475569; font-size: 12px; text-transform: uppercase; margin-bottom: 5px;">${label}</div>
-                            <div style="color: #1e293b; font-size: 14px;">${content}</div>
-                        </div>
-                    `;
-                });
+                // Detailed fields (Deduplicated)
+                let detailFieldsCount = 0;
+                const fieldChunks = []; // Accumulate HTML strings to join later
 
-                html += `</div>`;
+                visibleFields
+                    .filter(f => !camposPrincipales.some(cpId => String(cpId) === String(f.id)))
+                    .forEach(f => {
+                        const val = fila.valores[f.id];
+                        const label = aliases[f.id] || f.nombre;
+                        const content = renderCellContent(val, f);
+                        const isFullWidth = content.includes('<table');
+                        const colSpanStyle = isFullWidth ? 'grid-column: 1 / -1;' : '';
+
+                        // Using div display:grid style for modern clients, iterating fallback for older clients is hard here.
+                        // We will stick to the grid div approach inside the TD as most webmails support basic grid or block layout.
+                        // Ideally we would use nested tables for 2-col, but grid is acceptable for modern webmail (Gmail/Outlook Web).
+                        if (isFullWidth) {
+                            html += `<div style="grid-column: 1 / -1; background: #f8fafc; padding: 6px 8px; border-radius: 4px; border: 1px solid #f1f5f9;">
+                                <div style="font-weight: bold; color: #64748b; font-size: 10px; text-transform: uppercase;">${label}</div>
+                                <div style="color: #1e293b; font-size: 13px; margin-top: 2px;">${content}</div>
+                             </div>`;
+                            detailFieldsCount++;
+                        } else {
+                            html += `<div style="background: #f8fafc; padding: 6px 8px; border-radius: 4px; border: 1px solid #f1f5f9;">
+                                <div style="font-weight: bold; color: #64748b; font-size: 10px; text-transform: uppercase;">${label}</div>
+                                <div style="color: #1e293b; font-size: 13px; margin-top: 2px;">${content}</div>
+                            </div>`;
+                            detailFieldsCount++;
+                        }
+                    });
+
+                html += `           </div>`; // End Grid Div
 
                 // Seguimiento section
                 if (showSeguimiento) {
                     const entries = seguimientoEntradas[fila.id] || [];
-                    html += `
-                        <div style="border-top: 2px dashed #f1f5f9; padding-top: 20px;">
-                            <h3 style="margin: 0 0 15px 0; font-size: 15px; color: #334155; display: flex; align-items: center; gap: 8px;">
-                                📝 Notas de Seguimiento
-                            </h3>
-                    `;
                     if (entries.length > 0) {
-                        html += `<div style="display: flex; flexDirection: column; gap: 10px;">`;
+                        html += `
+                            <div style="border-top: 1px dashed #e2e8f0; padding-top: 8px; margin-top: 8px;">
+                                <h3 style="margin: 0 0 5px 0; font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;">
+                                    📝 Seguimiento
+                                </h3>
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
+                        `;
                         entries.forEach(e => {
-                            const style = e.realizado ? 'text-decoration: line-through; color: #94a3b8; background-color: #f8fafc;' : 'background-color: #ffffff; border-left: 3px solid #3b82f6;';
+                            const isDone = e.realizado === true;
+                            const bg = isDone ? '#f8fafc' : '#ffffff';
+                            const fg = isDone ? '#94a3b8' : '#1e293b';
+                            const borderL = isDone ? '3px solid #cbd5e1' : '3px solid #3b82f6';
+                            const deco = isDone ? 'text-decoration: line-through;' : '';
+
+                            let contentHtml = '';
+                            if (isDone) {
+                                contentHtml = `
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                        <tr>
+                                            <td style="width: 20px; vertical-align: top; font-weight: bold; padding-top: 2px;">✅</td>
+                                            <td style="vertical-align: top; ${deco}">
+                                                ${e.contenido}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                `;
+                            } else {
+                                contentHtml = `
+                                    <div style="${deco}">
+                                        ${e.contenido}
+                                    </div>
+                                `;
+                            }
+
                             html += `
-                                <div style="padding: 12px; border: 1px solid #e2e8f0; border-radius: 6px; margin-bottom: 8px; ${style}">
-                                    <div style="font-size: 14px;">${e.contenido}</div>
-                                    <div style="font-size: 11px; color: #94a3b8; margin-top: 5px;">${new Date(e.created_at).toLocaleDateString()} ${new Date(e.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
-                                </div>
+                                <tr>
+                                    <td style="padding: 6px 8px; background-color: ${bg}; border: 1px solid #e2e8f0; border-left: ${borderL}; color: ${fg}; font-size: 13px; line-height: 1.3; border-radius: 4px; display: block;">
+                                        ${contentHtml}
+                                        <div style="font-size: 10px; color: #94a3b8; margin-top: 2px; text-align: right;">${new Date(e.created_at).toLocaleDateString()}</div>
+                                    </td>
+                                </tr>
+                                <tr><td style="height: 4px;"></td></tr>
                             `;
                         });
-                        html += `</div>`;
+                        html += `</table></div>`;
                     } else {
-                        html += `<p style="color: #94a3b8; font-style: italic; font-size: 13px;">Sin notas de seguimiento registradas.</p>`;
+                        html += `<div style="border-top: 1px dashed #e2e8f0; padding-top: 8px; margin-top: 8px; text-align: center; color: #cbd5e1; font-style: italic; font-size: 11px;">Sin seguimiento</div>`;
                     }
-                    html += `</div>`;
                 }
 
-                html += `</div></details>`;
+                html += `
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </details>
+                        </td>
+                    </tr>
+                    <tr><td style="height: 10px;"></td></tr> <!-- Spacer between cards -->
+                `;
             });
 
-            html += `</div>`;
+            html += `</table></div>`;
 
             // 4. Copy to Clipboard
             const blob = new Blob([html], { type: 'text/html' });
@@ -539,6 +615,26 @@ const SeguimientoView = () => {
             }
         } catch (err) {
             console.error(err);
+        }
+    };
+
+    const handleReorderEntries = async (instanciaId, newEntries) => {
+        // Update local state first for snappiness
+        if (instanciaId) {
+            setSeguimientoEntradas(prev => ({
+                ...prev,
+                [instanciaId]: newEntries
+            }));
+        } else {
+            setGlobalEntradas(newEntries);
+        }
+
+        try {
+            await api.put(`/seguimiento/${id}/entrada/reorder`, {
+                ids: newEntries.map(e => e.id)
+            });
+        } catch (err) {
+            console.error("Failed to reorder entries", err);
         }
     };
 
@@ -729,6 +825,13 @@ const SeguimientoView = () => {
                                             <input type="checkbox" checked={selected} readOnly style={{ flexShrink: 0 }} />
                                             <span style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={c.nombre}>{c.nombre}</span>
                                             <span className={styles.tipo}>{c.tipo}</span>
+                                            <button
+                                                className={`${styles.principalBtn} ${camposPrincipales.includes(c.id) ? styles.principalActive : ''}`}
+                                                onClick={(e) => { e.stopPropagation(); togglePrincipal(c.id); }}
+                                                title={camposPrincipales.includes(c.id) ? "Quitar de principal" : "Marcar como principal"}
+                                            >
+                                                {camposPrincipales.includes(c.id) ? '⭐' : '☆'}
+                                            </button>
                                             {selected && (
                                                 <select
                                                     value={modo}
@@ -761,7 +864,7 @@ const SeguimientoView = () => {
                     className={styles.globalHeader}
                     onClick={() => setShowGlobalNotes(!showGlobalNotes)}
                 >
-                    <span className={styles.globalTitle}>📋 Notas globales de la lista</span>
+                    <span className={styles.globalTitle}>📋 Notas globales Reunión</span>
                     <span className={`${styles.chevron} ${showGlobalNotes ? styles.chevronOpen : ''}`}>▼</span>
                 </div>
                 {showGlobalNotes && (
@@ -773,6 +876,8 @@ const SeguimientoView = () => {
                             onToggleComplete={handleToggleComplete}
                             onUpdateEntry={handleUpdateEntry}
                             onDeleteEntry={handleDeleteEntry}
+                            onReorder={handleReorderEntries}
+                            enableReorder={true}
                         />
                     </div>
                 )}
@@ -869,11 +974,32 @@ const SeguimientoView = () => {
     );
 };
 
-const SeguimientoInlineCell = ({ instanciaId, entries, onAddEntry, onToggleComplete, onUpdateEntry, onDeleteEntry }) => {
+const SeguimientoInlineCell = ({ instanciaId, entries, onAddEntry, onToggleComplete, onUpdateEntry, onDeleteEntry, onReorder, enableReorder = false }) => {
     const [text, setText] = useState('');
     const [saving, setSaving] = useState(false);
     const [editingId, setEditingId] = useState(null);
     const [editValue, setEditValue] = useState('');
+
+    const sensors = useSensors(
+        useSensor(PointerSensor, {
+            activationConstraint: {
+                distance: 5,
+            },
+        }),
+        useSensor(KeyboardSensor, {
+            coordinateGetter: sortableKeyboardCoordinates,
+        })
+    );
+
+    const handleDragEnd = (event) => {
+        const { active, over } = event;
+        if (active.id !== over.id) {
+            const oldIndex = entries.findIndex(e => e.id === active.id);
+            const newIndex = entries.findIndex(e => e.id === over.id);
+            const newEntries = arrayMove(entries, oldIndex, newIndex);
+            onReorder(instanciaId, newEntries);
+        }
+    };
 
     const handleSend = async () => {
         const cleanText = text.replace(/<p><br><\/p>/g, '').trim();
@@ -920,49 +1046,99 @@ const SeguimientoInlineCell = ({ instanciaId, entries, onAddEntry, onToggleCompl
     return (
         <div className={styles.inlineCell}>
             <div className={styles.inlineHistory}>
-                {entries.map(e => (
-                    <div key={e.id} className={`${styles.inlineEntry} ${e.realizado ? styles.entryCompleted : ''}`}>
-                        <div className={styles.entryMain}>
-                            <input
-                                type="checkbox"
-                                checked={!!e.realizado}
-                                onChange={(evt) => onToggleComplete(e.id, instanciaId, evt.target.checked)}
-                                className={styles.completeCheck}
-                            />
+                {enableReorder ? (
+                    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                        <SortableContext items={entries.map(e => e.id)} strategy={verticalListSortingStrategy}>
+                            {entries.map(e => (
+                                <SortableItem key={e.id} id={e.id} className={`${styles.inlineEntry} ${e.realizado ? styles.entryCompleted : ''}`}>
+                                    <div className={styles.entryMain}>
+                                        <input
+                                            type="checkbox"
+                                            checked={!!e.realizado}
+                                            onChange={(evt) => onToggleComplete(e.id, instanciaId, evt.target.checked)}
+                                            className={styles.completeCheck}
+                                        />
 
-                            <div className={styles.entryBody}>
-                                {editingId === e.id ? (
-                                    <div className={styles.editEntryWrapper}>
-                                        <ReactQuill theme="snow" value={editValue} onChange={setEditValue} modules={modules} formats={formats} autoFocus />
-                                        <div className={styles.editActions}>
-                                            <button className={styles.saveEditBtn} onClick={handleSaveEdit}>Guardar</button>
-                                            <button className={styles.cancelEditBtn} onClick={handleCancelEdit}>Cancelar</button>
+                                        <div className={styles.entryBody}>
+                                            {editingId === e.id ? (
+                                                <div className={styles.editEntryWrapper}>
+                                                    <ReactQuill theme="snow" value={editValue} onChange={setEditValue} modules={modules} formats={formats} autoFocus />
+                                                    <div className={styles.editActions}>
+                                                        <button className={styles.saveEditBtn} onClick={handleSaveEdit}>Guardar</button>
+                                                        <button className={styles.cancelEditBtn} onClick={handleCancelEdit}>Cancelar</button>
+                                                    </div>
+                                                </div>
+                                            ) : (
+                                                <div
+                                                    className={`${styles.inlineEntryContent} ${e.realizado ? styles.contentCompleted : ''} ql-editor`}
+                                                    dangerouslySetInnerHTML={{ __html: e.contenido }}
+                                                    onClick={() => handleStartEdit(e)}
+                                                    title="Click para editar"
+                                                    style={{ cursor: 'pointer' }}
+                                                />
+                                            )}
                                         </div>
+
+                                        <div className={styles.inlineEntryMeta}>
+                                            <span>{new Date(e.created_at).toLocaleString([], { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
+                                            {!!e.realizado && e.fecha_realizado && (
+                                                <span className={styles.completionDate} title={`Completado el ${new Date(e.fecha_realizado).toLocaleString()}`}>
+                                                    ✓ {new Date(e.fecha_realizado).toLocaleString([], { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}
+                                                </span>
+                                            )}
+                                        </div>
+
+                                        <button className={styles.deleteEntryBtn} onClick={() => handleDelete(e.id)} title="Eliminar">×</button>
                                     </div>
-                                ) : (
-                                    <div
-                                        className={`${styles.inlineEntryContent} ${e.realizado ? styles.contentCompleted : ''} ql-editor`}
-                                        dangerouslySetInnerHTML={{ __html: e.contenido }}
-                                        onClick={() => handleStartEdit(e)}
-                                        title="Click para editar"
-                                        style={{ cursor: 'pointer' }}
-                                    />
-                                )}
-                            </div>
+                                </SortableItem>
+                            ))}
+                        </SortableContext>
+                    </DndContext>
+                ) : (
+                    entries.map(e => (
+                        <div key={e.id} className={`${styles.inlineEntry} ${e.realizado ? styles.entryCompleted : ''}`}>
+                            <div className={styles.entryMain}>
+                                <input
+                                    type="checkbox"
+                                    checked={!!e.realizado}
+                                    onChange={(evt) => onToggleComplete(e.id, instanciaId, evt.target.checked)}
+                                    className={styles.completeCheck}
+                                />
 
-                            <div className={styles.inlineEntryMeta}>
-                                <span>{new Date(e.created_at).toLocaleString([], { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
-                                {!!e.realizado && e.fecha_realizado && (
-                                    <span className={styles.completionDate} title={`Completado el ${new Date(e.fecha_realizado).toLocaleString()}`}>
-                                        ✓ {new Date(e.fecha_realizado).toLocaleString([], { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}
-                                    </span>
-                                )}
-                            </div>
+                                <div className={styles.entryBody}>
+                                    {editingId === e.id ? (
+                                        <div className={styles.editEntryWrapper}>
+                                            <ReactQuill theme="snow" value={editValue} onChange={setEditValue} modules={modules} formats={formats} autoFocus />
+                                            <div className={styles.editActions}>
+                                                <button className={styles.saveEditBtn} onClick={handleSaveEdit}>Guardar</button>
+                                                <button className={styles.cancelEditBtn} onClick={handleCancelEdit}>Cancelar</button>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div
+                                            className={`${styles.inlineEntryContent} ${e.realizado ? styles.contentCompleted : ''} ql-editor`}
+                                            dangerouslySetInnerHTML={{ __html: e.contenido }}
+                                            onClick={() => handleStartEdit(e)}
+                                            title="Click para editar"
+                                            style={{ cursor: 'pointer' }}
+                                        />
+                                    )}
+                                </div>
 
-                            <button className={styles.deleteEntryBtn} onClick={() => handleDelete(e.id)} title="Eliminar">×</button>
+                                <div className={styles.inlineEntryMeta}>
+                                    <span>{new Date(e.created_at).toLocaleString([], { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
+                                    {!!e.realizado && e.fecha_realizado && (
+                                        <span className={styles.completionDate} title={`Completado el ${new Date(e.fecha_realizado).toLocaleString()}`}>
+                                            ✓ {new Date(e.fecha_realizado).toLocaleString([], { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}
+                                        </span>
+                                    )}
+                                </div>
+
+                                <button className={styles.deleteEntryBtn} onClick={() => handleDelete(e.id)} title="Eliminar">×</button>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))
+                )}
             </div>
             <div className={styles.inlineInputWrapper}>
                 <div className={styles.quillWrapper}>

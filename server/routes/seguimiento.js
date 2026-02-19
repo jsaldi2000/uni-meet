@@ -70,7 +70,9 @@ router.get('/:id', (req, res) => {
 
         // Fetch Seguimiento entries for this list
         const entradas = db.prepare(`
-            SELECT * FROM SeguimientoEntrada WHERE lista_id = ? ORDER BY created_at ASC
+            SELECT * FROM SeguimientoEntrada 
+            WHERE lista_id = ? 
+            ORDER BY orden ASC, created_at ASC
         `).all(req.params.id);
 
         // Map entries by instancia_id for easier frontend consumption
@@ -106,12 +108,41 @@ router.post('/:id/entrada', (req, res) => {
             return res.status(400).json({ error: 'Contenido es obligatorio' });
         }
 
+        // Get max order
+        const maxOrder = db.prepare(`
+            SELECT MAX(orden) as max_o FROM SeguimientoEntrada 
+            WHERE lista_id = ? AND (instancia_id = ? OR (instancia_id IS NULL AND ? IS NULL))
+        `).get(req.params.id, instancia_id, instancia_id)?.max_o || 0;
+
         const result = db.prepare(`
-            INSERT INTO SeguimientoEntrada (lista_id, instancia_id, contenido, realizado)
-            VALUES (?, ?, ?, 0)
-        `).run(req.params.id, instancia_id, contenido);
+            INSERT INTO SeguimientoEntrada (lista_id, instancia_id, contenido, realizado, orden)
+            VALUES (?, ?, ?, 0, ?)
+        `).run(req.params.id, instancia_id, contenido, maxOrder + 1);
 
         res.json({ id: result.lastInsertRowid, created_at: new Date().toISOString() });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// PUT /api/seguimiento/:id/entrada/reorder
+router.put('/:id/entrada/reorder', (req, res) => {
+    try {
+        const { ids } = req.body; // Array of entry IDs in order
+        if (!Array.isArray(ids)) return res.status(400).json({ error: 'ids debe ser un array' });
+
+        const updateOrden = db.prepare(`
+            UPDATE SeguimientoEntrada SET orden = ? WHERE id = ? AND lista_id = ?
+        `);
+
+        const transaction = db.transaction((idList, listaId) => {
+            idList.forEach((id, idx) => {
+                updateOrden.run(idx, id, listaId);
+            });
+        });
+
+        transaction(ids, req.params.id);
+        res.json({ success: true });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

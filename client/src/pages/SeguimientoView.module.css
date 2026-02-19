@@ -403,13 +403,16 @@
     font-size: 0.8rem;
     position: relative;
     transition: all 0.2s;
+    display: flex;
+    align-items: center;
 }
 
 .entryMain {
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    width: 100%;
+    flex: 1;
+    min-width: 0;
     min-height: 24px;
 }
 
@@ -668,4 +671,32 @@
 
 .chevronOpen {
     transform: rotate(180deg);
+}
+
+.principalBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 2px 5px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    line-height: 1;
+    color: #cbd5e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.principalBtn:hover {
+    color: #f59e0b;
+    background: #fffbeb;
+}
+
+.principalActive {
+    color: #f59e0b;
+}
+
+.editSelect {
+    margin-left: 0.5rem;
 }
