@@ -291,7 +291,7 @@ const SeguimientoView = () => {
             const res = await api.post(`/seguimiento/${id}/entrada`, { instancia_id: instanciaId, contenido });
             setSeguimientoEntradas(prev => ({
                 ...prev,
-                [instanciaId]: [{ id: res.data.id, contenido, created_at: res.data.created_at, realizado: 0 }, ...(prev[instanciaId] || [])]
+                [instanciaId]: [...(prev[instanciaId] || []), { id: res.data.id, contenido, created_at: res.data.created_at, realizado: 0 }]
             }));
         } catch (err) {
             console.error(err);
@@ -331,7 +331,7 @@ const SeguimientoView = () => {
             await api.delete(`/seguimiento/${id}/entrada/${entradaId}`);
             setSeguimientoEntradas(prev => ({
                 ...prev,
-                [instanciaId]: prev[instanciaId].filter(e => e.id !== entradaId)
+                [instanciaId]: prev[instanciaId].filter(e => String(e.id) !== String(entradaId))
             }));
         } catch (err) {
             console.error(err);
@@ -699,7 +699,7 @@ const SeguimientoInlineCell = ({ instanciaId, entries, onAddEntry, onToggleCompl
                             </div>
                         ) : (
                             <div
-                                className={styles.inlineEntryContent}
+                                className={`${styles.inlineEntryContent} ${e.realizado ? styles.contentCompleted : ''} ql-editor`}
                                 dangerouslySetInnerHTML={{ __html: e.contenido }}
                                 onClick={() => handleStartEdit(e)}
                                 title="Click para editar"

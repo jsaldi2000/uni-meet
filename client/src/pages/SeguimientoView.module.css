@@ -447,6 +447,23 @@
     color: #334155;
     word-break: break-word;
     line-height: 1.5;
+    padding: 0 !important;
+    /* Reset ql-editor padding */
+    min-height: 0 !important;
+    /* Reset ql-editor min-height */
+}
+
+.contentCompleted {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    display: block;
+}
+
+.inlineEntryContent :global(.ql-editor) {
+    padding: 0;
+    min-height: 0;
 }
 
 /* React Quill overrides for compact display */

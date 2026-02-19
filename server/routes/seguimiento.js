@@ -70,7 +70,7 @@ router.get('/:id', (req, res) => {
 
         // Fetch Seguimiento entries for this list
         const entradas = db.prepare(`
-            SELECT * FROM SeguimientoEntrada WHERE lista_id = ? ORDER BY created_at DESC
+            SELECT * FROM SeguimientoEntrada WHERE lista_id = ? ORDER BY created_at ASC
         `).all(req.params.id);
 
         // Map entries by instancia_id for easier frontend consumption
@@ -141,12 +141,20 @@ router.patch('/:id/entrada/:entradaId', (req, res) => {
 // DELETE /api/seguimiento/:id/entrada/:entradaId
 router.delete('/:id/entrada/:entradaId', (req, res) => {
     try {
-        db.prepare(`
+        const listaId = Number(req.params.id);
+        const entradaId = Number(req.params.entradaId);
+
+        console.log(`Deleting entry ${entradaId} from list ${listaId}`);
+
+        const result = db.prepare(`
             DELETE FROM SeguimientoEntrada 
             WHERE id = ? AND lista_id = ?
-        `).run(req.params.entradaId, req.params.id);
+        `).run(entradaId, listaId);
+
+        console.log(`Delete result:`, result);
         res.json({ success: true });
     } catch (err) {
+        console.error('Delete error:', err);
         res.status(500).json({ error: err.message });
     }
 });
