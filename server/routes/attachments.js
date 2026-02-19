@@ -5,14 +5,21 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
-// Helper to sanitize folder names (Allowing Unicode/UTF-8 characters while removing Windows invalid chars)
-const sanitizeName = (name) => {
-    return name
+// Helper to strip accents and non-ASCII for safe filesystem paths
+const toPlainName = (str) => {
+    if (!str) return 'adjunto';
+    return str
         .trim()
-        .replace(/[<>:"/\\|?*]/g, '_') // Prohibited chars in Windows
-        .replace(/\s+/g, '_')          // Spaces to underscores
-        .toLowerCase();
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '') // Remove accents
+        .replace(/[^\x00-\x7F]/g, '')    // Remove non-ASCII
+        .replace(/[<>:"/\\|?*]/g, '_')   // Prohibited Windows chars
+        .replace(/\s+/g, '_')            // Spaces to underscores
+        .toLowerCase()
+        .normalize('NFC');
 };
+
+const sanitizeName = toPlainName;
 
 // Storage configuration
 const storage = multer.diskStorage({
@@ -21,7 +28,6 @@ const storage = multer.diskStorage({
         if (!instancia_id) return cb(new Error('Instance ID is required'));
 
         try {
-            // Get folder structure names from DB
             const instance = db.prepare(`
                 SELECT ri.titulo as instance_title, p.titulo as template_title
                 FROM ReunionInstancia ri
@@ -31,11 +37,12 @@ const storage = multer.diskStorage({
 
             if (!instance) return cb(new Error('Instance not found'));
 
+            // Standardize folder names: lowercase and NFC (Windows/Web safest)
             const folderPath = path.join(
                 __dirname,
                 '../../attachments',
-                sanitizeName(instance.template_title).normalize('NFC'),
-                sanitizeName(instance.instance_title).normalize('NFC')
+                sanitizeName(instance.template_title),
+                sanitizeName(instance.instance_title)
             );
 
             fs.mkdirSync(folderPath, { recursive: true });
@@ -45,10 +52,17 @@ const storage = multer.diskStorage({
         }
     },
     filename: (req, file, cb) => {
-        // Fix encoding: multer/busboy on Windows often misinterprets UTF-8 as Latin1
-        // Then normalize to NFC (Windows standard)
-        const originalName = Buffer.from(file.originalname, 'latin1').toString('utf8').normalize('NFC');
-        cb(null, `${Date.now()}-${originalName}`);
+        let originalName = file.originalname;
+        try {
+            // FIX for Multer/Busboy encoding issues on Windows
+            if (/[Ã¡Ã©Ã­Ã³ÃºÃ±]/.test(originalName)) {
+                originalName = Buffer.from(originalName, 'latin1').toString('utf8');
+            }
+        } catch (e) { }
+
+        // Use completely plain name for disk storage
+        const plain = toPlainName(originalName);
+        cb(null, `${Date.now()}-${plain}`);
     }
 });
 
@@ -64,16 +78,23 @@ router.post('/', upload.single('archivo'), (req, res) => {
     const { instancia_id } = req.body;
 
     try {
-        // Fix encoding for DB record as well and normalize
-        const originalName = Buffer.from(file.originalname, 'latin1').toString('utf8').normalize('NFC');
+        let originalName = req.file.originalname;
+        try {
+            // FIX for Multer/Busboy encoding issues on Windows
+            if (/[Ã¡Ã©Ã­Ã³ÃºÃ±]/.test(originalName)) {
+                originalName = Buffer.from(originalName, 'latin1').toString('utf8');
+            }
+        } catch (e) { }
+
+        const relativePath = path.relative(path.join(__dirname, '../../attachments'), req.file.path).replace(/\\/g, '/');
 
         const result = db.prepare(`
             INSERT INTO Adjunto (instancia_id, nombre_archivo, ruta_archivo, tipo_mime, tamano_bytes)
             VALUES (?, ?, ?, ?, ?)
         `).run(
             instancia_id,
-            originalName,
-            path.relative(path.join(__dirname, '../../attachments'), req.file.path).replace(/\\/g, '/'), // Relative to attachments folder
+            toPlainName(originalName), // Record uses plain name for 100% safety
+            relativePath,             // Path is also plain ASCII
             req.file.mimetype,
             req.file.size
         );

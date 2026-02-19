@@ -1,0 +1,227 @@
+[
+  {
+    "id": 23,
+    "instancia_id": 1,
+    "nombre_archivo": "image.png",
+    "ruta_archivo": "cea_meeting_-_grado_en_ing._de_sistemas_de_telecomunicación./cálculo_i/1771444408127-image.png",
+    "tipo_mime": "image/png",
+    "tamano_bytes": 72549,
+    "fecha_subida": "2026-02-18 19:53:28"
+  },
+  {
+    "id": 24,
+    "instancia_id": 1,
+    "nombre_archivo": "image.png",
+    "ruta_archivo": "cea_meeting_-_grado_en_ing._de_sistemas_de_telecomunicaci�n./c�lculo_i/1771448137920-image.png",
+    "tipo_mime": "image/png",
+    "tamano_bytes": 78909,
+    "fecha_subida": "2026-02-18 20:55:37"
+  },
+  {
+    "id": 25,
+    "instancia_id": 1,
+    "nombre_archivo": "9971003102.pdf",
+    "ruta_archivo": "cea_meeting_-_grado_en_ing._de_sistemas_de_telecomunicaci�n./c�lculo_i/1771448255972-9971003102.pdf",
+    "tipo_mime": "application/pdf",
+    "tamano_bytes": 25258,
+    "fecha_subida": "2026-02-18 20:57:35"
+  },
+  {
+    "id": 27,
+    "instancia_id": 2,
+    "nombre_archivo": "�lgebra.pdf",
+    "ruta_archivo": "cea_meeting_-_grado_en_ing._de_sistemas_de_telecomunicaci�n./�lgebra/1771451223937-�lgebra.pdf",
+    "tipo_mime": "application/pdf",
+    "tamano_bytes": 25258,
+    "fecha_subida": "2026-02-18 21:47:03"
+  },
+  {
+    "id": 28,
+    "instancia_id": 3,
+    "nombre_archivo": "image.png",
+    "ruta_archivo": "cea_meeting_-_grado_en_ing._de_sistemas_de_telecomunicaci�n./fundamentos_de_programaci�n/1771452131527-image.png",
+    "tipo_mime": "image/png",
+    "tamano_bytes": 55845,
+    "fecha_subida": "2026-02-18 22:02:11"
+  },
+  {
+    "id": 29,
+    "instancia_id": 3,
+    "nombre_archivo": "9971003106 - Fundamentos de programaci�n.pdf",
+    "ruta_archivo": "cea_meeting_-_grado_en_ing._de_sistemas_de_telecomunicaci�n./fundamentos_de_programaci�n/1771452137663-9971003106 - Fundamentos de programaci�n.pdf",
+    "tipo_mime": "application/pdf",
+    "tamano_bytes": 24211,
+    "fecha_subida": "2026-02-18 22:02:17"
+  },
+  {
+    "id": 30,
+    "instancia_id": 4,
+    "nombre_archivo": "image.png",
+    "ruta_archivo": "cea_meeting_-_grado_en_ing._de_sistemas_de_telecomunicaci�n./�tica_y_eficacia_profesional/1771452229799-image.png",
+    "tipo_mime": "image/png",
+    "tamano_bytes": 55517,
+    "fecha_subida": "2026-02-18 22:03:49"
+  },
+  {
+    "id": 31,
+    "instancia_id": 4,
+    "nombre_archivo": "9971003108 - �tica y Eficacia profesional.pdf",
+    "ruta_archivo": "cea_meeting_-_grado_en_ing._de_sistemas_de_telecomunicaci�n./�tica_y_eficacia_profesional/1771452234943-9971003108 - �tica y Eficacia profesional.pdf",
+    "tipo_mime": "application/pdf",
+    "tamano_bytes": 24223,
+    "fecha_subida": "2026-02-18 22:03:54"
+  },
+  {
+    "id": 33,
+    "instancia_id": 5,
+    "nombre_archivo": "9971003105 - Bases de la inform�tica.pdf",
+    "ruta_archivo": "cea_meeting_-_grado_en_ing._de_sistemas_de_telecomunicaci�n./bases_de_la_inform�tica/1771452322281-9971003105 - Bases de la inform�tica.pdf",
+    "tipo_mime": "application/pdf",
+    "tamano_bytes": 25389,
+    "fecha_subida": "2026-02-18 22:05:22"
+  },
+  {
+    "id": 34,
+    "instancia_id": 6,
+    "nombre_archivo": "image.png",
+    "ruta_archivo": "cea_meeting_-_grado_en_ing._de_sistemas_de_telecomunicaci�n./proyecto_de_sistemas_de_telecomunicaci�n_ii/1771452520940-image.png",
+    "tipo_mime": "image/png",
+    "tamano_bytes": 55946,
+    "fecha_subida": "2026-02-18 22:08:40"
+  },
+  {
+    "id": 35,
+    "instancia_id": 6,
+    "nombre_archivo": "9971003308 - Proyecto de Sistemas de Telecomunicaci�n II.pdf",
+    "ruta_archivo": "cea_meeting_-_grado_en_ing._de_sistemas_de_telecomunicaci�n./proyecto_de_sistemas_de_telecomunicaci�n_ii/1771452542697-9971003308 - Proyecto de Sistemas de Telecomunicaci�n II.pdf",
+    "tipo_mime": "application/pdf",
+    "tamano_bytes": 25469,
+    "fecha_subida": "2026-02-18 22:09:02"
+  },
+  {
+    "id": 36,
+    "instancia_id": 7,
+    "nombre_archivo": "image.png",
+    "ruta_archivo": "cea_meeting_-_grado_en_ing._de_sistemas_de_telecomunicaci�n./redes_de_ordenadores/1771452747134-image.png",
+    "tipo_mime": "image/png",
+    "tamano_bytes": 55619,
+    "fecha_subida": "2026-02-18 22:12:27"
+  },
+  {
+    "id": 37,
+    "instancia_id": 7,
+    "nombre_archivo": "9971003302 - Redes de Ordenadores.pdf",
+    "ruta_archivo": "cea_meeting_-_grado_en_ing._de_sistemas_de_telecomunicaci�n./redes_de_ordenadores/1771452750368-9971003302 - Redes de Ordenadores.pdf",
+    "tipo_mime": "application/pdf",
+    "tamano_bytes": 25342,
+    "fecha_subida": "2026-02-18 22:12:30"
+  },
+  {
+    "id": 38,
+    "instancia_id": 8,
+    "nombre_archivo": "image.png",
+    "ruta_archivo": "cea_meeting_-_grado_en_ing._de_sistemas_de_telecomunicaci�n./gesti�n_de_redes_de_telecomunicaci�n/1771452959046-image.png",
+    "tipo_mime": "image/png",
+    "tamano_bytes": 54654,
+    "fecha_subida": "2026-02-18 22:15:59"
+  },
+  {
+    "id": 39,
+    "instancia_id": 8,
+    "nombre_archivo": "9971003402 - Gesti�n de redes de telecomunicaci�n.pdf",
+    "ruta_archivo": "cea_meeting_-_grado_en_ing._de_sistemas_de_telecomunicaci�n./gesti�n_de_redes_de_telecomunicaci�n/1771452962157-9971003402 - Gesti�n de redes de telecomunicaci�n.pdf",
+    "tipo_mime": "application/pdf",
+    "tamano_bytes": 24200,
+    "fecha_subida": "2026-02-18 22:16:02"
+  },
+  {
+    "id": 40,
+    "instancia_id": 9,
+    "nombre_archivo": "image.png",
+    "ruta_archivo": "cea_meeting_-_grado_en_ing._de_sistemas_de_telecomunicaci�n./proyecto_de_telecomunicaci�n_i/1771453086030-image.png",
+    "tipo_mime": "image/png",
+    "tamano_bytes": 77472,
+    "fecha_subida": "2026-02-18 22:18:06"
+  },
+  {
+    "id": 41,
+    "instancia_id": 9,
+    "nombre_archivo": "9971003208 - Proyecto de telecomunicaci�n I.pdf",
+    "ruta_archivo": "cea_meeting_-_grado_en_ing._de_sistemas_de_telecomunicaci�n./proyecto_de_telecomunicaci�n_i/1771453093660-9971003208 - Proyecto de telecomunicaci�n I.pdf",
+    "tipo_mime": "application/pdf",
+    "tamano_bytes": 24650,
+    "fecha_subida": "2026-02-18 22:18:13"
+  },
+  {
+    "id": 42,
+    "instancia_id": 10,
+    "nombre_archivo": "9971003301 - Teor�a de la comunicaci�n.pdf",
+    "ruta_archivo": "cea_meeting_-_grado_en_ing._de_sistemas_de_telecomunicaci�n./teor�a_de_la_comunicaci�n/1771453738954-9971003301 - Teor�a de la comunicaci�n.pdf",
+    "tipo_mime": "application/pdf",
+    "tamano_bytes": 24083,
+    "fecha_subida": "2026-02-18 22:28:58"
+  },
+  {
+    "id": 43,
+    "instancia_id": 11,
+    "nombre_archivo": "image.png",
+    "ruta_archivo": "cea_meeting_-_grado_en_ing._de_sistemas_de_telecomunicaci�n./electr�nica_de_comunicaciones_y_de_alta_frecuencia/1771453822679-image.png",
+    "tipo_mime": "image/png",
+    "tamano_bytes": 70543,
+    "fecha_subida": "2026-02-18 22:30:22"
+  },
+  {
+    "id": 44,
+    "instancia_id": 12,
+    "nombre_archivo": "9971003201 - Estad�stica y Optimizaci�n.pdf",
+    "ruta_archivo": "cea_meeting_-_grado_en_ing._de_sistemas_de_telecomunicaci�n./estad�stica_y_optimizaci�n/1771454365553-9971003201 - Estad�stica y Optimizaci�n.pdf",
+    "tipo_mime": "application/pdf",
+    "tamano_bytes": 24153,
+    "fecha_subida": "2026-02-18 22:39:25"
+  },
+  {
+    "id": 45,
+    "instancia_id": 16,
+    "nombre_archivo": "image.png",
+    "ruta_archivo": "cea_meeting_-_grado_en_ing._de_sistemas_de_telecomunicaci�n./comunicaciones_�pticas/1771455004695-image.png",
+    "tipo_mime": "image/png",
+    "tamano_bytes": 228379,
+    "fecha_subida": "2026-02-18 22:50:04"
+  },
+  {
+    "id": 46,
+    "instancia_id": 18,
+    "nombre_archivo": "image.png",
+    "ruta_archivo": "cea_meeting_-_grado_en_ing._de_sistemas_de_telecomunicaci�n./legislaci�n_en_telecomunicaciones/1771455242272-image.png",
+    "tipo_mime": "image/png",
+    "tamano_bytes": 67489,
+    "fecha_subida": "2026-02-18 22:54:02"
+  },
+  {
+    "id": 47,
+    "instancia_id": 2,
+    "nombre_archivo": "image.png",
+    "ruta_archivo": "cea_meeting_-_grado_en_ing._de_sistemas_de_telecomunicaci�n./�lgebra/1771457861312-image.png",
+    "tipo_mime": "image/png",
+    "tamano_bytes": 73185,
+    "fecha_subida": "2026-02-18 23:37:41"
+  },
+  {
+    "id": 48,
+    "instancia_id": 21,
+    "nombre_archivo": "5E, Plan de investigación y formación.docx",
+    "ruta_archivo": "doctorado/sesi�n_2_-_plan_de_investigaci�n_y_formaci�n_(5e)/1771467568008-5E, Plan de investigación y formación.docx",
+    "tipo_mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "tamano_bytes": 49543,
+    "fecha_subida": "2026-02-19 02:19:28"
+  },
+  {
+    "id": 49,
+    "instancia_id": 21,
+    "nombre_archivo": "5E, Plan de investigación y formación.docx",
+    "ruta_archivo": "doctorado/sesi�n_2_-_plan_de_investigaci�n_y_formaci�n_(5e)/1771467716752-5E, Plan de investigación y formación.docx",
+    "tipo_mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "tamano_bytes": 49543,
+    "fecha_subida": "2026-02-19 02:21:56"
+  }
+]

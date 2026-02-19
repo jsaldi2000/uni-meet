@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 const path = require('path');
+const db = require('../database');
 
 const DB_PATH = path.join(__dirname, '../../database/meetings_v2.db');
 const BACKUPS_DIR = path.join(__dirname, '../../backups');
@@ -32,7 +33,7 @@ router.get('/list', (req, res) => {
 });
 
 // POST /api/backup/create - Create a new backup
-router.post('/create', (req, res) => {
+router.post('/create', async (req, res) => {
     try {
         const now = new Date();
         const dd = String(now.getDate()).padStart(2, '0');
@@ -41,11 +42,13 @@ router.post('/create', (req, res) => {
         const hh = String(now.getHours()).padStart(2, '0');
         const min = String(now.getMinutes()).padStart(2, '0');
 
-        const dbName = path.basename(DB_PATH, '.db');
         const backupName = `${dbName}_backup${dd}${mm}${yy}_${hh}${min}.back`;
         const backupPath = path.join(BACKUPS_DIR, backupName);
 
-        fs.copyFileSync(DB_PATH, backupPath);
+        // Ensure all pending WAL transactions are flushed to the main file before backup
+        db.pragma('wal_checkpoint(FULL)');
+
+        await db.backup(backupPath);
 
         const stat = fs.statSync(backupPath);
         res.json({
