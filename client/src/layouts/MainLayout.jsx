@@ -15,7 +15,7 @@ const MainLayout = () => {
                 <div className={styles.brand}>
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                         <h1>UniMeet</h1>
-                        <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '-5px' }}>v1.2.1</span>
+                        <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '-5px' }}>v1.2.2</span>
                     </div>
                 </div>
                 <nav className={styles.nav}>

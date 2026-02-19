@@ -237,6 +237,13 @@ const SeguimientoView = () => {
             const allFieldsOrderedIds = orderedFields.map(f => f.id);
             const visibleFieldsIds = [...camposSeleccionados]; // Only the checked ones are visible
 
+            console.log('Sending PUT:', {
+                allFieldsOrderedIds,
+                visibleFieldsIds,
+                modos,
+                aliases
+            });
+
             await api.put(`/seguimiento/${id}`, {
                 nombre: data.nombre,
                 // Legacy: preserve sending something to "campo_ids" if needed, 
@@ -416,7 +423,7 @@ const SeguimientoView = () => {
                         >
                             <div className={styles.camposList}>
                                 {orderedFields.map(c => {
-                                    const selected = camposSeleccionados.includes(c.id);
+                                    const selected = camposSeleccionados.some(id => Number(id) === Number(c.id));
                                     const isPrincipal = camposPrincipales.includes(c.id);
                                     const canMark = camposPrincipales.length < 2 || isPrincipal;
                                     const modo = modos[c.id] || 'contenido';
