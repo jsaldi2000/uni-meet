@@ -6,11 +6,16 @@ const MeetingList = () => {
     const [meetings, setMeetings] = useState([]);
     const [templates, setTemplates] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [searchTerm, setSearchTerm] = useState(localStorage.getItem('meeting_filter') || '');
     const navigate = useNavigate();
 
     useEffect(() => {
         fetchData();
     }, []);
+
+    useEffect(() => {
+        localStorage.setItem('meeting_filter', searchTerm);
+    }, [searchTerm]);
 
     const fetchData = async () => {
         try {
@@ -72,8 +77,13 @@ const MeetingList = () => {
 
     if (loading) return <div>Loading...</div>;
 
+    // Filter templates by searchTerm
+    const filteredTemplates = templates.filter(t =>
+        t.titulo.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     // Group meetings by template_id
-    const groupedMeetings = templates.map(template => ({
+    const groupedMeetings = filteredTemplates.map(template => ({
         ...template,
         meetings: meetings.filter(m => m.plantilla_id === template.id)
     }));
@@ -83,14 +93,37 @@ const MeetingList = () => {
 
     return (
         <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-                <h1>Reuniones</h1>
-                <Link to="/templates/new" className="btn btn-primary">Crear Nueva Plantilla</Link>
+            <div className="page-header">
+                <div className="header-title">
+                    <h1>Reuniones</h1>
+                </div>
+
+                <div className="search-container">
+                    <input
+                        type="text"
+                        placeholder="Filtrar por nombre de plantilla..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                    {searchTerm && (
+                        <button
+                            onClick={() => setSearchTerm('')}
+                            className="search-clear-btn"
+                        >✕</button>
+                    )}
+                </div>
+
+                <div className="header-actions">
+                    <Link to="/templates/new" className="btn btn-primary" style={{ whiteSpace: 'nowrap', flexShrink: 0 }}>Crear Nueva Plantilla</Link>
+                </div>
             </div>
 
             {groupedMeetings.length === 0 && orphanMeetings.length === 0 ? (
                 <div className="card" style={{ textAlign: 'center', padding: '3rem' }}>
-                    <p>No se encontraron reuniones. Crea una plantilla para comenzar.</p>
+                    <p>No se encontraron reuniones que coincidan con el filtro.</p>
+                    {searchTerm && (
+                        <button onClick={() => setSearchTerm('')} className="btn btn-secondary">Limpiar Filtro</button>
+                    )}
                 </div>
             ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -182,10 +215,9 @@ const MeetingList = () => {
                         </div>
                     ))}
 
-                    {orphanMeetings.length > 0 && (
+                    {orphanMeetings.length > 0 && !searchTerm && (
                         <div className="card" style={{ padding: '1rem' }}>
                             <h3>Reuniones Huérfanas (Plantilla borrada)</h3>
-                            {/* Similar table for orphans... omitted for brevity but logic is same */}
                             <ul>
                                 {orphanMeetings.map(m => (
                                     <li key={m.id}><Link to={`/meetings/${m.id}`}>{m.titulo}</Link></li>

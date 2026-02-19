@@ -422,8 +422,11 @@ const SeguimientoView = () => {
         if (!searchTerm) return true;
         const term = searchTerm.toLowerCase();
         if (fila.titulo && fila.titulo.toLowerCase().includes(term)) return true;
-        for (const campoId of camposPrincipales) {
-            const val = fila.valores[campoId];
+
+        // Optional: Search in all visible fields instead of just principal ones
+        const visibleFields = orderedFields.filter(f => camposSeleccionados.includes(f.id));
+        for (const field of visibleFields) {
+            const val = fila.valores[field.id];
             if (val) {
                 const textVal = val.valor_texto ? val.valor_texto.toLowerCase() : '';
                 const numVal = val.valor_numero != null ? String(val.valor_numero) : '';
@@ -438,16 +441,15 @@ const SeguimientoView = () => {
 
     return (
         <div>
-            <div className={styles.header}>
-                <div className={styles.headerLeft}>
-                    <div>
-                        <h1>{data.nombre}</h1>
-                        <p className={styles.subtitle}>
-                            {data.plantilla_nombre} · {data.filas.length} instancia{data.filas.length !== 1 ? 's' : ''}
-                        </p>
-                    </div>
+            <div className="page-header">
+                <div className="header-title">
+                    <h1>{data.nombre}</h1>
+                    <p className={styles.subtitle}>
+                        {data.plantilla_nombre} · {data.filas.length} instancia{data.filas.length !== 1 ? 's' : ''}
+                    </p>
                 </div>
-                <div className={styles.headerRight}>
+
+                <div className="search-container">
                     <input
                         type="text"
                         placeholder="Buscar por título o campos principales..."
@@ -457,13 +459,24 @@ const SeguimientoView = () => {
                             setSearchTerm(val);
                             localStorage.setItem(`seguimiento_search_${id}`, val);
                         }}
-                        className={styles.searchInput}
                     />
+                    {searchTerm && (
+                        <button
+                            onClick={() => {
+                                setSearchTerm('');
+                                localStorage.setItem(`seguimiento_search_${id}`, '');
+                            }}
+                            className="search-clear-btn"
+                        >✕</button>
+                    )}
+                </div>
+
+                <div className="header-actions">
                     <button
                         className={styles.backBtn}
                         onClick={() => setShowSeguimiento(!showSeguimiento)}
                         title={showSeguimiento ? 'Ocultar Seguimiento' : 'Mostrar Seguimiento'}
-                        style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: showSeguimiento ? 'var(--primary-color)' : 'var(--text-muted)' }}
+                        style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: showSeguimiento ? 'var(--primary-color)' : 'var(--text-muted)', marginTop: 0 }}
                     >
                         {showSeguimiento ? (
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
@@ -472,7 +485,7 @@ const SeguimientoView = () => {
                         )}
                         Seguimiento
                     </button>
-                    <button className={styles.backBtn} onClick={() => navigate('/seguimiento')}>
+                    <button className={styles.backBtn} onClick={() => navigate('/seguimiento')} style={{ marginTop: 0 }}>
                         ← Volver
                     </button>
                     <button
@@ -486,10 +499,10 @@ const SeguimientoView = () => {
 
             {editMode && (
                 <div className={styles.editPanel}>
-                    <p className={styles.editLabel}>
-                        Campos a mostrar{' '}
+                    <p className={styles.subtitle}>
+                        Buscar por título o cualquier campo visible...
                         <span className={styles.editHint}>
-                            — ☑ incluir · ★ principal · modo de visualización · <b>arrastra para reordenar</b>
+                            — ☑ incluir · modo de visualización · <b>arrastra para reordenar</b>
                         </span>
                     </p>
                     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
@@ -502,7 +515,7 @@ const SeguimientoView = () => {
                                     const modo = modos[c.id] || 'contenido';
                                     return (
                                         <SortableItem key={c.id} id={c.id}
-                                            className={`${styles.campoItem} ${isPrincipal ? styles.campoItemPrincipal : ''}`}
+                                            className={styles.campoItem}
                                             onClick={() => toggleCampo(c.id)}
                                         >
                                             <input type="checkbox" checked={selected} readOnly style={{ flexShrink: 0 }} />
@@ -520,12 +533,6 @@ const SeguimientoView = () => {
                                                     <option value="rellenado">✓ Rellenado</option>
                                                 </select>
                                             )}
-                                            <button
-                                                type="button"
-                                                onClick={(e) => { e.stopPropagation(); togglePrincipal(c.id); }}
-                                                disabled={!canMark}
-                                                className={`${styles.starBtn} ${isPrincipal ? styles.starActive : ''}`}
-                                            >★</button>
                                         </SortableItem>
                                     );
                                 })}
@@ -553,7 +560,6 @@ const SeguimientoView = () => {
                                 {visibleOrderedFields.filter(c => c.id !== 'special_seguimiento').map(c => (
                                     <th
                                         key={c.id}
-                                        className={camposPrincipales.includes(c.id) ? styles.principalTh : ''}
                                     >
                                         <div className={styles.thContent}>
                                             <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -573,7 +579,6 @@ const SeguimientoView = () => {
                                                     onDoubleClick={() => setEditingAlias({ campoId: c.id, value: aliases[c.id] || c.nombre })}
                                                     style={{ cursor: 'text', marginLeft: modos[c.id] === 'contenido' ? '0.25rem' : '0' }}
                                                 >
-                                                    {camposPrincipales.includes(c.id) ? '⭐' : ''}
                                                     {editingAlias && editingAlias.campoId === c.id ? (
                                                         <input
                                                             autoFocus type="text" value={editingAlias.value}
@@ -604,7 +609,7 @@ const SeguimientoView = () => {
                                         <div className={styles.cellContent}>{fila.titulo || '—'}</div>
                                     </td>
                                     {visibleOrderedFields.filter(c => c.id !== 'special_seguimiento').map(c => (
-                                        <td key={c.id} className={camposPrincipales.includes(c.id) ? styles.principalTd : ''}>
+                                        <td key={c.id}>
                                             {getCellValue(fila.valores, { ...c, campo_id: c.id, modo_visualizacion: modos[c.id], tipo: c.tipo, opciones: c.opciones }, shouldExpand)}
                                         </td>
                                     ))}

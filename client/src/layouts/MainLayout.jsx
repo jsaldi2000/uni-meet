@@ -15,12 +15,12 @@ const MainLayout = () => {
                 <div className={styles.brand}>
                     <div className={styles.logo}>
                         <h1>UniMeet</h1>
-                        <span className={styles.version}>v1.3.1</span>
+                        <span className={styles.version}>v1.3.12</span>
                     </div>
                 </div>
                 <nav className={styles.nav}>
                     <Link to="/" className={`${styles.navItem} ${isActive('/') ? styles.active : ''}`}>
-                        Inicio
+                        Panel
                     </Link>
                     <Link to="/templates" className={`${styles.navItem} ${isActive('/templates') || location.pathname.startsWith('/templates/') ? styles.active : ''}`}>
                         Plantillas

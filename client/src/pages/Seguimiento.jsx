@@ -8,6 +8,8 @@ const Seguimiento = () => {
     const [plantillas, setPlantillas] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [viewMode, setViewMode] = useState(localStorage.getItem('seguimiento_view_mode') || 'grid');
+    const [searchTerm, setSearchTerm] = useState(localStorage.getItem('seguimiento_search_term') || '');
 
     const fetchData = async () => {
         setLoading(true);
@@ -27,34 +29,166 @@ const Seguimiento = () => {
 
     useEffect(() => { fetchData(); }, []);
 
-    const handleDelete = async (id, e) => {
-        e.stopPropagation();
-        if (!window.confirm('¿Eliminar esta lista de seguimiento?')) return;
-        await api.delete(`/seguimiento/${id}`);
-        fetchData();
+    useEffect(() => {
+        localStorage.setItem('seguimiento_view_mode', viewMode);
+    }, [viewMode]);
+
+    useEffect(() => {
+        localStorage.setItem('seguimiento_search_term', searchTerm);
+    }, [searchTerm]);
+
+    const [hiddenColumns, setHiddenColumns] = useState(() => {
+        const saved = localStorage.getItem('seguimiento_hidden_columns');
+        return saved ? JSON.parse(saved) : [];
+    });
+    const [showColumnToggle, setShowColumnToggle] = useState(false);
+
+    useEffect(() => {
+        localStorage.setItem('seguimiento_hidden_columns', JSON.stringify(hiddenColumns));
+    }, [hiddenColumns]);
+
+    const isVisible = (id) => !hiddenColumns.includes(id);
+    const toggleColumn = (id) => {
+        setHiddenColumns(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
     };
 
-    if (loading) return <div>Cargando...</div>;
+    const handleDelete = async (id, e) => {
+        e.stopPropagation();
+        if (!window.confirm('¿Estás seguro de que deseas eliminar esta lista de seguimiento?')) return;
+        try {
+            await api.delete(`/seguimiento/${id}`);
+            setListas(listas.filter(l => l.id !== id));
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    const filteredListas = listas.filter(l =>
+        l.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     return (
         <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-                <div>
-                    <h1 style={{ marginBottom: '0.25rem' }}>Seguimiento</h1>
-                    <p style={{ color: 'var(--text-muted)', margin: 0 }}>Vistas cruzadas de datos de reuniones por plantilla.</p>
+            <div className="page-header">
+                <div className="header-title">
+                    <h1>Seguimiento</h1>
+                    <p>Vistas cruzadas de datos de reuniones por plantilla.</p>
                 </div>
-                <button className="btn btn-primary" onClick={() => setShowModal(true)}>
-                    + Nueva Lista
-                </button>
+
+                <div className="search-container">
+                    <input
+                        type="text"
+                        placeholder="Buscar lista de seguimiento..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                    {searchTerm && (
+                        <button
+                            onClick={() => setSearchTerm('')}
+                            className="search-clear-btn"
+                        >✕</button>
+                    )}
+                </div>
+
+                <div className="header-actions">
+                    <div style={{ position: 'relative' }}>
+                        <button
+                            className="btn btn-secondary"
+                            onClick={() => setShowColumnToggle(!showColumnToggle)}
+                            style={{ padding: '0.45rem 0.75rem', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+                        >
+                            ⚙️ Columnas
+                        </button>
+                        {showColumnToggle && (
+                            <div style={{
+                                position: 'absolute', top: '100%', right: 0, marginTop: '0.5rem',
+                                background: '#fff', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)',
+                                boxShadow: '0 4px 12px rgba(0,0,0,0.1)', padding: '0.75rem', zIndex: 10,
+                                minWidth: '150px'
+                            }}>
+                                <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '0.9rem' }}>
+                                    <input
+                                        type="checkbox"
+                                        checked={isVisible('plantilla')}
+                                        onChange={() => toggleColumn('plantilla')}
+                                    />
+                                    Plantilla
+                                </label>
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="segmented-control">
+                        <button
+                            onClick={() => setViewMode('grid')}
+                            className={viewMode === 'grid' ? 'active' : ''}
+                            title="Vista Mosaico (Cuadrícula)"
+                        >
+                            🔲
+                        </button>
+                        <button
+                            onClick={() => setViewMode('list')}
+                            className={viewMode === 'list' ? 'active' : ''}
+                            title="Vista Listado"
+                        >
+                            ≡
+                        </button>
+                    </div>
+
+                    <button className="btn btn-primary" onClick={() => setShowModal(true)} style={{ whiteSpace: 'nowrap', flexShrink: 0 }}>
+                        + Nueva Lista
+                    </button>
+                </div>
             </div>
 
-            {listas.length === 0 ? (
+            {loading ? (
+                <div style={{ textAlign: 'center', padding: '3rem' }}>Cargando...</div>
+            ) : filteredListas.length === 0 ? (
                 <div className="card" style={{ textAlign: 'center', padding: '3rem' }}>
-                    <p>No hay listas de seguimiento. ¡Crea la primera!</p>
+                    <p>{searchTerm ? 'No se encontraron listas que coincidan con la búsqueda.' : 'No hay listas de seguimiento. ¡Crea la primera!'}</p>
+                    {searchTerm && <button className="btn btn-secondary" onClick={() => setSearchTerm('')}>Limpiar búsqueda</button>}
+                </div>
+            ) : viewMode === 'list' ? (
+                <div className="card" style={{ padding: 0, overflowX: 'auto' }}>
+                    <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+                        <thead>
+                            <tr style={{ backgroundColor: '#f1f3f5', borderBottom: '1px solid var(--border-color)' }}>
+                                <th style={{ padding: '1rem' }}>Nombre de la Lista</th>
+                                {isVisible('plantilla') && <th style={{ padding: '1rem' }}>Plantilla</th>}
+                                <th style={{ padding: '1rem', textAlign: 'right' }}>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {filteredListas.map(lista => (
+                                <tr
+                                    key={lista.id}
+                                    style={{ borderBottom: '1px solid #f1f3f5', cursor: 'pointer' }}
+                                    onClick={() => navigate(`/seguimiento/${lista.id}`)}
+                                    className="list-row-hover"
+                                >
+                                    <td style={{ padding: '1rem', fontWeight: 500, color: 'var(--primary-color)' }}>
+                                        {lista.nombre}
+                                    </td>
+                                    {isVisible('plantilla') && (
+                                        <td style={{ padding: '1rem', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+                                            {lista.plantilla_nombre}
+                                        </td>
+                                    )}
+                                    <td style={{ padding: '1rem', textAlign: 'right' }}>
+                                        <button
+                                            className="btn btn-secondary"
+                                            style={{ padding: '0.25rem 0.5rem', borderColor: 'var(--danger-color)', color: 'var(--danger-color)', fontSize: '0.8rem' }}
+                                            onClick={(e) => handleDelete(lista.id, e)}
+                                        >Eliminar</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             ) : (
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
-                    {listas.map(lista => (
+                    {filteredListas.map(lista => (
                         <div
                             key={lista.id}
                             className="card"
@@ -70,12 +204,9 @@ const Seguimiento = () => {
                                     title="Eliminar"
                                 >×</button>
                             </div>
-                            <p style={{ color: 'var(--text-muted)', margin: '0.25rem 0 0', fontSize: '0.9rem' }}>
-                                📋 {lista.plantilla_nombre}
-                            </p>
-                            {lista.campos_principales && lista.campos_principales.length > 0 && (
-                                <p style={{ color: 'var(--text-muted)', margin: '0.25rem 0 0', fontSize: '0.85rem' }}>
-                                    ⭐ {lista.campos_principales.join(' · ')}
+                            {isVisible('plantilla') && (
+                                <p style={{ color: 'var(--text-muted)', margin: '0.25rem 0 0', fontSize: '0.9rem' }}>
+                                    📋 {lista.plantilla_nombre}
                                 </p>
                             )}
                         </div>

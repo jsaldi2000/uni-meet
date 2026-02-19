@@ -51,19 +51,6 @@
     margin-top: 0.25rem;
 }
 
-.searchInput {
-    padding: 0.5rem 0.75rem;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    font-size: 0.9rem;
-    width: 250px;
-    height: 38px;
-    /* Match button height roughly */
-    box-sizing: border-box;
-    font-family: inherit;
-    margin-top: 0.25rem;
-    /* Align with backBtn margin-top */
-}
 
 .backBtn:hover {
     background: var(--hover-bg, #f3f4f6);
@@ -568,6 +555,7 @@
 .seguimientoTd {
     min-width: 450px;
     width: 450px;
+    vertical-align: top !important;
 }
 
 .aliasInput {

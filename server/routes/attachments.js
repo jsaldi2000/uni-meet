@@ -34,8 +34,8 @@ const storage = multer.diskStorage({
             const folderPath = path.join(
                 __dirname,
                 '../../attachments',
-                sanitizeName(instance.template_title),
-                sanitizeName(instance.instance_title)
+                sanitizeName(instance.template_title).normalize('NFC'),
+                sanitizeName(instance.instance_title).normalize('NFC')
             );
 
             fs.mkdirSync(folderPath, { recursive: true });
@@ -45,10 +45,10 @@ const storage = multer.diskStorage({
         }
     },
     filename: (req, file, cb) => {
-        // Keep original name but maybe prepend timestamp to avoid executing collisions? 
-        // Requirement says "metadata de archivos (nombre...)", implies logic for display.
-        // We'll keep original name for simplicity but adding timestamp to be safe.
-        cb(null, `${Date.now()}-${file.originalname}`);
+        // Fix encoding: multer/busboy on Windows often misinterprets UTF-8 as Latin1
+        // Then normalize to NFC (Windows standard)
+        const originalName = Buffer.from(file.originalname, 'latin1').toString('utf8').normalize('NFC');
+        cb(null, `${Date.now()}-${originalName}`);
     }
 });
 
@@ -64,12 +64,15 @@ router.post('/', upload.single('archivo'), (req, res) => {
     const { instancia_id } = req.body;
 
     try {
+        // Fix encoding for DB record as well and normalize
+        const originalName = Buffer.from(file.originalname, 'latin1').toString('utf8').normalize('NFC');
+
         const result = db.prepare(`
             INSERT INTO Adjunto (instancia_id, nombre_archivo, ruta_archivo, tipo_mime, tamano_bytes)
             VALUES (?, ?, ?, ?, ?)
         `).run(
             instancia_id,
-            req.file.originalname,
+            originalName,
             path.relative(path.join(__dirname, '../../attachments'), req.file.path).replace(/\\/g, '/'), // Relative to attachments folder
             req.file.mimetype,
             req.file.size
