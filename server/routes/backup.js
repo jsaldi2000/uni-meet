@@ -42,7 +42,7 @@ router.post('/create', async (req, res) => {
         const hh = String(now.getHours()).padStart(2, '0');
         const min = String(now.getMinutes()).padStart(2, '0');
 
-        const backupName = `${dbName}_backup${dd}${mm}${yy}_${hh}${min}.back`;
+        const backupName = `meetings_v2_backup${dd}${mm}${yy}_${hh}${min}.back`;
         const backupPath = path.join(BACKUPS_DIR, backupName);
 
         // Ensure all pending WAL transactions are flushed to the main file before backup
