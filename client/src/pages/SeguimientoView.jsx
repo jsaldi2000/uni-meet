@@ -61,8 +61,23 @@ const SeguimientoView = () => {
     );
 
     useEffect(() => {
-        setLocalModos(modos);
-    }, [modos]);
+        const savedSearch = localStorage.getItem(`seguimiento_search_${id}`);
+        if (savedSearch) setSearchTerm(savedSearch);
+    }, [id]);
+
+    useEffect(() => {
+        // Load from localStorage if available, merge with default modes
+        const savedModes = JSON.parse(localStorage.getItem(`seguimiento_modes_${id}`) || '{}');
+        setLocalModos({ ...modos, ...savedModes });
+    }, [modos, id]);
+
+    const updateLocalMode = (campoId, newMode) => {
+        setLocalModos(prev => {
+            const next = { ...prev, [campoId]: newMode };
+            localStorage.setItem(`seguimiento_modes_${id}`, JSON.stringify(next));
+            return next;
+        });
+    };
 
     const fetchData = async () => {
         setLoading(true);
@@ -388,7 +403,11 @@ const SeguimientoView = () => {
                         type="text"
                         placeholder="Buscar por título o campos principales..."
                         value={searchTerm}
-                        onChange={e => setSearchTerm(e.target.value)}
+                        onChange={e => {
+                            const val = e.target.value;
+                            setSearchTerm(val);
+                            localStorage.setItem(`seguimiento_search_${id}`, val);
+                        }}
                         className={styles.searchInput}
                     />
                     <button className={styles.backBtn} onClick={() => navigate('/seguimiento')}>
@@ -494,10 +513,7 @@ const SeguimientoView = () => {
                                                 {modos[c.id] === 'contenido' && (
                                                     <button
                                                         className={styles.toggleModeBtn}
-                                                        onClick={() => setLocalModos(prev => ({
-                                                            ...prev,
-                                                            [c.id]: prev[c.id] === 'rellenado' ? 'contenido' : 'rellenado'
-                                                        }))}
+                                                        onClick={() => updateLocalMode(c.id, localModos[c.id] === 'rellenado' ? 'contenido' : 'rellenado')}
                                                         title={localModos[c.id] === 'rellenado' ? "Cambiar a vista contenido" : "Cambiar a vista check"}
                                                     >
                                                         {localModos[c.id] === 'rellenado' ? (
