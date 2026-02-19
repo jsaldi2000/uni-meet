@@ -455,14 +455,19 @@
 
 .contentCompleted {
     display: -webkit-box;
-    -webkit-line-clamping: 1;
-    /* Non-standard but used in older WebKit */
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     line-clamp: 1;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: -webkit-box;
     max-width: 100%;
+}
+
+/* Force all children to be inline for robust clamping */
+.contentCompleted :global(*) {
+    display: inline !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 .inlineEntryContent :global(.ql-editor) {
@@ -478,7 +483,14 @@
 .inlineEntryContent :global(ul),
 .inlineEntryContent :global(ol) {
     margin: 0.25rem 0;
-    padding-left: 1.25rem;
+    padding-left: 0.75rem;
+    /* Reduced from 1.25rem for a more compact look */
+}
+
+/* Ensure the editor also has compact indentation */
+.inlineEntryContent :global(.ql-editor ul),
+.inlineEntryContent :global(.ql-editor ol) {
+    padding-left: 0.75rem !important;
 }
 
 .inlineEntryMeta {
