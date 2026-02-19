@@ -454,11 +454,15 @@
 }
 
 .contentCompleted {
-    white-space: nowrap;
+    display: -webkit-box;
+    -webkit-line-clamping: 1;
+    /* Non-standard but used in older WebKit */
+    -webkit-box-orient: vertical;
+    line-clamp: 1;
     overflow: hidden;
     text-overflow: ellipsis;
+    display: -webkit-box;
     max-width: 100%;
-    display: block;
 }
 
 .inlineEntryContent :global(.ql-editor) {
