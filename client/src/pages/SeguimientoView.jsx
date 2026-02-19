@@ -225,7 +225,10 @@ const SeguimientoView = () => {
         // Auto-save if not in main edit mode
         if (!editMode) {
             try {
-                const allIds = [...new Set([...camposSeleccionados, ...camposPrincipales])];
+                // Filter out special field ID which is a string and non-persistent
+                const allIds = [...new Set([...camposSeleccionados, ...camposPrincipales])]
+                    .filter(id => id !== 'special_seguimiento');
+
                 // Prepare aliases for save
                 const nextAliases = { ...aliases };
                 if (newAlias) nextAliases[campoId] = newAlias;
@@ -264,8 +267,13 @@ const SeguimientoView = () => {
     const handleSave = async () => {
         setSaving(true);
         try {
-            const allFieldsOrderedIds = orderedFields.map(f => f.id);
-            const visibleFieldsIds = [...camposSeleccionados];
+            // Filter out special field ID which is a string and non-persistent
+            const allFieldsOrderedIds = orderedFields
+                .map(f => f.id)
+                .filter(id => id !== 'special_seguimiento');
+
+            const visibleFieldsIds = [...camposSeleccionados]
+                .filter(id => id !== 'special_seguimiento');
 
             await api.put(`/seguimiento/${id}`, {
                 nombre: data.nombre,
@@ -338,6 +346,16 @@ const SeguimientoView = () => {
         }
     };
 
+    const formatDate = (val) => {
+        if (typeof val !== 'string') return val;
+        // Check for YYYY-MM-DD pattern
+        const match = val.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+        if (match) {
+            return `${match[3]}/${match[2]}/${match[1]}`;
+        }
+        return val;
+    };
+
     const getCellValue = (valores, campo, expanded = false) => {
         const val = valores[campo.campo_id];
         const modo = localModos[campo.campo_id] || campo.modo_visualizacion || 'contenido';
@@ -380,7 +398,7 @@ const SeguimientoView = () => {
                             <tbody>
                                 {rows.map((row, rIdx) => (
                                     <tr key={rIdx}>
-                                        {cols.map((col, cIdx) => <td key={cIdx}>{row[col.nombre]}</td>)}
+                                        {cols.map((col, cIdx) => <td key={cIdx}>{formatDate(row[col.nombre])}</td>)}
                                     </tr>
                                 ))}
                             </tbody>
@@ -394,7 +412,7 @@ const SeguimientoView = () => {
             return <div className={contentClass} dangerouslySetInnerHTML={{ __html: text }} />;
         }
 
-        return <div className={contentClass}>{text}</div>;
+        return <div className={contentClass}>{formatDate(text)}</div>;
     };
 
     if (loading) return <div>Cargando...</div>;
