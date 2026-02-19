@@ -237,6 +237,15 @@
     /* Prevent overflow */
 }
 
+.cellContent p {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.cellContent p:last-child {
+    margin-bottom: 0;
+}
+
 .cellContentExpanded {
     max-height: none !important;
     overflow-y: visible !important;

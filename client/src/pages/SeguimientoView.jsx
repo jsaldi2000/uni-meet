@@ -278,6 +278,9 @@ const SeguimientoView = () => {
             });
             setEditMode(false);
             fetchData();
+        } catch (err) {
+            console.error("Error saving configuration:", err);
+            alert("Error al guardar la configuración.");
         } finally {
             setSaving(false);
         }
