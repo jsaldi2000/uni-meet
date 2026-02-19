@@ -105,10 +105,12 @@
 
 .camposList {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 0.5rem;
-    max-height: 200px;
+    max-height: 500px;
     overflow-y: auto;
+    padding-right: 0.5rem;
+    /* Space for scrollbar */
 }
 
 .campoItem {
@@ -119,8 +121,11 @@
     background: white;
     border: 1px solid #bfdbfe;
     border-radius: var(--radius-md);
-    padding: 0.3rem 0.6rem;
+    padding: 0.5rem 0.8rem;
+    /* Slightly more padding for touch targets */
     cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .tipo {
