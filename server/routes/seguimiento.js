@@ -111,16 +111,41 @@ router.post('/:id/entrada', (req, res) => {
 // PATCH /api/seguimiento/:id/entrada/:entradaId
 router.patch('/:id/entrada/:entradaId', (req, res) => {
     try {
-        const { realizado } = req.body;
-        const fechaRealizado = realizado ? new Date().toISOString() : null;
+        const { realizado, contenido } = req.body;
 
+        if (contenido !== undefined) {
+            db.prepare(`
+                UPDATE SeguimientoEntrada 
+                SET contenido = ?
+                WHERE id = ? AND lista_id = ?
+            `).run(contenido, req.params.entradaId, req.params.id);
+            return res.json({ success: true });
+        }
+
+        if (realizado !== undefined) {
+            const fechaRealizado = realizado ? new Date().toISOString() : null;
+            db.prepare(`
+                UPDATE SeguimientoEntrada 
+                SET realizado = ?, fecha_realizado = ? 
+                WHERE id = ? AND lista_id = ?
+            `).run(realizado ? 1 : 0, fechaRealizado, req.params.entradaId, req.params.id);
+            return res.json({ success: true, fecha_realizado: fechaRealizado });
+        }
+
+        res.status(400).json({ error: 'Faltan datos para actualizar' });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// DELETE /api/seguimiento/:id/entrada/:entradaId
+router.delete('/:id/entrada/:entradaId', (req, res) => {
+    try {
         db.prepare(`
-            UPDATE SeguimientoEntrada 
-            SET realizado = ?, fecha_realizado = ? 
+            DELETE FROM SeguimientoEntrada 
             WHERE id = ? AND lista_id = ?
-        `).run(realizado ? 1 : 0, fechaRealizado, req.params.entradaId, req.params.id);
-
-        res.json({ success: true, fecha_realizado: fechaRealizado });
+        `).run(req.params.entradaId, req.params.id);
+        res.json({ success: true });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

@@ -301,6 +301,32 @@ const SeguimientoView = () => {
         }
     };
 
+    const handleUpdateEntry = async (entradaId, instanciaId, contenido) => {
+        try {
+            await api.patch(`/seguimiento/${id}/entrada/${entradaId}`, { contenido });
+            setSeguimientoEntradas(prev => ({
+                ...prev,
+                [instanciaId]: prev[instanciaId].map(e =>
+                    e.id === entradaId ? { ...e, contenido } : e
+                )
+            }));
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    const handleDeleteEntry = async (entradaId, instanciaId) => {
+        try {
+            await api.delete(`/seguimiento/${id}/entrada/${entradaId}`);
+            setSeguimientoEntradas(prev => ({
+                ...prev,
+                [instanciaId]: prev[instanciaId].filter(e => e.id !== entradaId)
+            }));
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
     const getCellValue = (valores, campo, expanded = false) => {
         const val = valores[campo.campo_id];
         const modo = localModos[campo.campo_id] || campo.modo_visualizacion || 'contenido';
@@ -540,6 +566,8 @@ const SeguimientoView = () => {
                                                     entries={seguimientoEntradas[fila.id] || []}
                                                     onAddEntry={handleAddEntry}
                                                     onToggleComplete={handleToggleComplete}
+                                                    onUpdateEntry={handleUpdateEntry}
+                                                    onDeleteEntry={handleDeleteEntry}
                                                 />
                                             ) : (
                                                 getCellValue(fila.valores, { ...c, campo_id: c.id, modo_visualizacion: modos[c.id], tipo: c.tipo, opciones: c.opciones }, shouldExpand)
@@ -559,9 +587,11 @@ const SeguimientoView = () => {
     );
 };
 
-const SeguimientoInlineCell = ({ instanciaId, entries, onAddEntry, onToggleComplete }) => {
+const SeguimientoInlineCell = ({ instanciaId, entries, onAddEntry, onToggleComplete, onUpdateEntry, onDeleteEntry }) => {
     const [text, setText] = useState('');
     const [saving, setSaving] = useState(false);
+    const [editingId, setEditingId] = useState(null);
+    const [editValue, setEditValue] = useState('');
 
     const handleSend = async () => {
         const cleanText = text.replace(/<p><br><\/p>/g, '').trim();
@@ -572,15 +602,41 @@ const SeguimientoInlineCell = ({ instanciaId, entries, onAddEntry, onToggleCompl
         setSaving(false);
     };
 
+    const handleStartEdit = (e) => {
+        setEditingId(e.id);
+        setEditValue(e.contenido);
+    };
+
+    const handleSaveEdit = async () => {
+        await onUpdateEntry(editingId, instanciaId, editValue);
+        setEditingId(null);
+        setEditValue('');
+    };
+
+    const handleCancelEdit = () => {
+        setEditingId(null);
+        setEditValue('');
+    };
+
+    const handleDelete = async (entryId) => {
+        if (window.confirm('¿Estás seguro de que deseas eliminar este comentario?')) {
+            await onDeleteEntry(entryId, instanciaId);
+        }
+    };
+
     const modules = {
         toolbar: [
             ['bold', 'italic', 'underline'],
             [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+            [{ 'color': [] }],
             ['clean']
         ],
     };
 
-    const formats = ['bold', 'italic', 'underline', 'list', 'bullet'];
+    // Explicitly allow red in the color palette if needed, 
+    // but the default 'color': [] usually includes it.
+    // However, to be sure we can specify a list if the default is too limited.
+    const formats = ['bold', 'italic', 'underline', 'list', 'bullet', 'color'];
 
     return (
         <div className={styles.inlineCell}>
@@ -588,20 +644,40 @@ const SeguimientoInlineCell = ({ instanciaId, entries, onAddEntry, onToggleCompl
                 {entries.map(e => (
                     <div key={e.id} className={`${styles.inlineEntry} ${e.realizado ? styles.entryCompleted : ''}`}>
                         <div className={styles.entryHeader}>
-                            <input
-                                type="checkbox"
-                                checked={!!e.realizado}
-                                onChange={(evt) => onToggleComplete(e.id, instanciaId, evt.target.checked)}
-                                className={styles.completeCheck}
-                            />
-                            <div className={styles.inlineEntryMeta}>
-                                {new Date(e.created_at).toLocaleDateString()}
-                                {e.realizado && e.fecha_realizado && (
-                                    <span className={styles.completionDate}> ✓ {new Date(e.fecha_realizado).toLocaleDateString()}</span>
-                                )}
+                            <div className={styles.entryHeaderLeft}>
+                                <input
+                                    type="checkbox"
+                                    checked={!!e.realizado}
+                                    onChange={(evt) => onToggleComplete(e.id, instanciaId, evt.target.checked)}
+                                    className={styles.completeCheck}
+                                />
+                                <div className={styles.inlineEntryMeta}>
+                                    {new Date(e.created_at).toLocaleDateString()}
+                                    {e.realizado && e.fecha_realizado && (
+                                        <span className={styles.completionDate}> ✓ {new Date(e.fecha_realizado).toLocaleDateString()}</span>
+                                    )}
+                                </div>
                             </div>
+                            <button className={styles.deleteEntryBtn} onClick={() => handleDelete(e.id)} title="Eliminar">×</button>
                         </div>
-                        <div className={styles.inlineEntryContent} dangerouslySetInnerHTML={{ __html: e.contenido }} />
+
+                        {editingId === e.id ? (
+                            <div className={styles.editEntryWrapper}>
+                                <ReactQuill theme="snow" value={editValue} onChange={setEditValue} modules={modules} formats={formats} />
+                                <div className={styles.editActions}>
+                                    <button className={styles.saveEditBtn} onClick={handleSaveEdit}>Guardar</button>
+                                    <button className={styles.cancelEditBtn} onClick={handleCancelEdit}>Cancelar</button>
+                                </div>
+                            </div>
+                        ) : (
+                            <div
+                                className={styles.inlineEntryContent}
+                                dangerouslySetInnerHTML={{ __html: e.contenido }}
+                                onClick={() => handleStartEdit(e)}
+                                title="Click para editar"
+                                style={{ cursor: 'pointer' }}
+                            />
+                        )}
                     </div>
                 ))}
             </div>

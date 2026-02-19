@@ -13,9 +13,9 @@ const MainLayout = () => {
         <div className={styles.layout}>
             <aside className={styles.sidebar}>
                 <div className={styles.brand}>
-                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <div className={styles.logo}>
                         <h1>UniMeet</h1>
-                        <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '-5px' }}>v1.2.4</span>
+                        <span className={styles.version}>v1.2.5</span>
                     </div>
                 </div>
                 <nav className={styles.nav}>
