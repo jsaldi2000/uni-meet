@@ -54,6 +54,14 @@ const SeguimientoView = () => {
     const [orderedFields, setOrderedFields] = useState([]); // List of full field objects in order
     const [searchTerm, setSearchTerm] = useState('');
     const [seguimientoEntradas, setSeguimientoEntradas] = useState({}); // { [instanciaId]: [entries] }
+    const [showSeguimiento, setShowSeguimiento] = useState(() => {
+        const saved = localStorage.getItem(`seguimiento_show_col_${id}`);
+        return saved !== null ? JSON.parse(saved) : true;
+    });
+
+    useEffect(() => {
+        localStorage.setItem(`seguimiento_show_col_${id}`, JSON.stringify(showSeguimiento));
+    }, [showSeguimiento, id]);
 
 
 
@@ -430,6 +438,19 @@ const SeguimientoView = () => {
                         }}
                         className={styles.searchInput}
                     />
+                    <button
+                        className={styles.backBtn}
+                        onClick={() => setShowSeguimiento(!showSeguimiento)}
+                        title={showSeguimiento ? 'Ocultar Seguimiento' : 'Mostrar Seguimiento'}
+                        style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: showSeguimiento ? 'var(--primary-color)' : 'var(--text-muted)' }}
+                    >
+                        {showSeguimiento ? (
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        ) : (
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+                        )}
+                        Seguimiento
+                    </button>
                     <button className={styles.backBtn} onClick={() => navigate('/seguimiento')}>
                         ← Volver
                     </button>
@@ -453,7 +474,7 @@ const SeguimientoView = () => {
                     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
                         <SortableContext items={orderedFields.map(f => f.id)} strategy={verticalListSortingStrategy}>
                             <div className={styles.camposList}>
-                                {orderedFields.map(c => {
+                                {orderedFields.filter(f => f.id !== 'special_seguimiento').map(c => {
                                     const selected = camposSeleccionados.some(id => Number(id) === Number(c.id));
                                     const isPrincipal = camposPrincipales.includes(c.id);
                                     const canMark = camposPrincipales.length < 2 || isPrincipal;
@@ -508,10 +529,10 @@ const SeguimientoView = () => {
                         <thead>
                             <tr>
                                 <th className={styles.tituloTh}>Título reunión</th>
-                                {visibleOrderedFields.map(c => (
+                                {visibleOrderedFields.filter(c => c.id !== 'special_seguimiento').map(c => (
                                     <th
                                         key={c.id}
-                                        className={`${camposPrincipales.includes(c.id) ? styles.principalTh : ''} ${c.id === 'special_seguimiento' ? styles.seguimientoTh : ''}`}
+                                        className={camposPrincipales.includes(c.id) ? styles.principalTh : ''}
                                     >
                                         <div className={styles.thContent}>
                                             <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -549,6 +570,9 @@ const SeguimientoView = () => {
                                         </div>
                                     </th>
                                 ))}
+                                {showSeguimiento && (
+                                    <th className={styles.seguimientoTh}>Seguimiento</th>
+                                )}
                                 <th className={styles.actionTh}>Ver</th>
                             </tr>
                         </thead>
@@ -558,22 +582,23 @@ const SeguimientoView = () => {
                                     <td className={styles.tituloTd}>
                                         <div className={styles.cellContent}>{fila.titulo || '—'}</div>
                                     </td>
-                                    {visibleOrderedFields.map(c => (
-                                        <td key={c.id} className={`${camposPrincipales.includes(c.id) ? styles.principalTd : ''} ${c.id === 'special_seguimiento' ? styles.seguimientoTd : ''}`}>
-                                            {c.id === 'special_seguimiento' ? (
-                                                <SeguimientoInlineCell
-                                                    instanciaId={fila.id}
-                                                    entries={seguimientoEntradas[fila.id] || []}
-                                                    onAddEntry={handleAddEntry}
-                                                    onToggleComplete={handleToggleComplete}
-                                                    onUpdateEntry={handleUpdateEntry}
-                                                    onDeleteEntry={handleDeleteEntry}
-                                                />
-                                            ) : (
-                                                getCellValue(fila.valores, { ...c, campo_id: c.id, modo_visualizacion: modos[c.id], tipo: c.tipo, opciones: c.opciones }, shouldExpand)
-                                            )}
+                                    {visibleOrderedFields.filter(c => c.id !== 'special_seguimiento').map(c => (
+                                        <td key={c.id} className={camposPrincipales.includes(c.id) ? styles.principalTd : ''}>
+                                            {getCellValue(fila.valores, { ...c, campo_id: c.id, modo_visualizacion: modos[c.id], tipo: c.tipo, opciones: c.opciones }, shouldExpand)}
                                         </td>
                                     ))}
+                                    {showSeguimiento && (
+                                        <td className={styles.seguimientoTd}>
+                                            <SeguimientoInlineCell
+                                                instanciaId={fila.id}
+                                                entries={seguimientoEntradas[fila.id] || []}
+                                                onAddEntry={handleAddEntry}
+                                                onToggleComplete={handleToggleComplete}
+                                                onUpdateEntry={handleUpdateEntry}
+                                                onDeleteEntry={handleDeleteEntry}
+                                            />
+                                        </td>
+                                    )}
                                     <td className={styles.actionTh}>
                                         <button className="btn btn-secondary" style={{ padding: '0.2rem 0.6rem', fontSize: '0.8rem' }} onClick={() => navigate(`/meetings/${fila.id}`)}>Ver</button>
                                     </td>
