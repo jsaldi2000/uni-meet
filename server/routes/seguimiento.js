@@ -97,12 +97,30 @@ router.post('/:id/entrada', (req, res) => {
         }
 
         const result = db.prepare(`
-            INSERT INTO SeguimientoEntrada (lista_id, instancia_id, contenido)
-            VALUES (?, ?, ?)
+            INSERT INTO SeguimientoEntrada (lista_id, instancia_id, contenido, realizado)
+            VALUES (?, ?, ?, 0)
         `).run(req.params.id, instancia_id, contenido);
 
 
         res.json({ id: result.lastInsertRowid, created_at: new Date().toISOString() });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// PATCH /api/seguimiento/:id/entrada/:entradaId
+router.patch('/:id/entrada/:entradaId', (req, res) => {
+    try {
+        const { realizado } = req.body;
+        const fechaRealizado = realizado ? new Date().toISOString() : null;
+
+        db.prepare(`
+            UPDATE SeguimientoEntrada 
+            SET realizado = ?, fecha_realizado = ? 
+            WHERE id = ? AND lista_id = ?
+        `).run(realizado ? 1 : 0, fechaRealizado, req.params.entradaId, req.params.id);
+
+        res.json({ success: true, fecha_realizado: fechaRealizado });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

@@ -5,6 +5,8 @@ import styles from './SeguimientoView.module.css';
 import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const SortableItem = ({ id, children, className, onClick }) => {
     const {
@@ -254,29 +256,14 @@ const SeguimientoView = () => {
     const handleSave = async () => {
         setSaving(true);
         try {
-            // allIds should now be the full ordered list of IDs, whether visible or not.
-            // But we must send what the backend expects.
-            // Backend now expects `all_fields_ordered` and `visible_fields` OR `campo_ids` as fallback.
-
             const allFieldsOrderedIds = orderedFields.map(f => f.id);
-            const visibleFieldsIds = [...camposSeleccionados]; // Only the checked ones are visible
-
-            console.log('Sending PUT:', {
-                allFieldsOrderedIds,
-                visibleFieldsIds,
-                modos,
-                aliases
-            });
+            const visibleFieldsIds = [...camposSeleccionados];
 
             await api.put(`/seguimiento/${id}`, {
                 nombre: data.nombre,
-                // Legacy: preserve sending something to "campo_ids" if needed, 
-                // but checking backend logic, it prioritizes "all_fields_ordered".
-                // We'll send both for safety if we didn't fully deprecate.
                 campo_ids: allFieldsOrderedIds,
                 all_fields_ordered: allFieldsOrderedIds,
                 visible_fields: visibleFieldsIds,
-
                 campos_principales: camposPrincipales,
                 modos_visualizacion: modos,
                 aliases: aliases
@@ -288,36 +275,35 @@ const SeguimientoView = () => {
         }
     };
 
-    const handleAddEntry = async (instanciaId, content) => {
+    const handleAddEntry = async (instanciaId, contenido) => {
         try {
-            const res = await api.post(`/seguimiento/${id}/entrada`, {
-                instancia_id: instanciaId,
-                contenido: content
-            });
-
-            const newEntry = {
-                id: res.data.id,
-                lista_id: id,
-                instancia_id: instanciaId,
-                contenido: content,
-                created_at: res.data.created_at
-            };
-
+            const res = await api.post(`/seguimiento/${id}/entrada`, { instancia_id: instanciaId, contenido });
             setSeguimientoEntradas(prev => ({
                 ...prev,
-                [instanciaId]: [newEntry, ...(prev[instanciaId] || [])]
+                [instanciaId]: [{ id: res.data.id, contenido, created_at: res.data.created_at, realizado: 0 }, ...(prev[instanciaId] || [])]
             }));
         } catch (err) {
             console.error(err);
         }
     };
 
-    // Render a cell based on the field's modo_visualizacion
+    const handleToggleComplete = async (entradaId, instanciaId, realizado) => {
+        try {
+            const res = await api.patch(`/seguimiento/${id}/entrada/${entradaId}`, { realizado });
+            setSeguimientoEntradas(prev => ({
+                ...prev,
+                [instanciaId]: prev[instanciaId].map(e =>
+                    e.id === entradaId ? { ...e, realizado: realizado ? 1 : 0, fecha_realizado: res.data.fecha_realizado } : e
+                )
+            }));
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
     const getCellValue = (valores, campo, expanded = false) => {
         const val = valores[campo.campo_id];
-        // Use localModos for display, fallback to campo.modo_visualizacion
         const modo = localModos[campo.campo_id] || campo.modo_visualizacion || 'contenido';
-
         const contentClass = expanded ? `${styles.cellContent} ${styles.cellContentExpanded}` : styles.cellContent;
 
         if (modo === 'rellenado') {
@@ -329,7 +315,6 @@ const SeguimientoView = () => {
             );
         }
 
-        // modo === 'contenido'
         if (!val) return <div className={contentClass} style={{ color: '#d1d5db' }}>—</div>;
 
         if (campo.tipo === 'booleano') {
@@ -347,31 +332,18 @@ const SeguimientoView = () => {
             try {
                 const rows = JSON.parse(text || '[]');
                 if (rows.length === 0) return <div className={contentClass} style={{ color: '#d1d5db' }}>—</div>;
-
-                const cols = typeof campo.opciones === 'string'
-                    ? JSON.parse(campo.opciones || '[]')
-                    : (campo.opciones || []);
-
+                const cols = typeof campo.opciones === 'string' ? JSON.parse(campo.opciones || '[]') : (campo.opciones || []);
                 if (cols.length === 0) return <div className={contentClass}>{rows.length} filas</div>;
-
                 return (
                     <div className={`${contentClass} ${styles.cellTable}`}>
                         <table>
                             <thead>
-                                <tr>
-                                    {cols.map((col, idx) => (
-                                        <th key={idx}>{col.nombre}</th>
-                                    ))}
-                                </tr>
+                                <tr>{cols.map((col, idx) => <th key={idx}>{col.nombre}</th>)}</tr>
                             </thead>
                             <tbody>
                                 {rows.map((row, rIdx) => (
                                     <tr key={rIdx}>
-                                        {cols.map((col, cIdx) => (
-                                            <td key={cIdx}>
-                                                {row[col.nombre]}
-                                            </td>
-                                        ))}
+                                        {cols.map((col, cIdx) => <td key={cIdx}>{row[col.nombre]}</td>)}
                                     </tr>
                                 ))}
                             </tbody>
@@ -391,25 +363,16 @@ const SeguimientoView = () => {
     if (loading) return <div>Cargando...</div>;
     if (!data) return <div>Lista no encontrada.</div>;
 
-    const principales = data.campos.filter(c => c.es_principal);
-    const resto = data.campos.filter(c => !c.es_principal);
-
     const filteredRows = data.filas.filter(fila => {
         if (!searchTerm) return true;
         const term = searchTerm.toLowerCase();
-
-        // Check title
         if (fila.titulo && fila.titulo.toLowerCase().includes(term)) return true;
-
-        // Check principal fields
         for (const campoId of camposPrincipales) {
             const val = fila.valores[campoId];
             if (val) {
                 const textVal = val.valor_texto ? val.valor_texto.toLowerCase() : '';
                 const numVal = val.valor_numero != null ? String(val.valor_numero) : '';
-
-                if (textVal && textVal.includes(term)) return true;
-                if (numVal && numVal.includes(term)) return true;
+                if (textVal.includes(term) || numVal.includes(term)) return true;
             }
         }
         return false;
@@ -418,10 +381,8 @@ const SeguimientoView = () => {
     const shouldExpand = searchTerm && filteredRows.length <= 3;
     const visibleOrderedFields = orderedFields.filter(f => camposSeleccionados.includes(f.id));
 
-
     return (
         <div>
-            {/* Header */}
             <div className={styles.header}>
                 <div className={styles.headerLeft}>
                     <div>
@@ -455,7 +416,6 @@ const SeguimientoView = () => {
                 </div>
             </div>
 
-            {/* Edit panel */}
             {editMode && (
                 <div className={styles.editPanel}>
                     <p className={styles.editLabel}>
@@ -464,15 +424,8 @@ const SeguimientoView = () => {
                             — ☑ incluir · ★ principal · modo de visualización · <b>arrastra para reordenar</b>
                         </span>
                     </p>
-                    <DndContext
-                        sensors={sensors}
-                        collisionDetection={closestCenter}
-                        onDragEnd={handleDragEnd}
-                    >
-                        <SortableContext
-                            items={orderedFields.map(f => f.id)}
-                            strategy={verticalListSortingStrategy}
-                        >
+                    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                        <SortableContext items={orderedFields.map(f => f.id)} strategy={verticalListSortingStrategy}>
                             <div className={styles.camposList}>
                                 {orderedFields.map(c => {
                                     const selected = camposSeleccionados.some(id => Number(id) === Number(c.id));
@@ -487,8 +440,6 @@ const SeguimientoView = () => {
                                             <input type="checkbox" checked={selected} readOnly style={{ flexShrink: 0 }} />
                                             <span style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={c.nombre}>{c.nombre}</span>
                                             <span className={styles.tipo}>{c.tipo}</span>
-
-                                            {/* Mode selector — only when selected */}
                                             {selected && (
                                                 <select
                                                     value={modo}
@@ -501,13 +452,11 @@ const SeguimientoView = () => {
                                                     <option value="rellenado">✓ Rellenado</option>
                                                 </select>
                                             )}
-
                                             <button
                                                 type="button"
                                                 onClick={(e) => { e.stopPropagation(); togglePrincipal(c.id); }}
                                                 disabled={!canMark}
                                                 className={`${styles.starBtn} ${isPrincipal ? styles.starActive : ''}`}
-                                                title={isPrincipal ? 'Quitar como principal' : 'Marcar como principal'}
                                             >★</button>
                                         </SortableItem>
                                     );
@@ -523,12 +472,6 @@ const SeguimientoView = () => {
                 </div>
             )}
 
-
-            {/* Header ... */}
-            {/* ... */}
-            {/* ... editPanel ... */}
-
-            {/* Table or empty state */}
             {visibleOrderedFields.length === 0 && !editMode ? (
                 <div className={styles.emptyState}>
                     <p>No hay campos seleccionados. Pulsa <strong>⚙️ Configurar campos</strong> para elegir qué mostrar.</p>
@@ -542,10 +485,7 @@ const SeguimientoView = () => {
                                 {visibleOrderedFields.map(c => (
                                     <th
                                         key={c.id}
-                                        className={`
-                                            ${camposPrincipales.includes(c.id) ? styles.principalTh : ''} 
-                                            ${c.id === 'special_seguimiento' ? styles.seguimientoTh : ''}
-                                        `}
+                                        className={`${camposPrincipales.includes(c.id) ? styles.principalTh : ''} ${c.id === 'special_seguimiento' ? styles.seguimientoTh : ''}`}
                                     >
                                         <div className={styles.thContent}>
                                             <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -553,52 +493,30 @@ const SeguimientoView = () => {
                                                     <button
                                                         className={styles.toggleModeBtn}
                                                         onClick={() => updateLocalMode(c.id, localModos[c.id] === 'rellenado' ? 'contenido' : 'rellenado')}
-                                                        title={localModos[c.id] === 'rellenado' ? "Cambiar a vista contenido" : "Cambiar a vista check"}
                                                     >
                                                         {localModos[c.id] === 'rellenado' ? (
-                                                            /* Eye Off / Check mode */
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                                                                <line x1="1" y1="1" x2="23" y2="23"></line>
-                                                            </svg>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
                                                         ) : (
-                                                            /* Eye Open / Content mode */
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8-11-8-11-8z"></path>
-                                                                <circle cx="12" cy="12" r="3"></circle>
-                                                            </svg>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                                                         )}
                                                     </button>
                                                 )}
-                                                <span style={{ marginLeft: modos[c.id] === 'contenido' ? '0.25rem' : '0' }}>
+                                                <span
+                                                    onDoubleClick={() => setEditingAlias({ campoId: c.id, value: aliases[c.id] || c.nombre })}
+                                                    style={{ cursor: 'text', marginLeft: modos[c.id] === 'contenido' ? '0.25rem' : '0' }}
+                                                >
                                                     {camposPrincipales.includes(c.id) ? '⭐' : ''}
                                                     {editingAlias && editingAlias.campoId === c.id ? (
                                                         <input
-                                                            autoFocus
-                                                            type="text"
-                                                            value={editingAlias.value}
+                                                            autoFocus type="text" value={editingAlias.value}
                                                             onChange={e => handleAliasChange(c.id, e.target.value)}
                                                             onBlur={() => handleAliasBlur(c.id)}
                                                             onKeyDown={e => handleAliasKeyDown(e, c.id)}
-                                                            style={{
-                                                                marginLeft: '0.25rem',
-                                                                padding: '0 0.2rem',
-                                                                border: '1px solid var(--primary-color)',
-                                                                borderRadius: '2px',
-                                                                fontSize: 'inherit',
-                                                                fontFamily: 'inherit',
-                                                                width: '100px'
-                                                            }}
+                                                            className={styles.aliasInput}
                                                             onClick={e => e.stopPropagation()}
                                                         />
                                                     ) : (
-                                                        <span
-                                                            onDoubleClick={() => setEditingAlias({ campoId: c.id, value: aliases[c.id] || c.nombre })}
-                                                            title="Doble clic para renombrar"
-                                                            style={{ cursor: 'text', marginLeft: '0.25rem' }}
-                                                        >
-                                                            {aliases[c.id] || c.nombre}
-                                                        </span>
+                                                        aliases[c.id] || c.nombre
                                                     )}
                                                 </span>
                                             </div>
@@ -609,24 +527,19 @@ const SeguimientoView = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {filteredRows.map((fila, i) => (
+                            {filteredRows.map(fila => (
                                 <tr key={fila.id}>
                                     <td className={styles.tituloTd}>
-                                        <div className={styles.cellContent} title={fila.titulo}>{fila.titulo || '—'}</div>
+                                        <div className={styles.cellContent}>{fila.titulo || '—'}</div>
                                     </td>
                                     {visibleOrderedFields.map(c => (
-                                        <td
-                                            key={c.id}
-                                            className={`
-                                                ${camposPrincipales.includes(c.id) ? styles.principalTd : ''} 
-                                                ${c.id === 'special_seguimiento' ? styles.seguimientoTd : ''}
-                                            `}
-                                        >
-                                            {c.tipo === 'special_seguimiento' ? (
+                                        <td key={c.id} className={`${camposPrincipales.includes(c.id) ? styles.principalTd : ''} ${c.id === 'special_seguimiento' ? styles.seguimientoTd : ''}`}>
+                                            {c.id === 'special_seguimiento' ? (
                                                 <SeguimientoInlineCell
                                                     instanciaId={fila.id}
                                                     entries={seguimientoEntradas[fila.id] || []}
                                                     onAddEntry={handleAddEntry}
+                                                    onToggleComplete={handleToggleComplete}
                                                 />
                                             ) : (
                                                 getCellValue(fila.valores, { ...c, campo_id: c.id, modo_visualizacion: modos[c.id], tipo: c.tipo, opciones: c.opciones }, shouldExpand)
@@ -634,23 +547,10 @@ const SeguimientoView = () => {
                                         </td>
                                     ))}
                                     <td className={styles.actionTh}>
-                                        <button
-                                            className="btn btn-secondary"
-                                            style={{ padding: '0.2rem 0.6rem', fontSize: '0.8rem' }}
-                                            onClick={() => navigate(`/meetings/${fila.id}`)}
-                                        >
-                                            Ver
-                                        </button>
+                                        <button className="btn btn-secondary" style={{ padding: '0.2rem 0.6rem', fontSize: '0.8rem' }} onClick={() => navigate(`/meetings/${fila.id}`)}>Ver</button>
                                     </td>
                                 </tr>
                             ))}
-                            {data.filas.length === 0 && (
-                                <tr>
-                                    <td colSpan={99} className={styles.emptyRow}>
-                                        No hay instancias de reunión para esta plantilla.
-                                    </td>
-                                </tr>
-                            )}
                         </tbody>
                     </table>
                 </div>
@@ -659,50 +559,58 @@ const SeguimientoView = () => {
     );
 };
 
-const SeguimientoInlineCell = ({ instanciaId, entries, onAddEntry }) => {
+const SeguimientoInlineCell = ({ instanciaId, entries, onAddEntry, onToggleComplete }) => {
     const [text, setText] = useState('');
     const [saving, setSaving] = useState(false);
 
-    const handleKeyDown = async (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            handleSend();
-        }
-    };
-
     const handleSend = async () => {
-        if (!text.trim()) return;
+        const cleanText = text.replace(/<p><br><\/p>/g, '').trim();
+        if (!cleanText || cleanText === '<p></p>') return;
         setSaving(true);
         await onAddEntry(instanciaId, text);
         setText('');
         setSaving(false);
     };
 
+    const modules = {
+        toolbar: [
+            ['bold', 'italic', 'underline'],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+            ['clean']
+        ],
+    };
+
+    const formats = ['bold', 'italic', 'underline', 'list', 'bullet'];
+
     return (
         <div className={styles.inlineCell}>
             <div className={styles.inlineHistory}>
                 {entries.map(e => (
-                    <div key={e.id} className={styles.inlineEntry}>
+                    <div key={e.id} className={`${styles.inlineEntry} ${e.realizado ? styles.entryCompleted : ''}`}>
+                        <div className={styles.entryHeader}>
+                            <input
+                                type="checkbox"
+                                checked={!!e.realizado}
+                                onChange={(evt) => onToggleComplete(e.id, instanciaId, evt.target.checked)}
+                                className={styles.completeCheck}
+                            />
+                            <div className={styles.inlineEntryMeta}>
+                                {new Date(e.created_at).toLocaleDateString()}
+                                {e.realizado && e.fecha_realizado && (
+                                    <span className={styles.completionDate}> ✓ {new Date(e.fecha_realizado).toLocaleDateString()}</span>
+                                )}
+                            </div>
+                        </div>
                         <div className={styles.inlineEntryContent} dangerouslySetInnerHTML={{ __html: e.contenido }} />
-                        <div className={styles.inlineEntryMeta}>{new Date(e.created_at).toLocaleDateString()}</div>
                     </div>
                 ))}
             </div>
             <div className={styles.inlineInputWrapper}>
-                <textarea
-                    className={styles.inlineInput}
-                    value={text}
-                    onChange={e => setText(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                    placeholder="Añadir..."
-                    rows={1}
-                />
-                <button
-                    className={styles.inlineSendBtn}
-                    onClick={handleSend}
-                    disabled={saving || !text.trim()}
-                >
-                    {saving ? '...' : 'OK'}
+                <div className={styles.quillWrapper}>
+                    <ReactQuill theme="snow" value={text} onChange={setText} modules={modules} formats={formats} placeholder="Añadir..." />
+                </div>
+                <button className={styles.inlineSendBtn} onClick={handleSend} disabled={saving || !text.trim() || text === '<p><br></p>'}>
+                    {saving ? '...' : 'Añadir'}
                 </button>
             </div>
         </div>
