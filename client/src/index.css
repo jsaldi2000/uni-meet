@@ -242,3 +242,41 @@ button {
 .segmented-control button:hover:not(.active) {
     background-color: rgba(0, 0, 0, 0.05);
 }
+
+/* Global Rich Text (Quill) Compacting */
+.ql-editor,
+.rich-text-content {
+    line-height: 1.25 !important;
+}
+
+.ql-editor {
+    padding: 0 !important;
+}
+
+.ql-editor p,
+.ql-editor ul,
+.ql-editor ol,
+.ql-editor li,
+.rich-text-content p,
+.rich-text-content ul,
+.rich-text-content ol,
+.rich-text-content li {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.ql-editor ul,
+.ql-editor ol,
+.rich-text-content ul,
+.rich-text-content ol {
+    padding-left: 1.25rem !important;
+    /* Standard but compact indentation */
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* Specific fix for gaps between bullet items and within li in Quill snow theme */
+.ql-snow .ql-editor li {
+    padding: 0 !important;
+    margin: 0 !important;
+}

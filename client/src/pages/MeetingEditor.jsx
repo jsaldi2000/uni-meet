@@ -247,7 +247,7 @@ const MeetingEditor = () => {
                             )}
 
                             {field.tipo === 'texto_largo' && (
-                                <div className={styles.quillWrapper}>
+                                <div className={`${styles.quillWrapper} rich-text-content`}>
                                     <ReactQuill
                                         theme="snow"
                                         value={val.valor_texto || ''}

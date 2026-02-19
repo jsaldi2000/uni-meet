@@ -432,7 +432,7 @@ const SeguimientoView = () => {
         }
 
         if (campo.tipo === 'texto_largo') {
-            return <div className={contentClass} dangerouslySetInnerHTML={{ __html: text }} />;
+            return <div className={`${contentClass} rich-text-content`} dangerouslySetInnerHTML={{ __html: text }} />;
         }
 
         return <div className={contentClass}>{formatDate(text)}</div>;

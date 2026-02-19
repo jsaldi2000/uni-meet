@@ -439,7 +439,7 @@
 .inlineEntryContent {
     color: #334155;
     word-break: break-word;
-    line-height: 1.5;
+    line-height: 1.3;
     padding: 0 !important;
     /* Reset ql-editor padding */
     min-height: 0 !important;
@@ -463,27 +463,10 @@
     padding: 0 !important;
 }
 
+/* Ensuring no local conflicts with global compacting */
 .inlineEntryContent :global(.ql-editor) {
     padding: 0;
     min-height: 0;
-}
-
-/* React Quill overrides for compact display */
-.inlineEntryContent :global(p) {
-    margin: 0;
-}
-
-.inlineEntryContent :global(ul),
-.inlineEntryContent :global(ol) {
-    margin: 0.25rem 0;
-    padding-left: 0.75rem;
-    /* Reduced from 1.25rem for a more compact look */
-}
-
-/* Ensure the editor also has compact indentation */
-.inlineEntryContent :global(.ql-editor ul),
-.inlineEntryContent :global(.ql-editor ol) {
-    padding-left: 0.75rem !important;
 }
 
 .inlineEntryMeta {

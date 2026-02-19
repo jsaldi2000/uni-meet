@@ -15,7 +15,7 @@ const MainLayout = () => {
                 <div className={styles.brand}>
                     <div className={styles.logo}>
                         <h1>UniMeet</h1>
-                        <span className={styles.version}>v1.4.1</span>
+                        <span className={styles.version}>v1.4.2</span>
                     </div>
                 </div>
                 <nav className={styles.nav}>
