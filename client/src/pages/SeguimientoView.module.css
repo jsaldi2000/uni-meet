@@ -383,3 +383,95 @@
     height: 14px;
     display: block;
 }
+
+/* Inline Seguimiento Cell */
+.inlineCell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.25rem 0;
+}
+
+.inlineHistory {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    /* Removed max-height truncation to show items full height vertically if possible */
+    padding-right: 4px;
+}
+
+.inlineEntry {
+    background: #f8fafc;
+    padding: 0.4rem;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+    font-size: 0.8rem;
+}
+
+.inlineEntryContent {
+    color: #334155;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.inlineEntryMeta {
+    font-size: 0.65rem;
+    color: #94a3b8;
+    margin-top: 0.2rem;
+    text-align: right;
+}
+
+.inlineInputWrapper {
+    display: flex;
+    gap: 0.25rem;
+    align-items: flex-end;
+}
+
+.inlineInput {
+    flex: 1;
+    padding: 0.4rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.8rem;
+    resize: none;
+    min-height: 32px;
+    line-height: 1.2;
+}
+
+.inlineInput:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.inlineSendBtn {
+    padding: 0.25rem 0.5rem;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+}
+
+.inlineSendBtn:disabled {
+    background: #e2e8f0;
+    cursor: default;
+}
+
+.seguimientoTh {
+    min-width: 400px;
+    /* Increase width for better readability */
+    flex: 1;
+    /* Encourage stretching */
+}
+
+.seguimientoTd {
+    min-width: 400px;
+    width: 400px;
+    /* Set a substantial base width */
+}

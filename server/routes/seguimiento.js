@@ -68,7 +68,41 @@ router.get('/:id', (req, res) => {
             return { ...instancia, valores };
         });
 
-        res.json({ ...lista, campos, filas });
+        // Fetch Seguimiento entries for this list
+        const entradas = db.prepare(`
+            SELECT * FROM SeguimientoEntrada WHERE lista_id = ? ORDER BY created_at DESC
+        `).all(req.params.id);
+
+        // Map entries by instancia_id for easier frontend consumption
+        // We'll return an object where key is instancia_id and value is array of entries (or just latest?)
+        // Let's return the raw list or a grouped map. A map is cleaner.
+        const entradasMap = {};
+        entradas.forEach(e => {
+            if (!entradasMap[e.instancia_id]) entradasMap[e.instancia_id] = [];
+            entradasMap[e.instancia_id].push(e);
+        });
+
+        res.json({ ...lista, campos, filas, seguimiento_entradas: entradasMap });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// POST /api/seguimiento/:id/entrada
+router.post('/:id/entrada', (req, res) => {
+    try {
+        const { instancia_id, contenido } = req.body;
+        if (!instancia_id || !contenido) {
+            return res.status(400).json({ error: 'Faltan datos' });
+        }
+
+        const result = db.prepare(`
+            INSERT INTO SeguimientoEntrada (lista_id, instancia_id, contenido)
+            VALUES (?, ?, ?)
+        `).run(req.params.id, instancia_id, contenido);
+
+
+        res.json({ id: result.lastInsertRowid, created_at: new Date().toISOString() });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

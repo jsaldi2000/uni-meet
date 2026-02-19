@@ -51,6 +51,8 @@ const SeguimientoView = () => {
     const [saving, setSaving] = useState(false);
     const [orderedFields, setOrderedFields] = useState([]); // List of full field objects in order
     const [searchTerm, setSearchTerm] = useState('');
+    const [seguimientoEntradas, setSeguimientoEntradas] = useState({}); // { [instanciaId]: [entries] }
+
 
 
     const sensors = useSensors(
@@ -110,6 +112,7 @@ const SeguimientoView = () => {
             });
             setModos(modesMap);
             setAliases(aliasMap);
+            setSeguimientoEntradas(res.data.seguimiento_entradas || {}); // Store entries map
         } catch (err) {
             console.error(err);
         } finally {
@@ -146,9 +149,15 @@ const SeguimientoView = () => {
                 }
             });
 
+            // Check if special field is missing
+            if (!savedOrderIds.includes('special_seguimiento')) {
+                ordered.push({ id: 'special_seguimiento', nombre: 'Seguimiento', tipo: 'special_seguimiento' });
+            }
+
             setOrderedFields(ordered);
         } else {
-            setOrderedFields(templateFields);
+            // Default: add special field at the end
+            setOrderedFields([...templateFields, { id: 'special_seguimiento', nombre: 'Seguimiento', tipo: 'special_seguimiento' }]);
         }
     };
 
@@ -276,6 +285,30 @@ const SeguimientoView = () => {
             fetchData();
         } finally {
             setSaving(false);
+        }
+    };
+
+    const handleAddEntry = async (instanciaId, content) => {
+        try {
+            const res = await api.post(`/seguimiento/${id}/entrada`, {
+                instancia_id: instanciaId,
+                contenido: content
+            });
+
+            const newEntry = {
+                id: res.data.id,
+                lista_id: id,
+                instancia_id: instanciaId,
+                contenido: content,
+                created_at: res.data.created_at
+            };
+
+            setSeguimientoEntradas(prev => ({
+                ...prev,
+                [instanciaId]: [newEntry, ...(prev[instanciaId] || [])]
+            }));
+        } catch (err) {
+            console.error(err);
         }
     };
 
@@ -507,7 +540,13 @@ const SeguimientoView = () => {
                             <tr>
                                 <th className={styles.tituloTh}>Título reunión</th>
                                 {visibleOrderedFields.map(c => (
-                                    <th key={c.id} className={camposPrincipales.includes(c.id) ? styles.principalTh : ''}>
+                                    <th
+                                        key={c.id}
+                                        className={`
+                                            ${camposPrincipales.includes(c.id) ? styles.principalTh : ''} 
+                                            ${c.id === 'special_seguimiento' ? styles.seguimientoTh : ''}
+                                        `}
+                                    >
                                         <div className={styles.thContent}>
                                             <div style={{ display: 'flex', alignItems: 'center' }}>
                                                 {modos[c.id] === 'contenido' && (
@@ -525,7 +564,7 @@ const SeguimientoView = () => {
                                                         ) : (
                                                             /* Eye Open / Content mode */
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8-11-8-11-8z"></path>
                                                                 <circle cx="12" cy="12" r="3"></circle>
                                                             </svg>
                                                         )}
@@ -576,8 +615,22 @@ const SeguimientoView = () => {
                                         <div className={styles.cellContent} title={fila.titulo}>{fila.titulo || '—'}</div>
                                     </td>
                                     {visibleOrderedFields.map(c => (
-                                        <td key={c.id} className={camposPrincipales.includes(c.id) ? styles.principalTd : ''}>
-                                            {getCellValue(fila.valores, { ...c, campo_id: c.id, modo_visualizacion: modos[c.id], tipo: c.tipo, opciones: c.opciones }, shouldExpand)}
+                                        <td
+                                            key={c.id}
+                                            className={`
+                                                ${camposPrincipales.includes(c.id) ? styles.principalTd : ''} 
+                                                ${c.id === 'special_seguimiento' ? styles.seguimientoTd : ''}
+                                            `}
+                                        >
+                                            {c.tipo === 'special_seguimiento' ? (
+                                                <SeguimientoInlineCell
+                                                    instanciaId={fila.id}
+                                                    entries={seguimientoEntradas[fila.id] || []}
+                                                    onAddEntry={handleAddEntry}
+                                                />
+                                            ) : (
+                                                getCellValue(fila.valores, { ...c, campo_id: c.id, modo_visualizacion: modos[c.id], tipo: c.tipo, opciones: c.opciones }, shouldExpand)
+                                            )}
                                         </td>
                                     ))}
                                     <td className={styles.actionTh}>
@@ -602,6 +655,56 @@ const SeguimientoView = () => {
                     </table>
                 </div>
             )}
+        </div>
+    );
+};
+
+const SeguimientoInlineCell = ({ instanciaId, entries, onAddEntry }) => {
+    const [text, setText] = useState('');
+    const [saving, setSaving] = useState(false);
+
+    const handleKeyDown = async (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            handleSend();
+        }
+    };
+
+    const handleSend = async () => {
+        if (!text.trim()) return;
+        setSaving(true);
+        await onAddEntry(instanciaId, text);
+        setText('');
+        setSaving(false);
+    };
+
+    return (
+        <div className={styles.inlineCell}>
+            <div className={styles.inlineHistory}>
+                {entries.map(e => (
+                    <div key={e.id} className={styles.inlineEntry}>
+                        <div className={styles.inlineEntryContent} dangerouslySetInnerHTML={{ __html: e.contenido }} />
+                        <div className={styles.inlineEntryMeta}>{new Date(e.created_at).toLocaleDateString()}</div>
+                    </div>
+                ))}
+            </div>
+            <div className={styles.inlineInputWrapper}>
+                <textarea
+                    className={styles.inlineInput}
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Añadir..."
+                    rows={1}
+                />
+                <button
+                    className={styles.inlineSendBtn}
+                    onClick={handleSend}
+                    disabled={saving || !text.trim()}
+                >
+                    {saving ? '...' : 'OK'}
+                </button>
+            </div>
         </div>
     );
 };
