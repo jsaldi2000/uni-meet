@@ -60,6 +60,8 @@ const SeguimientoView = () => {
         const saved = localStorage.getItem(`seguimiento_show_col_${id}`);
         return saved !== null ? JSON.parse(saved) : true;
     });
+    const [exporting, setExporting] = useState(false);
+    const [showExportSuccess, setShowExportSuccess] = useState(false);
 
     useEffect(() => {
         localStorage.setItem(`seguimiento_show_col_${id}`, JSON.stringify(showSeguimiento));
@@ -267,6 +269,177 @@ const SeguimientoView = () => {
         }
     };
 
+    const handleExportToEmail = async () => {
+        setExporting(true);
+        try {
+            const visibleFields = orderedFields.filter(f => camposSeleccionados.includes(f.id) && f.id !== 'special_seguimiento');
+            const booleanFields = visibleFields.filter(f => f.tipo === 'booleano');
+
+            // Helper to render value (handling tables and empty states)
+            const renderCellContent = (val, field) => {
+                if (field.tipo === 'booleano') {
+                    return val?.valor_booleano ? '✅ Sí' : '❌ No';
+                }
+
+                const rawVal = val?.valor_texto || (val?.valor_numero != null ? String(val.valor_numero) : null);
+
+                if (!rawVal || rawVal.trim() === '' || rawVal === '—') {
+                    return '<span style="color: #94a3b8; font-style: italic;">Sin contenido</span>';
+                }
+
+                // Check if it's a JSON table (Plan de Mejora)
+                if (rawVal.startsWith('[') && rawVal.endsWith(']')) {
+                    try {
+                        const parsed = JSON.parse(rawVal);
+                        if (Array.isArray(parsed) && parsed.length > 0 && typeof parsed[0] === 'object') {
+                            const keys = Object.keys(parsed[0]);
+                            let tableHtml = `<table cellspacing="0" cellpadding="6" border="1" style="width: 100%; border-collapse: collapse; border: 1px solid #e2e8f0; font-size: 12px; margin-top: 10px; background: #ffffff;">`;
+                            tableHtml += `<thead style="background: #f8fafc;"><tr>`;
+                            keys.forEach(k => tableHtml += `<th style="text-align: left; border: 1px solid #e2e8f0; padding: 8px;">${k}</th>`);
+                            tableHtml += `</tr></thead><tbody>`;
+                            parsed.forEach(row => {
+                                tableHtml += `<tr>`;
+                                keys.forEach(k => tableHtml += `<td style="border: 1px solid #e2e8f0; padding: 8px; vertical-align: top;">${row[k] || ''}</td>`);
+                                tableHtml += `</tr>`;
+                            });
+                            tableHtml += `</tbody></table>`;
+                            return tableHtml;
+                        }
+                    } catch (e) { /* Not a valid JSON or not a table, fall back to text */ }
+                }
+
+                return rawVal;
+            };
+
+            // 1. Build HTML string for EMAIL (Wide layout)
+            let html = `
+                <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #1e293b; max-width: 1100px; margin: 0 auto; line-height: 1.5; background-color: #f1f5f9; padding: 25px; border-radius: 12px;">
+                    <div style="background-color: #ffffff; padding: 20px; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                        <h1 style="color: #2563eb; margin: 0 0 10px 0; font-size: 24px;">Seguimiento: ${data.nombre}</h1>
+                        <p style="color: #64748b; font-size: 14px; margin: 0;">Plantilla: ${data.plantilla_nombre} · Reporte interactivo generado el ${new Date().toLocaleString()}</p>
+                    </div>
+            `;
+
+            // 2. Global Notes (Always Visible)
+            if (globalEntradas && globalEntradas.length > 0) {
+                html += `
+                    <div style="background-color: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 20px; margin-bottom: 25px;">
+                        <h2 style="margin-top: 0; color: #1e40af; font-size: 18px; display: flex; align-items: center; gap: 10px;">
+                            📋 Notas Globales de la Lista
+                        </h2>
+                        <ul style="padding-left: 25px; margin: 10px 0 0 0; color: #1e3a8a;">
+                `;
+                globalEntradas.forEach(e => {
+                    const style = e.realizado ? 'text-decoration: line-through; color: #64748b; font-style: italic;' : '';
+                    html += `<li style="margin-bottom: 10px; ${style}">${e.contenido}</li>`;
+                });
+                html += `</ul></div>`;
+            }
+
+            // 3. Meeting Cards (Interactive)
+            html += `<h2 style="color: #334155; font-size: 18px; margin-bottom: 15px; padding-left: 5px;">Reuniones e Instancias</h2>`;
+
+            filteredRows.forEach(fila => {
+                // Determine icons for the summary bar
+                const booleanIconsHtml = booleanFields.map(f => {
+                    const val = fila.valores[f.id];
+                    const label = aliases[f.id] || f.nombre;
+                    return `<span style="padding: 2px 6px; background: #f1f5f9; border-radius: 4px; font-size: 11px; color: #475569; border: 1px solid #e2e8f0; display: inline-flex; align-items: center; gap: 4px;" title="${label}">
+                        ${val?.valor_booleano ? '✅' : '❌'} ${label}
+                    </span>`;
+                }).join(' ');
+
+                // Identify if there's a "Profesor" field to show in the summary
+                const profField = visibleFields.find(f => (aliases[f.id] || f.nombre).toLowerCase().includes('profesor'));
+                const profVal = profField ? (fila.valores[profField.id]?.valor_texto || '—') : null;
+
+                html += `
+                    <details style="margin-bottom: 15px; border-radius: 10px; background: #ffffff; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.05); overflow: hidden;">
+                        <summary style="padding: 15px 20px; cursor: pointer; display: flex; align-items: center; list-style: none; outline: none; transition: background 0.2s;">
+                            <div style="display: flex; align-items: center; width: 100%; justify-content: space-between; gap: 20px;">
+                                <div style="display: flex; align-items: center; gap: 15px;">
+                                    <span style="font-weight: 700; color: #0f172a; font-size: 16px;">${fila.titulo || 'Instancia'}</span>
+                                    ${profVal ? `<span style="color: #64748b; font-size: 13px; background: #f8fafc; padding: 2px 8px; border-radius: 12px; border: 1px solid #f1f5f9;">👤 ${profVal}</span>` : ''}
+                                </div>
+                                <div style="display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end;">
+                                    ${booleanIconsHtml}
+                                    <span style="color: #3b82f6; font-size: 12px; margin-left: 10px;">Ver detalles ▼</span>
+                                </div>
+                            </div>
+                        </summary>
+                        <div style="padding: 20px; border-top: 1px solid #f1f5f9; background-color: #fff;">
+                            
+                            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; margin-bottom: 25px;">
+                `;
+
+                // All fields in detailed view
+                visibleFields.forEach(f => {
+                    const val = fila.valores[f.id];
+                    const label = aliases[f.id] || f.nombre;
+                    const content = renderCellContent(val, f);
+                    const isFullWidth = content.includes('<table');
+
+                    html += `
+                        <div style="background: #f8fafc; padding: 12px; border-radius: 8px; border: 1px solid #f1f5f9; ${isFullWidth ? 'grid-column: 1 / -1;' : ''}">
+                            <div style="font-weight: bold; color: #475569; font-size: 12px; text-transform: uppercase; margin-bottom: 5px;">${label}</div>
+                            <div style="color: #1e293b; font-size: 14px;">${content}</div>
+                        </div>
+                    `;
+                });
+
+                html += `</div>`;
+
+                // Seguimiento section
+                if (showSeguimiento) {
+                    const entries = seguimientoEntradas[fila.id] || [];
+                    html += `
+                        <div style="border-top: 2px dashed #f1f5f9; padding-top: 20px;">
+                            <h3 style="margin: 0 0 15px 0; font-size: 15px; color: #334155; display: flex; align-items: center; gap: 8px;">
+                                📝 Notas de Seguimiento
+                            </h3>
+                    `;
+                    if (entries.length > 0) {
+                        html += `<div style="display: flex; flexDirection: column; gap: 10px;">`;
+                        entries.forEach(e => {
+                            const style = e.realizado ? 'text-decoration: line-through; color: #94a3b8; background-color: #f8fafc;' : 'background-color: #ffffff; border-left: 3px solid #3b82f6;';
+                            html += `
+                                <div style="padding: 12px; border: 1px solid #e2e8f0; border-radius: 6px; margin-bottom: 8px; ${style}">
+                                    <div style="font-size: 14px;">${e.contenido}</div>
+                                    <div style="font-size: 11px; color: #94a3b8; margin-top: 5px;">${new Date(e.created_at).toLocaleDateString()} ${new Date(e.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
+                                </div>
+                            `;
+                        });
+                        html += `</div>`;
+                    } else {
+                        html += `<p style="color: #94a3b8; font-style: italic; font-size: 13px;">Sin notas de seguimiento registradas.</p>`;
+                    }
+                    html += `</div>`;
+                }
+
+                html += `</div></details>`;
+            });
+
+            html += `</div>`;
+
+            // 4. Copy to Clipboard
+            const blob = new Blob([html], { type: 'text/html' });
+            const dataToCopy = [new ClipboardItem({
+                'text/html': blob,
+                'text/plain': new Blob([html.replace(/<[^>]*>/g, '')], { type: 'text/plain' })
+            })];
+
+            await navigator.clipboard.write(dataToCopy);
+
+            setShowExportSuccess(true);
+            setTimeout(() => setShowExportSuccess(false), 3000);
+        } catch (err) {
+            console.error("Export failed", err);
+            alert("Error al copiar al portapapeles.");
+        } finally {
+            setExporting(false);
+        }
+    };
+
     const handleSave = async () => {
         setSaving(true);
         try {
@@ -393,15 +566,15 @@ const SeguimientoView = () => {
             );
         }
 
-        if (!val) return <div className={contentClass} style={{ color: '#d1d5db' }}>—</div>;
-
         if (campo.tipo === 'booleano') {
             return (
                 <div className={styles.cellBoolean}>
-                    {val.valor_booleano ? '✅' : '❌'}
+                    {val?.valor_booleano ? '✅' : '❌'}
                 </div>
             );
         }
+
+        if (!val) return <div className={contentClass} style={{ color: '#d1d5db' }}>—</div>;
 
         const text = val.valor_texto || (val.valor_numero != null ? String(val.valor_numero) : null);
         if (!text) return <div className={contentClass} style={{ color: '#d1d5db' }}>—</div>;
@@ -495,6 +668,20 @@ const SeguimientoView = () => {
                 </div>
 
                 <div className="header-actions">
+                    <button
+                        className={styles.backBtn}
+                        onClick={handleExportToEmail}
+                        title="Copiar tabla para Email"
+                        disabled={exporting}
+                        style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: showExportSuccess ? 'var(--success-color)' : 'var(--text-muted)', marginTop: 0 }}
+                    >
+                        {showExportSuccess ? '¡Copiado!' : (
+                            <>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                Email
+                            </>
+                        )}
+                    </button>
                     <button
                         className={styles.backBtn}
                         onClick={() => setShowSeguimiento(!showSeguimiento)}
