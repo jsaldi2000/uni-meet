@@ -117,7 +117,12 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
     try {
         const { nombre, campo_ids, campos_principales, modos_visualizacion, aliases } = req.body;
-        console.log('PUT seguimiento body:', { nombre, aliases_keys: Object.keys(aliases || {}), campo_ids });
+        console.log('PUT seguimiento body:', {
+            nombre,
+            aliases_keys: Object.keys(aliases || {}),
+            campo_ids_count: campo_ids?.length,
+            visible_fields_count: req.body.visible_fields?.length
+        });
 
         db.prepare(`UPDATE SeguimientoLista SET nombre = ? WHERE id = ?`)
             .run(nombre, req.params.id);
@@ -125,37 +130,33 @@ router.put('/:id', (req, res) => {
         db.prepare('DELETE FROM SeguimientoCampo WHERE lista_id = ?').run(req.params.id);
 
 
-        const principalesSet = new Set(campos_principales || []);
+        // Helper to normalize IDs to strings for Set lookups to avoid type mismatches
+        const normalize = (arr) => new Set((arr || []).map(String));
+
+        const principalesSet = normalize(campos_principales);
         const modos = modos_visualizacion || {};
         const aliasMap = aliases || {};
-
-        // campo_ids should be the ordered list of ALL fields (or at least all known fields)
-        // We will respect the order in campo_ids for inserting
 
         if (campo_ids && campo_ids.length > 0) {
             const insertCampo = db.prepare(`
                 INSERT INTO SeguimientoCampo (lista_id, campo_id, orden, es_principal, visible, modo_visualizacion, alias) VALUES (?, ?, ?, ?, ?, ?, ?)
             `);
 
-            // "campo_ids" now represents the FULL ordered list from the frontend
-            // We assume the frontend sends everything in "campo_ids" in the desired order
-            // And potentially a separate "visible_ids" list to mark visibility, OR we infer it?
-            // Let's check the request body destructuring. 
-            // We need to add "visible_ids" to the destructuring at the top of the route if we want explicit visibility control separate from ordering.
-            // But wait, "campo_ids" was previously "selected fields". Now we need "all_fields_ordered" and "selected_fields".
-            // To maintain backward compatibility somewhat, let's look at how we call it from frontend.
-            // Plan said: accept `all_fields` and `visible_fields`.
-
             const { all_fields_ordered, visible_fields } = req.body;
 
-            // Fallback for older frontend version if any (though we update both)
+            // Fallback for older frontend version
             const fieldsToInsert = all_fields_ordered || campo_ids;
-            const visibleSet = new Set(visible_fields || campo_ids); // if new params not present, assume campo_ids are the visible ones
+
+            // If visible_fields is explicitly provided (even empty), use it. 
+            // Otherwise fallback to campo_ids (legacy behavior where everything sent was visible)
+            const visibleSource = visible_fields !== undefined ? visible_fields : campo_ids;
+            const visibleSet = normalize(visibleSource);
 
             fieldsToInsert.forEach((campoId, idx) => {
-                const isVisible = visibleSet.has(campoId) ? 1 : 0;
-                const isPrincipal = principalesSet.has(campoId) ? 1 : 0;
-                const aliasValue = aliasMap[campoId] || aliasMap[String(campoId)] || null;
+                const idStr = String(campoId);
+                const isVisible = visibleSet.has(idStr) ? 1 : 0;
+                const isPrincipal = principalesSet.has(idStr) ? 1 : 0;
+                const aliasValue = aliasMap[campoId] || aliasMap[idStr] || null;
 
                 insertCampo.run(req.params.id, campoId, idx, isPrincipal, isVisible, modos[campoId] || 'contenido', aliasValue);
             });
