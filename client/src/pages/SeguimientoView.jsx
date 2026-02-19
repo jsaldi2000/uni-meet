@@ -54,6 +54,8 @@ const SeguimientoView = () => {
     const [orderedFields, setOrderedFields] = useState([]); // List of full field objects in order
     const [searchTerm, setSearchTerm] = useState('');
     const [seguimientoEntradas, setSeguimientoEntradas] = useState({}); // { [instanciaId]: [entries] }
+    const [globalEntradas, setGlobalEntradas] = useState([]);
+    const [showGlobalNotes, setShowGlobalNotes] = useState(true);
     const [showSeguimiento, setShowSeguimiento] = useState(() => {
         const saved = localStorage.getItem(`seguimiento_show_col_${id}`);
         return saved !== null ? JSON.parse(saved) : true;
@@ -122,7 +124,8 @@ const SeguimientoView = () => {
             });
             setModos(modesMap);
             setAliases(aliasMap);
-            setSeguimientoEntradas(res.data.seguimiento_entradas || {}); // Store entries map
+            setSeguimientoEntradas(res.data.seguimiento_entradas || {});
+            setGlobalEntradas(res.data.global_entradas || []);
         } catch (err) {
             console.error(err);
         } finally {
@@ -297,10 +300,14 @@ const SeguimientoView = () => {
     const handleAddEntry = async (instanciaId, contenido) => {
         try {
             const res = await api.post(`/seguimiento/${id}/entrada`, { instancia_id: instanciaId, contenido });
-            setSeguimientoEntradas(prev => ({
-                ...prev,
-                [instanciaId]: [...(prev[instanciaId] || []), { id: res.data.id, contenido, created_at: res.data.created_at, realizado: 0 }]
-            }));
+            if (instanciaId) {
+                setSeguimientoEntradas(prev => ({
+                    ...prev,
+                    [instanciaId]: [...(prev[instanciaId] || []), { id: res.data.id, contenido, created_at: res.data.created_at, realizado: 0 }]
+                }));
+            } else {
+                setGlobalEntradas(prev => [...prev, { id: res.data.id, contenido, created_at: res.data.created_at, realizado: 0 }]);
+            }
         } catch (err) {
             console.error(err);
         }
@@ -309,12 +316,18 @@ const SeguimientoView = () => {
     const handleToggleComplete = async (entradaId, instanciaId, realizado) => {
         try {
             const res = await api.patch(`/seguimiento/${id}/entrada/${entradaId}`, { realizado });
-            setSeguimientoEntradas(prev => ({
-                ...prev,
-                [instanciaId]: prev[instanciaId].map(e =>
+            if (instanciaId) {
+                setSeguimientoEntradas(prev => ({
+                    ...prev,
+                    [instanciaId]: prev[instanciaId].map(e =>
+                        e.id === entradaId ? { ...e, realizado: realizado ? 1 : 0, fecha_realizado: res.data.fecha_realizado } : e
+                    )
+                }));
+            } else {
+                setGlobalEntradas(prev => prev.map(e =>
                     e.id === entradaId ? { ...e, realizado: realizado ? 1 : 0, fecha_realizado: res.data.fecha_realizado } : e
-                )
-            }));
+                ));
+            }
         } catch (err) {
             console.error(err);
         }
@@ -323,12 +336,18 @@ const SeguimientoView = () => {
     const handleUpdateEntry = async (entradaId, instanciaId, contenido) => {
         try {
             await api.patch(`/seguimiento/${id}/entrada/${entradaId}`, { contenido });
-            setSeguimientoEntradas(prev => ({
-                ...prev,
-                [instanciaId]: prev[instanciaId].map(e =>
+            if (instanciaId) {
+                setSeguimientoEntradas(prev => ({
+                    ...prev,
+                    [instanciaId]: prev[instanciaId].map(e =>
+                        e.id === entradaId ? { ...e, contenido } : e
+                    )
+                }));
+            } else {
+                setGlobalEntradas(prev => prev.map(e =>
                     e.id === entradaId ? { ...e, contenido } : e
-                )
-            }));
+                ));
+            }
         } catch (err) {
             console.error(err);
         }
@@ -337,10 +356,14 @@ const SeguimientoView = () => {
     const handleDeleteEntry = async (entradaId, instanciaId) => {
         try {
             await api.delete(`/seguimiento/${id}/entrada/${entradaId}`);
-            setSeguimientoEntradas(prev => ({
-                ...prev,
-                [instanciaId]: prev[instanciaId].filter(e => String(e.id) !== String(entradaId))
-            }));
+            if (instanciaId) {
+                setSeguimientoEntradas(prev => ({
+                    ...prev,
+                    [instanciaId]: prev[instanciaId].filter(e => String(e.id) !== String(entradaId))
+                }));
+            } else {
+                setGlobalEntradas(prev => prev.filter(e => String(e.id) !== String(entradaId)));
+            }
         } catch (err) {
             console.error(err);
         }
@@ -452,7 +475,7 @@ const SeguimientoView = () => {
                 <div className="search-container">
                     <input
                         type="text"
-                        placeholder="Buscar por título o campos principales..."
+                        placeholder="Buscar por título o contenido..."
                         value={searchTerm}
                         onChange={e => {
                             const val = e.target.value;
@@ -510,8 +533,6 @@ const SeguimientoView = () => {
                             <div className={styles.camposList}>
                                 {orderedFields.filter(f => f.id !== 'special_seguimiento').map(c => {
                                     const selected = camposSeleccionados.some(id => Number(id) === Number(c.id));
-                                    const isPrincipal = camposPrincipales.includes(c.id);
-                                    const canMark = camposPrincipales.length < 2 || isPrincipal;
                                     const modo = modos[c.id] || 'contenido';
                                     return (
                                         <SortableItem key={c.id} id={c.id}
@@ -546,6 +567,29 @@ const SeguimientoView = () => {
                     </div>
                 </div>
             )}
+
+            {/* Global Notes Panel */}
+            <div className={styles.globalContainer}>
+                <div
+                    className={styles.globalHeader}
+                    onClick={() => setShowGlobalNotes(!showGlobalNotes)}
+                >
+                    <span className={styles.globalTitle}>📋 Notas globales de la lista</span>
+                    <span className={`${styles.chevron} ${showGlobalNotes ? styles.chevronOpen : ''}`}>▼</span>
+                </div>
+                {showGlobalNotes && (
+                    <div className={styles.globalContent}>
+                        <SeguimientoInlineCell
+                            instanciaId={null}
+                            entries={globalEntradas}
+                            onAddEntry={handleAddEntry}
+                            onToggleComplete={handleToggleComplete}
+                            onUpdateEntry={handleUpdateEntry}
+                            onDeleteEntry={handleDeleteEntry}
+                        />
+                    </div>
+                )}
+            </div>
 
             {visibleOrderedFields.length === 0 && !editMode ? (
                 <div className={styles.emptyState}>
@@ -684,9 +728,6 @@ const SeguimientoInlineCell = ({ instanciaId, entries, onAddEntry, onToggleCompl
         ],
     };
 
-    // Explicitly allow red in the color palette if needed, 
-    // but the default 'color': [] usually includes it.
-    // However, to be sure we can specify a list if the default is too limited.
     const formats = ['bold', 'italic', 'underline', 'list', 'bullet', 'color'];
 
     return (
@@ -694,41 +735,45 @@ const SeguimientoInlineCell = ({ instanciaId, entries, onAddEntry, onToggleCompl
             <div className={styles.inlineHistory}>
                 {entries.map(e => (
                     <div key={e.id} className={`${styles.inlineEntry} ${e.realizado ? styles.entryCompleted : ''}`}>
-                        <div className={styles.entryHeader}>
-                            <div className={styles.entryHeaderLeft}>
-                                <input
-                                    type="checkbox"
-                                    checked={!!e.realizado}
-                                    onChange={(evt) => onToggleComplete(e.id, instanciaId, evt.target.checked)}
-                                    className={styles.completeCheck}
-                                />
-                                <div className={styles.inlineEntryMeta}>
-                                    {new Date(e.created_at).toLocaleDateString()}
-                                    {e.realizado && e.fecha_realizado && (
-                                        <span className={styles.completionDate}> ✓ {new Date(e.fecha_realizado).toLocaleDateString()}</span>
-                                    )}
-                                </div>
+                        <div className={styles.entryMain}>
+                            <input
+                                type="checkbox"
+                                checked={!!e.realizado}
+                                onChange={(evt) => onToggleComplete(e.id, instanciaId, evt.target.checked)}
+                                className={styles.completeCheck}
+                            />
+
+                            <div className={styles.entryBody}>
+                                {editingId === e.id ? (
+                                    <div className={styles.editEntryWrapper}>
+                                        <ReactQuill theme="snow" value={editValue} onChange={setEditValue} modules={modules} formats={formats} autoFocus />
+                                        <div className={styles.editActions}>
+                                            <button className={styles.saveEditBtn} onClick={handleSaveEdit}>Guardar</button>
+                                            <button className={styles.cancelEditBtn} onClick={handleCancelEdit}>Cancelar</button>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div
+                                        className={`${styles.inlineEntryContent} ${e.realizado ? styles.contentCompleted : ''} ql-editor`}
+                                        dangerouslySetInnerHTML={{ __html: e.contenido }}
+                                        onClick={() => handleStartEdit(e)}
+                                        title="Click para editar"
+                                        style={{ cursor: 'pointer' }}
+                                    />
+                                )}
                             </div>
+
+                            <div className={styles.inlineEntryMeta}>
+                                <span>{new Date(e.created_at).toLocaleString([], { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
+                                {!!e.realizado && e.fecha_realizado && (
+                                    <span className={styles.completionDate} title={`Completado el ${new Date(e.fecha_realizado).toLocaleString()}`}>
+                                        ✓ {new Date(e.fecha_realizado).toLocaleString([], { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}
+                                    </span>
+                                )}
+                            </div>
+
                             <button className={styles.deleteEntryBtn} onClick={() => handleDelete(e.id)} title="Eliminar">×</button>
                         </div>
-
-                        {editingId === e.id ? (
-                            <div className={styles.editEntryWrapper}>
-                                <ReactQuill theme="snow" value={editValue} onChange={setEditValue} modules={modules} formats={formats} />
-                                <div className={styles.editActions}>
-                                    <button className={styles.saveEditBtn} onClick={handleSaveEdit}>Guardar</button>
-                                    <button className={styles.cancelEditBtn} onClick={handleCancelEdit}>Cancelar</button>
-                                </div>
-                            </div>
-                        ) : (
-                            <div
-                                className={`${styles.inlineEntryContent} ${e.realizado ? styles.contentCompleted : ''} ql-editor`}
-                                dangerouslySetInnerHTML={{ __html: e.contenido }}
-                                onClick={() => handleStartEdit(e)}
-                                title="Click para editar"
-                                style={{ cursor: 'pointer' }}
-                            />
-                        )}
                     </div>
                 ))}
             </div>

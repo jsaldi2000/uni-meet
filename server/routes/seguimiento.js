@@ -74,15 +74,25 @@ router.get('/:id', (req, res) => {
         `).all(req.params.id);
 
         // Map entries by instancia_id for easier frontend consumption
-        // We'll return an object where key is instancia_id and value is array of entries (or just latest?)
-        // Let's return the raw list or a grouped map. A map is cleaner.
         const entradasMap = {};
+        const global_entradas = [];
+
         entradas.forEach(e => {
-            if (!entradasMap[e.instancia_id]) entradasMap[e.instancia_id] = [];
-            entradasMap[e.instancia_id].push(e);
+            if (e.instancia_id) {
+                if (!entradasMap[e.instancia_id]) entradasMap[e.instancia_id] = [];
+                entradasMap[e.instancia_id].push(e);
+            } else {
+                global_entradas.push(e);
+            }
         });
 
-        res.json({ ...lista, campos, filas, seguimiento_entradas: entradasMap });
+        res.json({
+            ...lista,
+            campos,
+            filas,
+            seguimiento_entradas: entradasMap,
+            global_entradas
+        });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -92,15 +102,14 @@ router.get('/:id', (req, res) => {
 router.post('/:id/entrada', (req, res) => {
     try {
         const { instancia_id, contenido } = req.body;
-        if (!instancia_id || !contenido) {
-            return res.status(400).json({ error: 'Faltan datos' });
+        if (contenido === undefined || contenido === null) {
+            return res.status(400).json({ error: 'Contenido es obligatorio' });
         }
 
         const result = db.prepare(`
             INSERT INTO SeguimientoEntrada (lista_id, instancia_id, contenido, realizado)
             VALUES (?, ?, ?, 0)
         `).run(req.params.id, instancia_id, contenido);
-
 
         res.json({ id: result.lastInsertRowid, created_at: new Date().toISOString() });
     } catch (err) {
