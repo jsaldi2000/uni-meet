@@ -7,13 +7,15 @@ const MainLayout = () => {
 
     const isActive = (path) => location.pathname === path;
 
+    const isFullWidth = /^\/seguimiento\/\d+$/.test(location.pathname);
+
     return (
         <div className={styles.layout}>
             <aside className={styles.sidebar}>
                 <div className={styles.brand}>
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                         <h1>UniMeet</h1>
-                        <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '-5px' }}>v1.1.0</span>
+                        <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '-5px' }}>v1.2.0</span>
                     </div>
                 </div>
                 <nav className={styles.nav}>
@@ -26,7 +28,7 @@ const MainLayout = () => {
                     <Link to="/meetings" className={`${styles.navItem} ${isActive('/meetings') ? styles.active : ''}`}>
                         Reuniones
                     </Link>
-                    <Link to="/seguimiento" className={`${styles.navItem} ${isActive('/seguimiento') ? styles.active : ''}`}>
+                    <Link to="/seguimiento" className={`${styles.navItem} ${isActive('/seguimiento') || location.pathname.startsWith('/seguimiento/') ? styles.active : ''}`}>
                         Seguimiento
                     </Link>
                     <Link to="/backup" className={`${styles.navItem} ${isActive('/backup') ? styles.active : ''}`}>
@@ -35,7 +37,7 @@ const MainLayout = () => {
                 </nav>
             </aside>
             <main className={styles.content}>
-                <div className="container">
+                <div className={isFullWidth ? "container-fluid" : "container"}>
                     <Outlet />
                 </div>
             </main>

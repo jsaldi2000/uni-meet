@@ -1,0 +1,380 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem 0;
+}
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.headerLeft {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.headerRight {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    margin: 0.25rem 0 0;
+    font-size: 0.9rem;
+}
+
+.backBtn {
+    background: none;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 0.5rem 0.875rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    transition: all 0.2s;
+    margin-top: 0.25rem;
+}
+
+.searchInput {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    width: 250px;
+    height: 38px;
+    /* Match button height roughly */
+    box-sizing: border-box;
+    font-family: inherit;
+    margin-top: 0.25rem;
+    /* Align with backBtn margin-top */
+}
+
+.backBtn:hover {
+    background: var(--hover-bg, #f3f4f6);
+    color: var(--text-main);
+}
+
+/* Edit panel */
+.editPanel {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.editSection {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.editLabel {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1e40af;
+}
+
+.editSelect {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #bfdbfe;
+    border-radius: var(--radius-md);
+    font-family: inherit;
+    font-size: 0.9rem;
+    background: white;
+    max-width: 350px;
+}
+
+.camposList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.campoItem {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    background: white;
+    border: 1px solid #bfdbfe;
+    border-radius: var(--radius-md);
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+}
+
+.tipo {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    background: #f3f4f6;
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
+}
+
+.editFooter {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 0.5rem;
+}
+
+/* Table */
+.tableWrapper {
+    margin-top: 1.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    overflow: auto;
+    max-height: calc(100vh - 240px);
+    /* Adjusted for extra margin */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.85rem;
+}
+
+.table thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #f8fafc;
+    /* Ensure opaque background for sticky header */
+}
+
+.table th {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-color);
+    border-right: 1px solid transparent;
+    /* maintain grid alignment */
+    white-space: nowrap;
+    background: #f8fafc;
+    transition: background 0.2s;
+}
+
+.table th:hover {
+    background: #f1f5f9;
+}
+
+.principalTh {
+    /* Keep class for selection logic if needed, but remove visual distinction */
+    /* background: #eff6ff !important;
+    border-bottom: 2px solid #bfdbfe !important; */
+    color: var(--text-muted) !important;
+}
+
+.tituloTh {
+    color: #4b5563;
+    font-style: italic;
+    background: #f9fafb;
+    width: 200px;
+    /* Fixed width for title */
+}
+
+.actionTh {
+    width: 50px;
+    text-align: center;
+    background: #f9fafb;
+}
+
+.table td {
+    padding: 0.5rem 1rem;
+    /* More compact vertical padding */
+    color: var(--text-main);
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: top;
+    transition: background 0.15s;
+    background: #fff;
+    height: 1px;
+    /* Hack to make children height: 100% work if needed */
+}
+
+.table tr:hover td {
+    background: #f8fafc !important;
+}
+
+/* Cell Content Wrappers */
+.cellContent {
+    max-height: 120px;
+    /* Limit height to prevent huge rows */
+    overflow-y: auto;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    word-break: break-word;
+    /* Prevent overflow */
+}
+
+.cellContentExpanded {
+    max-height: none !important;
+    overflow-y: visible !important;
+}
+
+.cellContent::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+.cellContent::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.cellContent::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+.cellContent::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+.cellTitle {
+    font-weight: 500;
+    color: #111827;
+    white-space: normal;
+}
+
+.cellBoolean {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+}
+
+.cellTable {
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    overflow: auto;
+    /* Allow scrolling, overrides hidden */
+    background: #fff;
+    font-size: 0.75rem;
+}
+
+.cellTable table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cellTable th {
+    padding: 2px 6px;
+    background: #f3f4f6;
+    color: #6b7280;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: normal;
+    font-size: 0.7rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.cellTable td {
+    padding: 2px 6px;
+    border-bottom: 1px solid #e5e7eb;
+    color: #374151;
+    white-space: normal;
+}
+
+.cellTable tr:last-child td {
+    border-bottom: none;
+}
+
+.principalTd {
+    background: #ffffff;
+    font-weight: 500;
+}
+
+/* Re-use existing edit panel styles... */
+.viewLink {
+    color: var(--primary-color);
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.viewLink:hover {
+    background: #eff6ff;
+    text-decoration: none;
+}
+
+.emptyState {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 5rem 2rem;
+    background: #f9fafb;
+    border-radius: var(--radius-lg);
+    border: 1px dashed var(--border-color);
+}
+
+/* NEW STYLES FOR HEADER TOGGLES */
+.thContent {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.25rem;
+}
+
+.toggleModeBtn {
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    cursor: pointer;
+    font-size: 0;
+    padding: 0 !important;
+    margin-right: 0.35rem !important;
+    margin-left: 0;
+    opacity: 0.4;
+    transition: all 0.2s ease;
+    color: var(--text-muted);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    width: 14px;
+    height: 14px;
+    line-height: 1;
+}
+
+.toggleModeBtn:hover {
+    opacity: 1;
+    color: var(--primary-color);
+    background: transparent !important;
+    transform: scale(1.1);
+}
+
+.toggleModeBtn svg {
+    width: 14px;
+    height: 14px;
+    display: block;
+}

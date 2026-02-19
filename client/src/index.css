@@ -47,6 +47,12 @@ button {
     padding: 2rem;
 }
 
+.container-fluid {
+    width: 100%;
+    padding: 1.5rem 2rem;
+    box-sizing: border-box;
+}
+
 .card {
     background: var(--surface-color);
     border: 1px solid var(--border-color);

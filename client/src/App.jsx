@@ -8,6 +8,7 @@ import MeetingList from './pages/MeetingList';
 import MeetingEditor from './pages/MeetingEditor';
 import Backup from './pages/Backup';
 import Seguimiento from './pages/Seguimiento';
+import SeguimientoView from './pages/SeguimientoView';
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                     <Route path="meetings/:id" element={<MeetingEditor />} />
                     <Route path="backup" element={<Backup />} />
                     <Route path="seguimiento" element={<Seguimiento />} />
+                    <Route path="seguimiento/:id" element={<SeguimientoView />} />
                 </Route>
             </Routes>
         </Router>
